@@ -1,1 +1,1 @@
-# @web3-vue/core
+# @web3-vue-org/core

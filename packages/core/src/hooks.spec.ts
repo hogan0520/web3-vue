@@ -1,10 +1,13 @@
 import { Web3Provider } from '@ethersproject/providers'
-import { act, renderHook } from '@testing-library/react-hooks'
-import type { Actions } from '@web3-react/types'
-import { Connector } from '@web3-react/types'
+import type { Actions } from '@web3-vue-org/types'
+import { Connector } from '@web3-vue-org/types'
 import EventEmitter from 'events'
-import type { Web3ReactHooks, Web3ReactPriorityHooks, Web3ReactSelectedHooks } from './hooks'
+import { setActivePinia, createPinia } from 'pinia'
+import { ref, shallowRef, watch } from 'vue'
+import type { Web3VueHooks, Web3VuePriorityHooks, Web3VueSelectedHooks } from './hooks'
 import { getPriorityConnector, getSelectedConnector, initializeConnector } from './hooks'
+
+jest.setTimeout(10000)
 
 class MockProvider extends EventEmitter {
   request = jest.fn()
@@ -26,49 +29,52 @@ class MockConnector extends Connector {
 
 class MockConnector2 extends MockConnector {}
 
+beforeEach(() => {
+  setActivePinia(createPinia())
+})
+
 describe('#initializeConnector', () => {
   let connector: MockConnector
-  let hooks: Web3ReactHooks
+  let hooks: Web3VueHooks
 
   beforeEach(() => {
     ;[connector, hooks] = initializeConnector((actions) => new MockConnector(actions))
   })
 
   test('#useChainId', () => {
-    const { result } = renderHook(() => hooks.useChainId())
-    expect(result.current).toBe(undefined)
+    const result = hooks.useChainId()
+    expect(result.value).toBe(undefined)
 
-    act(() => connector.update({ chainId: 1 }))
-    expect(result.current).toBe(1)
+    connector.update({ chainId: 1 })
+    expect(result.value).toBe(1)
   })
 
   describe('#useAccounts', () => {
     test('empty', () => {
-      const { result } = renderHook(() => hooks.useAccounts())
-      expect(result.current).toBe(undefined)
+      const result = hooks.useAccounts()
+      expect(result.value).toBe(undefined)
 
-      act(() => connector.update({ accounts: [] }))
-      expect(result.current).toEqual([])
+      connector.update({ accounts: [] })
+      expect(result.value).toEqual([])
     })
 
     test('single', () => {
-      const { result } = renderHook(() => hooks.useAccounts())
-      expect(result.current).toBe(undefined)
+      const result = hooks.useAccounts()
+      expect(result.value).toBe(undefined)
 
-      act(() => connector.update({ accounts: ['0x0000000000000000000000000000000000000000'] }))
-      expect(result.current).toEqual(['0x0000000000000000000000000000000000000000'])
+      connector.update({ accounts: ['0x0000000000000000000000000000000000000000'] })
+      expect(result.value).toEqual(['0x0000000000000000000000000000000000000000'])
     })
 
     test('multiple', () => {
-      const { result } = renderHook(() => hooks.useAccounts())
-      expect(result.current).toBe(undefined)
+      const result = hooks.useAccounts()
+      expect(result.value).toBe(undefined)
 
-      act(() =>
-        connector.update({
-          accounts: ['0x0000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000001'],
-        })
-      )
-      expect(result.current).toEqual([
+      connector.update({
+        accounts: ['0x0000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000001'],
+      })
+
+      expect(result.value).toEqual([
         '0x0000000000000000000000000000000000000000',
         '0x0000000000000000000000000000000000000001',
       ])
@@ -76,41 +82,45 @@ describe('#initializeConnector', () => {
   })
 
   test('#useIsActivating', () => {
-    const { result } = renderHook(() => hooks.useIsActivating())
-    expect(result.current).toBe(false)
+    const result = hooks.useIsActivating()
+    expect(result.value).toBe(false)
 
-    act(() => connector.activate())
-    expect(result.current).toEqual(true)
+    connector.activate()
+    expect(result.value).toEqual(true)
   })
 
   test('#useIsActive', () => {
-    const { result } = renderHook(() => hooks.useIsActive())
-    expect(result.current).toBe(false)
+    const result = hooks.useIsActive()
+    expect(result.value).toBe(false)
 
-    act(() => connector.update({ chainId: 1, accounts: [] }))
-    expect(result.current).toEqual(true)
+    connector.update({ chainId: 1, accounts: [] })
+    expect(result.value).toEqual(true)
   })
 
   describe('#useProvider', () => {
     test('lazy loads Web3Provider and rerenders', async () => {
-      act(() => connector.update({ chainId: 1, accounts: [] }))
+      connector.update({ chainId: 1, accounts: [] })
 
-      const { result, waitForNextUpdate } = renderHook(() => hooks.useProvider())
-      expect(result.current).toBeUndefined()
-      await waitForNextUpdate()
-      expect(result.current).toBeInstanceOf(Web3Provider)
+      const result = hooks.useProvider(ref(undefined))
+      expect(result.value).toBeUndefined()
+      await new Promise((resolve) => {
+        watch(result, () => {
+          resolve(result.value)
+        })
+      })
+      expect(result.value).toBeInstanceOf(Web3Provider)
     })
   })
 })
 
 describe('#getSelectedConnector', () => {
   let connector: MockConnector
-  let hooks: Web3ReactHooks
+  let hooks: Web3VueHooks
 
   let connector2: MockConnector
-  let hooks2: Web3ReactHooks
+  let hooks2: Web3VueHooks
 
-  let selectedConnectorHooks: Web3ReactSelectedHooks
+  let selectedConnectorHooks: Web3VueSelectedHooks
 
   beforeEach(() => {
     ;[connector, hooks] = initializeConnector((actions) => new MockConnector(actions))
@@ -120,44 +130,30 @@ describe('#getSelectedConnector', () => {
   })
 
   test('isActive is false for connector', () => {
-    const {
-      result: { current: isActive },
-    } = renderHook(() => selectedConnectorHooks.useSelectedIsActive(connector))
+    const result = selectedConnectorHooks.useSelectedIsActive(shallowRef(connector))
 
-    expect(isActive).toBe(false)
+    expect(result.value).toBe(false)
   })
 
   test('isActive is false for connector2', () => {
-    const {
-      result: { current: isActive },
-    } = renderHook(() => selectedConnectorHooks.useSelectedIsActive(connector2))
+    const result = selectedConnectorHooks.useSelectedIsActive(shallowRef(connector2))
 
-    expect(isActive).toBe(false)
+    expect(result.value).toBe(false)
   })
 
   test('connector active', () => {
-    act(() => connector.update({ chainId: 1, accounts: [] }))
-    const {
-      result: { current: isActive },
-    } = renderHook(() => selectedConnectorHooks.useSelectedIsActive(connector))
-
-    const {
-      result: { current: isActive2 },
-    } = renderHook(() => selectedConnectorHooks.useSelectedIsActive(connector2))
+    connector.update({ chainId: 1, accounts: [] })
+    const { value: isActive } = selectedConnectorHooks.useSelectedIsActive(shallowRef(connector))
+    const { value: isActive2 } = selectedConnectorHooks.useSelectedIsActive(shallowRef(connector2))
 
     expect(isActive).toBe(true)
     expect(isActive2).toBe(false)
   })
 
   test('connector2 active', () => {
-    act(() => connector2.update({ chainId: 1, accounts: [] }))
-    const {
-      result: { current: isActive },
-    } = renderHook(() => selectedConnectorHooks.useSelectedIsActive(connector))
-
-    const {
-      result: { current: isActive2 },
-    } = renderHook(() => selectedConnectorHooks.useSelectedIsActive(connector2))
+    connector2.update({ chainId: 1, accounts: [] })
+    const { value: isActive } = selectedConnectorHooks.useSelectedIsActive(shallowRef(connector))
+    const { value: isActive2 } = selectedConnectorHooks.useSelectedIsActive(shallowRef(connector2))
 
     expect(isActive).toBe(false)
     expect(isActive2).toBe(true)
@@ -166,12 +162,12 @@ describe('#getSelectedConnector', () => {
 
 describe('#getPriorityConnector', () => {
   let connector: MockConnector
-  let hooks: Web3ReactHooks
+  let hooks: Web3VueHooks
 
   let connector2: MockConnector
-  let hooks2: Web3ReactHooks
+  let hooks2: Web3VueHooks
 
-  let priorityConnectorHooks: Web3ReactPriorityHooks
+  let priorityConnectorHooks: Web3VuePriorityHooks
 
   beforeEach(() => {
     ;[connector, hooks] = initializeConnector((actions) => new MockConnector(actions))
@@ -181,23 +177,17 @@ describe('#getPriorityConnector', () => {
   })
 
   test('returns first connector if both are uninitialized', () => {
-    const {
-      result: { current: priorityConnector },
-    } = renderHook(() => priorityConnectorHooks.usePriorityConnector())
+    const { value: priorityConnector } = priorityConnectorHooks.usePriorityConnector()
 
     expect(priorityConnector).toBeInstanceOf(MockConnector)
     expect(priorityConnector).not.toBeInstanceOf(MockConnector2)
   })
 
   test('returns first connector if it is initialized', () => {
-    act(() => connector.update({ chainId: 1, accounts: [] }))
-    const {
-      result: { current: priorityConnector },
-    } = renderHook(() => priorityConnectorHooks.usePriorityConnector())
+    connector.update({ chainId: 1, accounts: [] })
+    const { value: priorityConnector } = priorityConnectorHooks.usePriorityConnector()
 
-    const {
-      result: { current: isActive },
-    } = renderHook(() => priorityConnectorHooks.usePriorityIsActive())
+    const { value: isActive } = priorityConnectorHooks.usePriorityIsActive()
     expect(isActive).toBe(true)
 
     expect(priorityConnector).toBeInstanceOf(MockConnector)
@@ -205,14 +195,10 @@ describe('#getPriorityConnector', () => {
   })
 
   test('returns second connector if it is initialized', () => {
-    act(() => connector2.update({ chainId: 1, accounts: [] }))
-    const {
-      result: { current: priorityConnector },
-    } = renderHook(() => priorityConnectorHooks.usePriorityConnector())
+    connector2.update({ chainId: 1, accounts: [] })
+    const { value: priorityConnector } = priorityConnectorHooks.usePriorityConnector()
 
-    const {
-      result: { current: isActive },
-    } = renderHook(() => priorityConnectorHooks.usePriorityIsActive())
+    const { value: isActive } = priorityConnectorHooks.usePriorityIsActive()
     expect(isActive).toBe(true)
 
     expect(priorityConnector).toBeInstanceOf(MockConnector2)

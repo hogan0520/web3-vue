@@ -1,1 +1,1 @@
-# @web3-vue/store
+# @web3-vue-org/store

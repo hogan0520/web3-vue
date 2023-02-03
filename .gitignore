@@ -1,4 +1,6 @@
 node_modules/
 packages/*/dist/
-packages/example-next/.next/
+example-next/.next/
 .env.local
+.idea
+*.log

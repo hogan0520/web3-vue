@@ -1,1 +1,1 @@
-# @web3-vue/walletconnect
+# @web3-vue-org/walletconnect

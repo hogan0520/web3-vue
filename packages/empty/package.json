@@ -1,13 +1,13 @@
 {
-  "name": "@web3-vue/empty",
+  "name": "@web3-vue-org/empty",
   "keywords": [
-    "web3-vue"
+    "web3-vue-org"
   ],
   "license": "GPL-3.0-or-later",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.1",
+  "version": "0.0.6-alpha.0",
   "files": [
     "dist/*"
   ],
@@ -21,6 +21,7 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "@web3-vue/types": "^0.0.1"
-  }
+    "@web3-vue-org/types": "^0.0.6-alpha.0"
+  },
+  "gitHead": "bc5c5d70cb26342312cfd1f6a9abd3c2e426262e"
 }

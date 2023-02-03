@@ -1,5 +1,6 @@
-import { createWeb3ReactStoreAndActions } from '@web3-react/store'
-import type { Actions, RequestArguments, Web3ReactStore } from '@web3-react/types'
+import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
+import type { Actions, RequestArguments, Web3VueStore } from '@web3-vue-org/types'
+import { setActivePinia, createPinia } from 'pinia'
 import EventEmitter from 'node:events'
 import { WalletConnect } from '.'
 import { MockEIP1193Provider } from '../../eip1193/src/mock'
@@ -27,14 +28,18 @@ const chainId = '0x1'
 const accounts: string[] = []
 
 describe('WalletConnect', () => {
-  let store: Web3ReactStore
+  let store: Web3VueStore
   let connector: WalletConnect
   let mockProvider: MockMockWalletConnectProvider
+
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
 
   describe('works', () => {
     beforeEach(async () => {
       let actions: Actions
-      ;[store, actions] = createWeb3ReactStoreAndActions()
+      ;[store, actions] = createWeb3VueStoreAndActions()
       connector = new WalletConnect({ actions, options: { rpc: {} } })
     })
 
@@ -50,10 +55,11 @@ describe('WalletConnect', () => {
       expect(mockProvider.eth_requestAccounts).toHaveBeenCalled()
       expect(mockProvider.eth_accounts).not.toHaveBeenCalled()
       expect(mockProvider.eth_chainId_number).toHaveBeenCalled()
-      expect(mockProvider.eth_chainId_number.mock.invocationCallOrder[0])
-        .toBeGreaterThan(mockProvider.eth_requestAccounts.mock.invocationCallOrder[0])
+      expect(mockProvider.eth_chainId_number.mock.invocationCallOrder[0]).toBeGreaterThan(
+        mockProvider.eth_requestAccounts.mock.invocationCallOrder[0]
+      )
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: Number.parseInt(chainId, 16),
         accounts,
         activating: false,

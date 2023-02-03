@@ -2,7 +2,7 @@ lockfileVersion: 5.4
 
 specifiers:
   pinia: ^2.0.30
-  vue: ^3.2.47
+  vue: '>=3.2'
 
 dependencies:
   pinia: registry.npmmirror.com/pinia/2.0.30_vue@3.2.47

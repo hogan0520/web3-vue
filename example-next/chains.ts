@@ -1,4 +1,4 @@
-import type { AddEthereumChainParameter } from '@web3-vue/types'
+import type { AddEthereumChainParameter } from '@web3-vue-org/types'
 
 const ETH: AddEthereumChainParameter['nativeCurrency'] = {
   name: 'Ether',

@@ -1,1 +1,1 @@
-# @web3-vue/eip1193
+# @web3-vue-org/eip1193

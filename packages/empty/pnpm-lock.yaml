@@ -1,16 +1,16 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@web3-react/types': ^8.0.20-beta.0
+  '@web3-vue-org/types': ^8.0.20-beta.0
 
 dependencies:
-  '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
+  '@web3-vue-org/types': registry.npmmirror.com/@web3-vue-org/types/8.0.20-beta.0
 
 packages:
 
-  registry.npmmirror.com/@web3-react/types/8.0.20-beta.0:
-    resolution: {integrity: sha512-qOZYMyUmsm3Um6t6Pg3OgnE86ufhWZpB5/VxsooB8cdpXc/C/f8KMyYSeM63GoKSMScOKwfqV6yODFL7g/Qc8g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/types/-/types-8.0.20-beta.0.tgz}
-    name: '@web3-react/types'
+  registry.npmmirror.com/@web3-vue-org/types/8.0.20-beta.0:
+    resolution: {integrity: sha512-qOZYMyUmsm3Um6t6Pg3OgnE86ufhWZpB5/VxsooB8cdpXc/C/f8KMyYSeM63GoKSMScOKwfqV6yODFL7g/Qc8g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-vue-org/types/-/types-8.0.20-beta.0.tgz}
+    name: '@web3-vue-org/types'
     version: 8.0.20-beta.0
     dependencies:
       zustand: registry.npmmirror.com/zustand/4.3.2

@@ -1,1 +1,1 @@
-# @web3-vue/metamask
+# @web3-vue-org/metamask

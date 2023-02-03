@@ -2,13 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ethersproject/providers': ^5
-  '@web3-react/store': ^8.0.25-beta.0
-  '@web3-react/types': ^8.0.20-beta.0
   zustand: ^4.0.0-rc.0
 
 dependencies:
-  '@web3-react/store': registry.npmmirror.com/@web3-react/store/8.0.25-beta.0
-  '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
   zustand: registry.npmmirror.com/zustand/4.3.2
 
 optionalDependencies:
@@ -55,6 +51,7 @@ packages:
       '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
       '@ethersproject/rlp': registry.npmmirror.com/@ethersproject/rlp/5.7.0
     dev: false
+    optional: true
 
   registry.npmmirror.com/@ethersproject/base64/5.7.0:
     resolution: {integrity: sha512-Dr8tcHt2mEbsZr/mwTPIQAf3Ai0Bks/7gTw9dSqk1mQvhW3XvRlmDJr/4n+wg1JmCl16NZue17CDh8xb/vZ0sQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/base64/-/base64-5.7.0.tgz}
@@ -84,6 +81,7 @@ packages:
       '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
       bn.js: registry.npmmirror.com/bn.js/5.2.1
     dev: false
+    optional: true
 
   registry.npmmirror.com/@ethersproject/bytes/5.7.0:
     resolution: {integrity: sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/bytes/-/bytes-5.7.0.tgz}
@@ -92,6 +90,7 @@ packages:
     dependencies:
       '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
     dev: false
+    optional: true
 
   registry.npmmirror.com/@ethersproject/constants/5.7.0:
     resolution: {integrity: sha512-DHI+y5dBNvkpYUMiRQyxRBYBefZkJfo70VUkUAsRjcPs47muV9evftfZ0PJVCXYbAiCgght0DtcF9srFQmIgWA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/constants/-/constants-5.7.0.tgz}
@@ -127,12 +126,14 @@ packages:
       '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
       js-sha3: registry.npmmirror.com/js-sha3/0.8.0
     dev: false
+    optional: true
 
   registry.npmmirror.com/@ethersproject/logger/5.7.0:
     resolution: {integrity: sha512-0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/logger/-/logger-5.7.0.tgz}
     name: '@ethersproject/logger'
     version: 5.7.0
     dev: false
+    optional: true
 
   registry.npmmirror.com/@ethersproject/networks/5.7.1:
     resolution: {integrity: sha512-n/MufjFYv3yFcUyfhnXotyDlNdFb7onmkSy8aQERi2PjNcnWQ66xXxa3XlS8nCcA8aJKJjIIMNJTC7tu80GwpQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/networks/-/networks-5.7.1.tgz}
@@ -202,6 +203,7 @@ packages:
       '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
       '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
     dev: false
+    optional: true
 
   registry.npmmirror.com/@ethersproject/sha2/5.7.0:
     resolution: {integrity: sha512-gKlH42riwb3KYp0reLsFTokByAKoJdgFCwI+CCiX/k+Jm2mbNs6oOaCjYQSlI1+XBVejwH2KrmCbMAT/GnRDQw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/sha2/-/sha2-5.7.0.tgz}
@@ -269,30 +271,6 @@ packages:
     dev: false
     optional: true
 
-  registry.npmmirror.com/@web3-react/store/8.0.25-beta.0:
-    resolution: {integrity: sha512-YHrZ42EHiQ9UAJq8Y/pHsyXu6GhzbCSHaQJ9U0wCDhbPoQ9QjOj0Pwcaa/VLXljuynK/7ERP942nI1IzArt9Sg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/store/-/store-8.0.25-beta.0.tgz}
-    name: '@web3-react/store'
-    version: 8.0.25-beta.0
-    dependencies:
-      '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
-      '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
-      zustand: registry.npmmirror.com/zustand/4.3.2
-    transitivePeerDependencies:
-      - immer
-      - react
-    dev: false
-
-  registry.npmmirror.com/@web3-react/types/8.0.20-beta.0:
-    resolution: {integrity: sha512-qOZYMyUmsm3Um6t6Pg3OgnE86ufhWZpB5/VxsooB8cdpXc/C/f8KMyYSeM63GoKSMScOKwfqV6yODFL7g/Qc8g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/types/-/types-8.0.20-beta.0.tgz}
-    name: '@web3-react/types'
-    version: 8.0.20-beta.0
-    dependencies:
-      zustand: registry.npmmirror.com/zustand/4.3.2
-    transitivePeerDependencies:
-      - immer
-      - react
-    dev: false
-
   registry.npmmirror.com/bech32/1.1.4:
     resolution: {integrity: sha512-s0IrSOzLlbvX7yp4WBfPITzpAU8sqQcpsmwXDiKwrG4r491vwCO/XpejasRNl0piBMe/DvP4Tz0mIS/X1DPJBQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bech32/-/bech32-1.1.4.tgz}
     name: bech32
@@ -312,6 +290,7 @@ packages:
     name: bn.js
     version: 5.2.1
     dev: false
+    optional: true
 
   registry.npmmirror.com/brorand/1.1.0:
     resolution: {integrity: sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/brorand/-/brorand-1.1.0.tgz}
@@ -368,6 +347,7 @@ packages:
     name: js-sha3
     version: 0.8.0
     dev: false
+    optional: true
 
   registry.npmmirror.com/minimalistic-assert/1.0.1:
     resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz}

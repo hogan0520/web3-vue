@@ -1,14 +1,14 @@
 {
-  "name": "@web3-vue/walletconnect",
+  "name": "@web3-vue-org/walletconnect",
   "keywords": [
-    "web3-vue",
+    "web3-vue-org",
     "walletconnect"
   ],
   "license": "GPL-3.0-or-later",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.1",
+  "version": "0.0.6-alpha.0",
   "files": [
     "dist/*"
   ],
@@ -22,13 +22,18 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "@web3-vue/types": "^0.0.1",
+    "@walletconnect/jsonrpc-http-connection": "^1.0.2",
+    "@walletconnect/jsonrpc-provider": "^1.0.5",
+    "@walletconnect/types": "^1.8.0",
+    "@web3-vue-org/types": "^0.0.6-alpha.0",
     "eventemitter3": "^4.0.7"
   },
   "peerDependencies": {
     "@walletconnect/ethereum-provider": "^1.7.8"
   },
   "devDependencies": {
-    "@web3-vue/store": "^0.0.1"
-  }
+    "@web3-vue-org/store": "^0.0.6-alpha.0",
+    "pinia": "^2.0.30"
+  },
+  "gitHead": "bc5c5d70cb26342312cfd1f6a9abd3c2e426262e"
 }

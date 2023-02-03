@@ -1,4 +1,4 @@
-import { Connector } from '@web3-react/types'
+import { Connector } from '@web3-vue-org/types'
 
 export class Empty extends Connector {
   /** {@inheritdoc Connector.provider} */

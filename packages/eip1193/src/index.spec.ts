@@ -1,7 +1,8 @@
 import { Eip1193Bridge } from '@ethersproject/experimental'
 import { Web3Provider } from '@ethersproject/providers'
-import { createWeb3ReactStoreAndActions } from '@web3-react/store'
-import type { Actions, ProviderRpcError, RequestArguments, Web3ReactStore } from '@web3-react/types'
+import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
+import type { Actions, ProviderRpcError, RequestArguments, Web3VueStore } from '@web3-vue-org/types'
+import { setActivePinia, createPinia } from 'pinia'
 import { EventEmitter } from 'node:events'
 import { EIP1193 } from '.'
 import { MockEIP1193Provider } from './mock'
@@ -20,14 +21,18 @@ const accounts: string[] = []
 describe('EIP1193', () => {
   let mockProvider: MockEIP1193Provider
 
-  let store: Web3ReactStore
+  let store: Web3VueStore
   let actions: Actions
 
   let connector: EIP1193
 
   beforeEach(() => {
+    setActivePinia(createPinia())
+  })
+
+  beforeEach(() => {
     mockProvider = new MockEIP1193Provider()
-    ;[store, actions] = createWeb3ReactStoreAndActions()
+    ;[store, actions] = createWeb3VueStoreAndActions()
   })
 
   describe('ethers', () => {
@@ -48,7 +53,7 @@ describe('EIP1193', () => {
 
       await connector.activate()
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: 1,
         accounts,
         activating: false,
@@ -76,7 +81,7 @@ describe('EIP1193', () => {
         connector = new EIP1193({ actions, provider: mockProvider })
         await connector.connectEagerly().catch(() => {})
 
-        expect(store.getState()).toEqual({
+        expect(store.$state).toEqual({
           chainId: undefined,
           accounts: undefined,
           activating: false,
@@ -94,7 +99,7 @@ describe('EIP1193', () => {
         connector = new EIP1193({ actions, provider: mockProvider })
         await connector.connectEagerly()
 
-        expect(store.getState()).toEqual({
+        expect(store.$state).toEqual({
           chainId: 1,
           accounts,
           activating: false,
@@ -103,8 +108,9 @@ describe('EIP1193', () => {
         expect(mockProvider.eth_chainId.mock.calls.length).toBe(1)
         expect(mockProvider.eth_accounts.mock.calls.length).toBe(1)
         expect(mockProvider.eth_requestAccounts.mock.calls.length).toBe(0)
-        expect(mockProvider.eth_chainId.mock.invocationCallOrder[0])
-          .toBeGreaterThan(mockProvider.eth_accounts.mock.invocationCallOrder[0])
+        expect(mockProvider.eth_chainId.mock.invocationCallOrder[0]).toBeGreaterThan(
+          mockProvider.eth_accounts.mock.invocationCallOrder[0]
+        )
       })
     })
 
@@ -120,7 +126,7 @@ describe('EIP1193', () => {
       })
 
       test('before', () => {
-        expect(store.getState()).toEqual({
+        expect(store.$state).toEqual({
           chainId: undefined,
           accounts: undefined,
           activating: false,
@@ -132,8 +138,9 @@ describe('EIP1193', () => {
           expect(mockProvider.eth_chainId.mock.calls.length).toBe(1)
           expect(mockProvider.eth_accounts.mock.calls.length).toBe(0)
           expect(mockProvider.eth_requestAccounts.mock.calls.length).toBe(1)
-          expect(mockProvider.eth_chainId.mock.invocationCallOrder[0])
-            .toBeGreaterThan(mockProvider.eth_requestAccounts.mock.invocationCallOrder[0])
+          expect(mockProvider.eth_chainId.mock.invocationCallOrder[0]).toBeGreaterThan(
+            mockProvider.eth_requestAccounts.mock.invocationCallOrder[0]
+          )
         })
 
         test(`chainId = ${chainId}`, async () => {
@@ -142,7 +149,7 @@ describe('EIP1193', () => {
 
           await connector.activate()
 
-          expect(store.getState()).toEqual({
+          expect(store.$state).toEqual({
             chainId: 1,
             accounts,
             activating: false,
@@ -155,7 +162,7 @@ describe('EIP1193', () => {
 
           await connector.activate()
 
-          expect(store.getState()).toEqual({
+          expect(store.$state).toEqual({
             chainId: 1,
             accounts,
             activating: false,
@@ -171,7 +178,7 @@ describe('EIP1193', () => {
 
           await connector.activate()
 
-          expect(store.getState()).toEqual({
+          expect(store.$state).toEqual({
             chainId: 1,
             accounts,
             activating: false,
@@ -190,7 +197,7 @@ describe('EIP1193', () => {
 
           await connector.activate()
 
-          expect(store.getState()).toEqual({
+          expect(store.$state).toEqual({
             chainId: 1,
             accounts,
             activating: false,
@@ -218,7 +225,7 @@ describe('EIP1193', () => {
     test('#connect', async () => {
       mockProvider.emitConnect(chainId)
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: 1,
         accounts: undefined,
         activating: false,
@@ -229,7 +236,7 @@ describe('EIP1193', () => {
     test('#disconnect', async () => {
       mockProvider.emitDisconnect(error)
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: undefined,
         accounts: undefined,
         activating: false,
@@ -239,7 +246,7 @@ describe('EIP1193', () => {
     test('#chainChanged', async () => {
       mockProvider.emitChainChanged(chainId)
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: 1,
         accounts: undefined,
         activating: false,
@@ -249,7 +256,7 @@ describe('EIP1193', () => {
     test('#accountsChanged', async () => {
       mockProvider.emitAccountsChanged(accounts)
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: undefined,
         accounts,
         activating: false,
@@ -260,7 +267,7 @@ describe('EIP1193', () => {
       mockProvider.emitConnect(chainId)
       mockProvider.emitAccountsChanged(accounts)
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: 1,
         accounts,
         activating: false,
@@ -271,7 +278,7 @@ describe('EIP1193', () => {
       mockProvider.emitChainChanged(chainId)
       mockProvider.emitAccountsChanged(accounts)
 
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: 1,
         accounts,
         activating: false,

@@ -1,5 +1,5 @@
 import { getAddress } from '@ethersproject/address'
-import type { Actions, Web3VueState, Web3VueStateUpdate, Web3VueStore } from '@web3-vue/types'
+import type { Actions, Web3VueState, Web3VueStateUpdate, Web3VueStore } from '@web3-vue-org/types'
 import { defineStore } from 'pinia'
 /**
  * MAX_SAFE_CHAIN_ID is the upper bound limit on what will be accepted for `chainId`
@@ -27,9 +27,9 @@ const DEFAULT_STATE = {
 
 let storeIndex = 0
 export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
-  const storeId = `web3-vue-store-${storeIndex++}`
-  const store = defineStore<string, Web3VueState>(storeId,{
-    state: () => Object.assign({}, DEFAULT_STATE)
+  const storeId = `web3-vue-org-store-${storeIndex++}`
+  const store = defineStore<string, Web3VueState>(storeId, {
+    state: () => Object.assign({}, DEFAULT_STATE),
   })()
 
   // flag for tracking updates so we don't clobber data when cancelling activation
@@ -94,7 +94,7 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
    */
   function resetState(): void {
     nullifier++
-    store.$patch({...DEFAULT_STATE})
+    store.$patch({ ...DEFAULT_STATE })
   }
 
   return [store, { startActivation, update, resetState }]

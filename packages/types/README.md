@@ -1,1 +1,1 @@
-# @web3-vue/types
+# @web3-vue-org/types

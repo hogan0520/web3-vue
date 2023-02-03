@@ -1,7 +1,7 @@
 import type { JsonRpcProvider } from '@ethersproject/providers'
 import type { ConnectionInfo } from '@ethersproject/web'
-import type { Actions } from '@web3-react/types'
-import { Connector } from '@web3-react/types'
+import type { Actions } from '@web3-vue-org/types'
+import { Connector } from '@web3-vue-org/types'
 import { getBestProvider } from './utils'
 
 type url = string | ConnectionInfo

@@ -1,5 +1,6 @@
-import { createWeb3ReactStoreAndActions } from '@web3-react/store'
-import type { Actions, Web3ReactStore } from '@web3-react/types'
+import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
+import type { Actions, Web3VueStore } from '@web3-vue-org/types'
+import { setActivePinia, createPinia } from 'pinia'
 import { Url } from '.'
 import { MockJsonRpcProvider } from '../../network/src/index.spec'
 
@@ -11,19 +12,23 @@ const chainId = '0x1'
 const accounts: string[] = []
 
 describe('Url', () => {
-  let store: Web3ReactStore
+  let store: Web3VueStore
   let connector: Url
   let mockConnector: MockJsonRpcProvider
+
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
 
   describe('works', () => {
     beforeEach(() => {
       let actions: Actions
-      ;[store, actions] = createWeb3ReactStoreAndActions()
+      ;[store, actions] = createWeb3VueStoreAndActions()
       connector = new Url({ actions, url: 'https://mock.url' })
     })
 
     test('is un-initialized', async () => {
-      expect(store.getState()).toEqual({
+      expect(store.$state).toEqual({
         chainId: undefined,
         accounts: undefined,
         activating: false,
@@ -42,7 +47,7 @@ describe('Url', () => {
       test('works', async () => {
         await connector.activate()
 
-        expect(store.getState()).toEqual({
+        expect(store.$state).toEqual({
           chainId: Number.parseInt(chainId, 16),
           accounts,
           activating: false,

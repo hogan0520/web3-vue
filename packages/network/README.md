@@ -1,1 +1,1 @@
-# @web3-vue/network
+# @web3-vue-org/network

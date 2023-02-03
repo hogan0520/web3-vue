@@ -1,10 +1,10 @@
-import {createPinia} from "pinia";
-import {createApp} from "vue";
+import { createPinia, setActivePinia } from 'pinia'
 import { createWeb3VueStoreAndActions, MAX_SAFE_CHAIN_ID } from '.'
 
-createApp({}).use(createPinia())
-
-describe('#createWeb3ReactStoreAndActions', () => {
+describe('#createWeb3VueStoreAndActions', () => {
+  beforeEach(() => {
+    setActivePinia(createPinia())
+  })
 
   test('uninitialized', () => {
     const [store] = createWeb3VueStoreAndActions()

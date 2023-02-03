@@ -4,5 +4,5 @@
     "packages/*"
   ],
   "npmClient": "pnpm",
-  "ignoreChanges": ["**/*.md", "**/*.spec.ts"]
+  "ignoreChanges": ["**/*.md", "**/*.spec.ts", "**/pnpm-lock.yaml"]
 }

@@ -1,13 +1,13 @@
 {
-  "name": "@web3-vue/network",
+  "name": "@web3-vue-org/network",
   "keywords": [
-    "web3-vue"
+    "web3-vue-org"
   ],
   "license": "GPL-3.0-or-later",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.1",
+  "version": "0.0.6-alpha.0",
   "files": [
     "dist/*"
   ],
@@ -22,9 +22,12 @@
   },
   "dependencies": {
     "@ethersproject/providers": "^5",
-    "@web3-vue/types": "^0.0.1"
+    "@ethersproject/web": "^5.7.1",
+    "@web3-vue-org/types": "^0.0.6-alpha.0"
   },
   "devDependencies": {
-    "@web3-vue/store": "^0.0.1"
-  }
+    "@web3-vue-org/store": "^0.0.6-alpha.0",
+    "pinia": "^2.0.30"
+  },
+  "gitHead": "bc5c5d70cb26342312cfd1f6a9abd3c2e426262e"
 }
