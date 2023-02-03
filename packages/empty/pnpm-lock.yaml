@@ -1,0 +1,45 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@web3-react/types': ^8.0.20-beta.0
+
+dependencies:
+  '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
+
+packages:
+
+  registry.npmmirror.com/@web3-react/types/8.0.20-beta.0:
+    resolution: {integrity: sha512-qOZYMyUmsm3Um6t6Pg3OgnE86ufhWZpB5/VxsooB8cdpXc/C/f8KMyYSeM63GoKSMScOKwfqV6yODFL7g/Qc8g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/types/-/types-8.0.20-beta.0.tgz}
+    name: '@web3-react/types'
+    version: 8.0.20-beta.0
+    dependencies:
+      zustand: registry.npmmirror.com/zustand/4.3.2
+    transitivePeerDependencies:
+      - immer
+      - react
+    dev: false
+
+  registry.npmmirror.com/use-sync-external-store/1.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz}
+    name: use-sync-external-store
+    version: 1.2.0
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dev: false
+
+  registry.npmmirror.com/zustand/4.3.2:
+    resolution: {integrity: sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/zustand/-/zustand-4.3.2.tgz}
+    name: zustand
+    version: 4.3.2
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      use-sync-external-store: registry.npmmirror.com/use-sync-external-store/1.2.0
+    dev: false

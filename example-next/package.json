@@ -1,0 +1,26 @@
+{
+  "private": true,
+  "name": "example-next",
+  "scripts": {
+    "start": "next dev",
+    "pin": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,gnosis-safe,metamask,network,types,url,walletconnect}; do lerna add @web3-vue/$X --exact --no-bootstrap --scope=example-next; done }'"
+  },
+  "dependencies": {
+    "@ethersproject/bignumber": "^5.6.0",
+    "@ethersproject/experimental": "^5.6.0",
+    "@ethersproject/providers": "^5.6.0",
+    "@ethersproject/units": "^5.6.0",
+    "@web3-vue/coinbase-wallet": "0.0.1",
+    "@web3-vue/core": "0.0.1",
+    "@web3-vue/eip1193": "0.0.1",
+    "@web3-vue/empty": "0.0.1",
+    "@web3-vue/gnosis-safe": "0.0.1",
+    "@web3-vue/metamask": "0.0.1",
+    "@web3-vue/network": "0.0.1",
+    "@web3-vue/types": "0.0.1",
+    "@web3-vue/url": "0.0.1",
+    "@web3-vue/walletconnect": "0.0.1",
+    "next": "^12.1.5",
+    "react-dom": "^18.0.0"
+  }
+}

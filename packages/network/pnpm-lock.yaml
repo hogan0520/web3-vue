@@ -1,0 +1,386 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@ethersproject/providers': ^5
+  '@web3-react/store': ^8.0.25-beta.0
+  '@web3-react/types': ^8.0.20-beta.0
+
+dependencies:
+  '@ethersproject/providers': registry.npmmirror.com/@ethersproject/providers/5.7.2
+  '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
+
+devDependencies:
+  '@web3-react/store': registry.npmmirror.com/@web3-react/store/8.0.25-beta.0
+
+packages:
+
+  registry.npmmirror.com/@ethersproject/abstract-provider/5.7.0:
+    resolution: {integrity: sha512-R41c9UkchKCpAqStMYUpdunjo3pkEvZC3FAwZn5S5MGbXoMQOHIdHItezTETxAO5bevtMApSyEhn9+CHcDsWBw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/abstract-provider/-/abstract-provider-5.7.0.tgz}
+    name: '@ethersproject/abstract-provider'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/networks': registry.npmmirror.com/@ethersproject/networks/5.7.1
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+      '@ethersproject/transactions': registry.npmmirror.com/@ethersproject/transactions/5.7.0
+      '@ethersproject/web': registry.npmmirror.com/@ethersproject/web/5.7.1
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/abstract-signer/5.7.0:
+    resolution: {integrity: sha512-a16V8bq1/Cz+TGCkE2OPMTOUDLS3grCpdjoJCYNnVBbdYEMSgKrU0+B90s8b6H+ByYTBZN7a3g76jdIJi7UfKQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/abstract-signer/-/abstract-signer-5.7.0.tgz}
+    name: '@ethersproject/abstract-signer'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/abstract-provider': registry.npmmirror.com/@ethersproject/abstract-provider/5.7.0
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/address/5.7.0:
+    resolution: {integrity: sha512-9wYhYt7aghVGo758POM5nqcOMaE168Q6aRLJZwUmiqSrAungkG74gSSeKEIR7ukixesdRZGPgVqme6vmxs1fkA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/address/-/address-5.7.0.tgz}
+    name: '@ethersproject/address'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/keccak256': registry.npmmirror.com/@ethersproject/keccak256/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/rlp': registry.npmmirror.com/@ethersproject/rlp/5.7.0
+
+  registry.npmmirror.com/@ethersproject/base64/5.7.0:
+    resolution: {integrity: sha512-Dr8tcHt2mEbsZr/mwTPIQAf3Ai0Bks/7gTw9dSqk1mQvhW3XvRlmDJr/4n+wg1JmCl16NZue17CDh8xb/vZ0sQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/base64/-/base64-5.7.0.tgz}
+    name: '@ethersproject/base64'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/basex/5.7.0:
+    resolution: {integrity: sha512-ywlh43GwZLv2Voc2gQVTKBoVQ1mti3d8HK5aMxsfu/nRDnMmNqaSJ3r3n85HBByT8OpoY96SXM1FogC533T4zw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/basex/-/basex-5.7.0.tgz}
+    name: '@ethersproject/basex'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/bignumber/5.7.0:
+    resolution: {integrity: sha512-n1CAdIHRWjSucQO3MC1zPSVgV/6dy/fjL9pMrPP9peL+QxEg9wOsVqwD4+818B6LUEtaXzVHQiuivzRoxPxUGw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/bignumber/-/bignumber-5.7.0.tgz}
+    name: '@ethersproject/bignumber'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      bn.js: registry.npmmirror.com/bn.js/5.2.1
+
+  registry.npmmirror.com/@ethersproject/bytes/5.7.0:
+    resolution: {integrity: sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/bytes/-/bytes-5.7.0.tgz}
+    name: '@ethersproject/bytes'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+
+  registry.npmmirror.com/@ethersproject/constants/5.7.0:
+    resolution: {integrity: sha512-DHI+y5dBNvkpYUMiRQyxRBYBefZkJfo70VUkUAsRjcPs47muV9evftfZ0PJVCXYbAiCgght0DtcF9srFQmIgWA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/constants/-/constants-5.7.0.tgz}
+    name: '@ethersproject/constants'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/hash/5.7.0:
+    resolution: {integrity: sha512-qX5WrQfnah1EFnO5zJv1v46a8HW0+E5xuBBDTwMFZLuVTx0tbU2kkx15NqdjxecrLGatQN9FGQKpb1FKdHCt+g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/hash/-/hash-5.7.0.tgz}
+    name: '@ethersproject/hash'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/abstract-signer': registry.npmmirror.com/@ethersproject/abstract-signer/5.7.0
+      '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
+      '@ethersproject/base64': registry.npmmirror.com/@ethersproject/base64/5.7.0
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/keccak256': registry.npmmirror.com/@ethersproject/keccak256/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+      '@ethersproject/strings': registry.npmmirror.com/@ethersproject/strings/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/keccak256/5.7.0:
+    resolution: {integrity: sha512-2UcPboeL/iW+pSg6vZ6ydF8tCnv3Iu/8tUmLLzWWGzxWKFFqOBQFLo6uLUv6BDrLgCDfN28RJ/wtByx+jZ4KBg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/keccak256/-/keccak256-5.7.0.tgz}
+    name: '@ethersproject/keccak256'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      js-sha3: registry.npmmirror.com/js-sha3/0.8.0
+
+  registry.npmmirror.com/@ethersproject/logger/5.7.0:
+    resolution: {integrity: sha512-0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/logger/-/logger-5.7.0.tgz}
+    name: '@ethersproject/logger'
+    version: 5.7.0
+
+  registry.npmmirror.com/@ethersproject/networks/5.7.1:
+    resolution: {integrity: sha512-n/MufjFYv3yFcUyfhnXotyDlNdFb7onmkSy8aQERi2PjNcnWQ66xXxa3XlS8nCcA8aJKJjIIMNJTC7tu80GwpQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/networks/-/networks-5.7.1.tgz}
+    name: '@ethersproject/networks'
+    version: 5.7.1
+    dependencies:
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/properties/5.7.0:
+    resolution: {integrity: sha512-J87jy8suntrAkIZtecpxEPxY//szqr1mlBaYlQ0r4RCaiD2hjheqF9s1LVE8vVuJCXisjIP+JgtK/Do54ej4Sw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/properties/-/properties-5.7.0.tgz}
+    name: '@ethersproject/properties'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/providers/5.7.2:
+    resolution: {integrity: sha512-g34EWZ1WWAVgr4aptGlVBF8mhl3VWjv+8hoAnzStu8Ah22VHBsuGzP17eb6xDVRzw895G4W7vvx60lFFur/1Rg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/providers/-/providers-5.7.2.tgz}
+    name: '@ethersproject/providers'
+    version: 5.7.2
+    dependencies:
+      '@ethersproject/abstract-provider': registry.npmmirror.com/@ethersproject/abstract-provider/5.7.0
+      '@ethersproject/abstract-signer': registry.npmmirror.com/@ethersproject/abstract-signer/5.7.0
+      '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
+      '@ethersproject/base64': registry.npmmirror.com/@ethersproject/base64/5.7.0
+      '@ethersproject/basex': registry.npmmirror.com/@ethersproject/basex/5.7.0
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/constants': registry.npmmirror.com/@ethersproject/constants/5.7.0
+      '@ethersproject/hash': registry.npmmirror.com/@ethersproject/hash/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/networks': registry.npmmirror.com/@ethersproject/networks/5.7.1
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+      '@ethersproject/random': registry.npmmirror.com/@ethersproject/random/5.7.0
+      '@ethersproject/rlp': registry.npmmirror.com/@ethersproject/rlp/5.7.0
+      '@ethersproject/sha2': registry.npmmirror.com/@ethersproject/sha2/5.7.0
+      '@ethersproject/strings': registry.npmmirror.com/@ethersproject/strings/5.7.0
+      '@ethersproject/transactions': registry.npmmirror.com/@ethersproject/transactions/5.7.0
+      '@ethersproject/web': registry.npmmirror.com/@ethersproject/web/5.7.1
+      bech32: registry.npmmirror.com/bech32/1.1.4
+      ws: registry.npmmirror.com/ws/7.4.6
+    transitivePeerDependencies:
+      - bufferutil
+      - utf-8-validate
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/random/5.7.0:
+    resolution: {integrity: sha512-19WjScqRA8IIeWclFme75VMXSBvi4e6InrUNuaR4s5pTF2qNhcGdCUwdxUVGtDDqC00sDLCO93jPQoDUH4HVmQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/random/-/random-5.7.0.tgz}
+    name: '@ethersproject/random'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/rlp/5.7.0:
+    resolution: {integrity: sha512-rBxzX2vK8mVF7b0Tol44t5Tb8gomOHkj5guL+HhzQ1yBh/ydjGnpw6at+X6Iw0Kp3OzzzkcKp8N9r0W4kYSs9w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/rlp/-/rlp-5.7.0.tgz}
+    name: '@ethersproject/rlp'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+
+  registry.npmmirror.com/@ethersproject/sha2/5.7.0:
+    resolution: {integrity: sha512-gKlH42riwb3KYp0reLsFTokByAKoJdgFCwI+CCiX/k+Jm2mbNs6oOaCjYQSlI1+XBVejwH2KrmCbMAT/GnRDQw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/sha2/-/sha2-5.7.0.tgz}
+    name: '@ethersproject/sha2'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      hash.js: registry.npmmirror.com/hash.js/1.1.7
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/signing-key/5.7.0:
+    resolution: {integrity: sha512-MZdy2nL3wO0u7gkB4nA/pEf8lu1TlFswPNmy8AiYkfKTdO6eXBJyUdmHO/ehm/htHw9K/qF8ujnTyUAD+Ry54Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/signing-key/-/signing-key-5.7.0.tgz}
+    name: '@ethersproject/signing-key'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+      bn.js: registry.npmmirror.com/bn.js/5.2.1
+      elliptic: registry.npmmirror.com/elliptic/6.5.4
+      hash.js: registry.npmmirror.com/hash.js/1.1.7
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/strings/5.7.0:
+    resolution: {integrity: sha512-/9nu+lj0YswRNSH0NXYqrh8775XNyEdUQAuf3f+SmOrnVewcJ5SBNAjF7lpgehKi4abvNNXyf+HX86czCdJ8Mg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/strings/-/strings-5.7.0.tgz}
+    name: '@ethersproject/strings'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/constants': registry.npmmirror.com/@ethersproject/constants/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/transactions/5.7.0:
+    resolution: {integrity: sha512-kmcNicCp1lp8qanMTC3RIikGgoJ80ztTyvtsFvCYpSCfkjhD0jZ2LOrnbcuxuToLIUYYf+4XwD1rP+B/erDIhQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/transactions/-/transactions-5.7.0.tgz}
+    name: '@ethersproject/transactions'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/constants': registry.npmmirror.com/@ethersproject/constants/5.7.0
+      '@ethersproject/keccak256': registry.npmmirror.com/@ethersproject/keccak256/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+      '@ethersproject/rlp': registry.npmmirror.com/@ethersproject/rlp/5.7.0
+      '@ethersproject/signing-key': registry.npmmirror.com/@ethersproject/signing-key/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@ethersproject/web/5.7.1:
+    resolution: {integrity: sha512-Gueu8lSvyjBWL4cYsWsjh6MtMwM0+H4HvqFPZfB6dV8ctbP9zFAO73VG1cMWae0FLPCtz0peKPpZY8/ugJJX2w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/web/-/web-5.7.1.tgz}
+    name: '@ethersproject/web'
+    version: 5.7.1
+    dependencies:
+      '@ethersproject/base64': registry.npmmirror.com/@ethersproject/base64/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/properties': registry.npmmirror.com/@ethersproject/properties/5.7.0
+      '@ethersproject/strings': registry.npmmirror.com/@ethersproject/strings/5.7.0
+    dev: false
+
+  registry.npmmirror.com/@web3-react/store/8.0.25-beta.0:
+    resolution: {integrity: sha512-YHrZ42EHiQ9UAJq8Y/pHsyXu6GhzbCSHaQJ9U0wCDhbPoQ9QjOj0Pwcaa/VLXljuynK/7ERP942nI1IzArt9Sg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/store/-/store-8.0.25-beta.0.tgz}
+    name: '@web3-react/store'
+    version: 8.0.25-beta.0
+    dependencies:
+      '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
+      '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
+      zustand: registry.npmmirror.com/zustand/4.3.2
+    transitivePeerDependencies:
+      - immer
+      - react
+    dev: true
+
+  registry.npmmirror.com/@web3-react/types/8.0.20-beta.0:
+    resolution: {integrity: sha512-qOZYMyUmsm3Um6t6Pg3OgnE86ufhWZpB5/VxsooB8cdpXc/C/f8KMyYSeM63GoKSMScOKwfqV6yODFL7g/Qc8g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/types/-/types-8.0.20-beta.0.tgz}
+    name: '@web3-react/types'
+    version: 8.0.20-beta.0
+    dependencies:
+      zustand: registry.npmmirror.com/zustand/4.3.2
+    transitivePeerDependencies:
+      - immer
+      - react
+
+  registry.npmmirror.com/bech32/1.1.4:
+    resolution: {integrity: sha512-s0IrSOzLlbvX7yp4WBfPITzpAU8sqQcpsmwXDiKwrG4r491vwCO/XpejasRNl0piBMe/DvP4Tz0mIS/X1DPJBQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bech32/-/bech32-1.1.4.tgz}
+    name: bech32
+    version: 1.1.4
+    dev: false
+
+  registry.npmmirror.com/bn.js/4.12.0:
+    resolution: {integrity: sha512-c98Bf3tPniI+scsdk237ku1Dc3ujXQTSgyiPUDEOe7tRkhrqridvh8klBv0HCEso1OLOYcHuCv/cS6DNxKH+ZA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bn.js/-/bn.js-4.12.0.tgz}
+    name: bn.js
+    version: 4.12.0
+    dev: false
+
+  registry.npmmirror.com/bn.js/5.2.1:
+    resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bn.js/-/bn.js-5.2.1.tgz}
+    name: bn.js
+    version: 5.2.1
+
+  registry.npmmirror.com/brorand/1.1.0:
+    resolution: {integrity: sha512-cKV8tMCEpQs4hK/ik71d6LrPOnpkpGBR0wzxqr68g2m/LB2GxVYQroAjMJZRVM1Y4BCjCKc3vAamxSzOY2RP+w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/brorand/-/brorand-1.1.0.tgz}
+    name: brorand
+    version: 1.1.0
+    dev: false
+
+  registry.npmmirror.com/elliptic/6.5.4:
+    resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/elliptic/-/elliptic-6.5.4.tgz}
+    name: elliptic
+    version: 6.5.4
+    dependencies:
+      bn.js: registry.npmmirror.com/bn.js/4.12.0
+      brorand: registry.npmmirror.com/brorand/1.1.0
+      hash.js: registry.npmmirror.com/hash.js/1.1.7
+      hmac-drbg: registry.npmmirror.com/hmac-drbg/1.0.1
+      inherits: registry.npmmirror.com/inherits/2.0.4
+      minimalistic-assert: registry.npmmirror.com/minimalistic-assert/1.0.1
+      minimalistic-crypto-utils: registry.npmmirror.com/minimalistic-crypto-utils/1.0.1
+    dev: false
+
+  registry.npmmirror.com/hash.js/1.1.7:
+    resolution: {integrity: sha512-taOaskGt4z4SOANNseOviYDvjEJinIkRgmp7LbKP2YTTmVxWBl87s/uzK9r+44BclBSp2X7K1hqeNfz9JbBeXA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hash.js/-/hash.js-1.1.7.tgz}
+    name: hash.js
+    version: 1.1.7
+    dependencies:
+      inherits: registry.npmmirror.com/inherits/2.0.4
+      minimalistic-assert: registry.npmmirror.com/minimalistic-assert/1.0.1
+    dev: false
+
+  registry.npmmirror.com/hmac-drbg/1.0.1:
+    resolution: {integrity: sha512-Tti3gMqLdZfhOQY1Mzf/AanLiqh1WTiJgEj26ZuYQ9fbkLomzGchCws4FyrSd4VkpBfiNhaE1On+lOz894jvXg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz}
+    name: hmac-drbg
+    version: 1.0.1
+    dependencies:
+      hash.js: registry.npmmirror.com/hash.js/1.1.7
+      minimalistic-assert: registry.npmmirror.com/minimalistic-assert/1.0.1
+      minimalistic-crypto-utils: registry.npmmirror.com/minimalistic-crypto-utils/1.0.1
+    dev: false
+
+  registry.npmmirror.com/inherits/2.0.4:
+    resolution: {integrity: sha512-k/vGaX4/Yla3WzyMCvTQOXYeIHvqOKtnqBduzTHpzpQZzAskKMhZ2K+EnBiSM9zGSoIFeMpXKxa4dYeZIQqewQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/inherits/-/inherits-2.0.4.tgz}
+    name: inherits
+    version: 2.0.4
+    dev: false
+
+  registry.npmmirror.com/js-sha3/0.8.0:
+    resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-sha3/-/js-sha3-0.8.0.tgz}
+    name: js-sha3
+    version: 0.8.0
+
+  registry.npmmirror.com/minimalistic-assert/1.0.1:
+    resolution: {integrity: sha512-UtJcAD4yEaGtjPezWuO9wC4nwUnVH/8/Im3yEHQP4b67cXlD/Qr9hdITCU1xDbSEXg2XKNaP8jsReV7vQd00/A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimalistic-assert/-/minimalistic-assert-1.0.1.tgz}
+    name: minimalistic-assert
+    version: 1.0.1
+    dev: false
+
+  registry.npmmirror.com/minimalistic-crypto-utils/1.0.1:
+    resolution: {integrity: sha512-JIYlbt6g8i5jKfJ3xz7rF0LXmv2TkDxBLUkiBeZ7bAx4GnnNMr8xFpGnOxn6GhTEHx3SjRrZEoU+j04prX1ktg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/minimalistic-crypto-utils/-/minimalistic-crypto-utils-1.0.1.tgz}
+    name: minimalistic-crypto-utils
+    version: 1.0.1
+    dev: false
+
+  registry.npmmirror.com/use-sync-external-store/1.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz}
+    name: use-sync-external-store
+    version: 1.2.0
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
+  registry.npmmirror.com/ws/7.4.6:
+    resolution: {integrity: sha512-YmhHDO4MzaDLB+M9ym/mDA5z0naX8j7SIlT8f8z+I0VtzsRbekxEutHSme7NPS2qE8StCYQNUnfWdXta/Yu85A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/ws/-/ws-7.4.6.tgz}
+    name: ws
+    version: 7.4.6
+    engines: {node: '>=8.3.0'}
+    peerDependencies:
+      bufferutil: ^4.0.1
+      utf-8-validate: ^5.0.2
+    peerDependenciesMeta:
+      bufferutil:
+        optional: true
+      utf-8-validate:
+        optional: true
+    dev: false
+
+  registry.npmmirror.com/zustand/4.3.2:
+    resolution: {integrity: sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/zustand/-/zustand-4.3.2.tgz}
+    name: zustand
+    version: 4.3.2
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      use-sync-external-store: registry.npmmirror.com/use-sync-external-store/1.2.0

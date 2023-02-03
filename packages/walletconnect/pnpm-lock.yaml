@@ -1,0 +1,133 @@
+lockfileVersion: 5.4
+
+specifiers:
+  '@web3-react/store': ^8.0.25-beta.0
+  '@web3-react/types': ^8.0.20-beta.0
+  eventemitter3: ^4.0.7
+
+dependencies:
+  '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
+  eventemitter3: registry.npmmirror.com/eventemitter3/4.0.7
+
+devDependencies:
+  '@web3-react/store': registry.npmmirror.com/@web3-react/store/8.0.25-beta.0
+
+packages:
+
+  registry.npmmirror.com/@ethersproject/address/5.7.0:
+    resolution: {integrity: sha512-9wYhYt7aghVGo758POM5nqcOMaE168Q6aRLJZwUmiqSrAungkG74gSSeKEIR7ukixesdRZGPgVqme6vmxs1fkA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/address/-/address-5.7.0.tgz}
+    name: '@ethersproject/address'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bignumber': registry.npmmirror.com/@ethersproject/bignumber/5.7.0
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/keccak256': registry.npmmirror.com/@ethersproject/keccak256/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      '@ethersproject/rlp': registry.npmmirror.com/@ethersproject/rlp/5.7.0
+    dev: true
+
+  registry.npmmirror.com/@ethersproject/bignumber/5.7.0:
+    resolution: {integrity: sha512-n1CAdIHRWjSucQO3MC1zPSVgV/6dy/fjL9pMrPP9peL+QxEg9wOsVqwD4+818B6LUEtaXzVHQiuivzRoxPxUGw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/bignumber/-/bignumber-5.7.0.tgz}
+    name: '@ethersproject/bignumber'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+      bn.js: registry.npmmirror.com/bn.js/5.2.1
+    dev: true
+
+  registry.npmmirror.com/@ethersproject/bytes/5.7.0:
+    resolution: {integrity: sha512-nsbxwgFXWh9NyYWo+U8atvmMsSdKJprTcICAkvbBffT75qDocbuggBU0SJiVK2MuTrp0q+xvLkTnGMPK1+uA9A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/bytes/-/bytes-5.7.0.tgz}
+    name: '@ethersproject/bytes'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+    dev: true
+
+  registry.npmmirror.com/@ethersproject/keccak256/5.7.0:
+    resolution: {integrity: sha512-2UcPboeL/iW+pSg6vZ6ydF8tCnv3Iu/8tUmLLzWWGzxWKFFqOBQFLo6uLUv6BDrLgCDfN28RJ/wtByx+jZ4KBg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/keccak256/-/keccak256-5.7.0.tgz}
+    name: '@ethersproject/keccak256'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      js-sha3: registry.npmmirror.com/js-sha3/0.8.0
+    dev: true
+
+  registry.npmmirror.com/@ethersproject/logger/5.7.0:
+    resolution: {integrity: sha512-0odtFdXu/XHtjQXJYA3u9G0G8btm0ND5Cu8M7i5vhEcE8/HmF4Lbdqanwyv4uQTr2tx6b7fQRmgLrsnpQlmnig==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/logger/-/logger-5.7.0.tgz}
+    name: '@ethersproject/logger'
+    version: 5.7.0
+    dev: true
+
+  registry.npmmirror.com/@ethersproject/rlp/5.7.0:
+    resolution: {integrity: sha512-rBxzX2vK8mVF7b0Tol44t5Tb8gomOHkj5guL+HhzQ1yBh/ydjGnpw6at+X6Iw0Kp3OzzzkcKp8N9r0W4kYSs9w==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@ethersproject/rlp/-/rlp-5.7.0.tgz}
+    name: '@ethersproject/rlp'
+    version: 5.7.0
+    dependencies:
+      '@ethersproject/bytes': registry.npmmirror.com/@ethersproject/bytes/5.7.0
+      '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
+    dev: true
+
+  registry.npmmirror.com/@web3-react/store/8.0.25-beta.0:
+    resolution: {integrity: sha512-YHrZ42EHiQ9UAJq8Y/pHsyXu6GhzbCSHaQJ9U0wCDhbPoQ9QjOj0Pwcaa/VLXljuynK/7ERP942nI1IzArt9Sg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/store/-/store-8.0.25-beta.0.tgz}
+    name: '@web3-react/store'
+    version: 8.0.25-beta.0
+    dependencies:
+      '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
+      '@web3-react/types': registry.npmmirror.com/@web3-react/types/8.0.20-beta.0
+      zustand: registry.npmmirror.com/zustand/4.3.2
+    transitivePeerDependencies:
+      - immer
+      - react
+    dev: true
+
+  registry.npmmirror.com/@web3-react/types/8.0.20-beta.0:
+    resolution: {integrity: sha512-qOZYMyUmsm3Um6t6Pg3OgnE86ufhWZpB5/VxsooB8cdpXc/C/f8KMyYSeM63GoKSMScOKwfqV6yODFL7g/Qc8g==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@web3-react/types/-/types-8.0.20-beta.0.tgz}
+    name: '@web3-react/types'
+    version: 8.0.20-beta.0
+    dependencies:
+      zustand: registry.npmmirror.com/zustand/4.3.2
+    transitivePeerDependencies:
+      - immer
+      - react
+
+  registry.npmmirror.com/bn.js/5.2.1:
+    resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bn.js/-/bn.js-5.2.1.tgz}
+    name: bn.js
+    version: 5.2.1
+    dev: true
+
+  registry.npmmirror.com/eventemitter3/4.0.7:
+    resolution: {integrity: sha512-8guHBZCwKnFhYdHr2ysuRWErTwhoN2X8XELRlrRwpmfeY2jjuUN4taQMsULKUVo1K4DvZl+0pgfyoysHxvmvEw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/eventemitter3/-/eventemitter3-4.0.7.tgz}
+    name: eventemitter3
+    version: 4.0.7
+    dev: false
+
+  registry.npmmirror.com/js-sha3/0.8.0:
+    resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-sha3/-/js-sha3-0.8.0.tgz}
+    name: js-sha3
+    version: 0.8.0
+    dev: true
+
+  registry.npmmirror.com/use-sync-external-store/1.2.0:
+    resolution: {integrity: sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz}
+    name: use-sync-external-store
+    version: 1.2.0
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+
+  registry.npmmirror.com/zustand/4.3.2:
+    resolution: {integrity: sha512-rd4haDmlwMTVWVqwvgy00ny8rtti/klRoZjFbL/MAcDnmD5qSw/RZc+Vddstdv90M5Lv6RPgWvm1Hivyn0QgJw==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/zustand/-/zustand-4.3.2.tgz}
+    name: zustand
+    version: 4.3.2
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      use-sync-external-store: registry.npmmirror.com/use-sync-external-store/1.2.0

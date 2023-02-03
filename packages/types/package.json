@@ -1,0 +1,32 @@
+{
+  "name": "@web3-vue/types",
+  "keywords": [
+    "web3-vue"
+  ],
+  "license": "GPL-3.0-or-later",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "files": [
+    "dist/*"
+  ],
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "pinia": "^2.0.30"
+  },
+  "devDependencies": {
+    "vue": ">=3.2"
+  },
+  "peerDependencies": {
+    "vue": ">=3.2"
+  }
+}
