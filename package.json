@@ -13,7 +13,7 @@
     "prestart": "npm run build",
     "start": "lerna run start --parallel",
     "pin": "lerna run pin && npm run bootstrap",
-    "version": "npm run pin",
+    "version": "npm run pin && git add packages/example-{vite-ts}/package.json",
     "prepack": "npm run build"
   },
   "devDependencies": {

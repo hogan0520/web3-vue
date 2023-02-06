@@ -8,7 +8,7 @@ export const [coinbaseWallet, hooks] = initializeConnector<CoinbaseWallet>(
       actions,
       options: {
         url: URLS[1][0],
-        appName: 'web3-react',
+        appName: 'web3-vue-org',
       },
     })
 )

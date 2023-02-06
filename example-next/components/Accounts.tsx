@@ -1,10 +1,10 @@
 import type { BigNumber } from '@ethersproject/bignumber'
 import { formatEther } from '@ethersproject/units'
-import type { Web3ReactHooks } from '@web3-react/core'
+import type { Web3VueHooks } from '@web3-vue-org/core'
 import { useEffect, useState } from 'react'
 
 function useBalances(
-  provider?: ReturnType<Web3ReactHooks['useProvider']>,
+  provider?: ReturnType<Web3VueHooks['useProvider']>,
   accounts?: string[]
 ): BigNumber[] | undefined {
   const [balances, setBalances] = useState<BigNumber[] | undefined>()
@@ -33,9 +33,9 @@ export function Accounts({
   provider,
   ENSNames,
 }: {
-  accounts: ReturnType<Web3ReactHooks['useAccounts']>
-  provider: ReturnType<Web3ReactHooks['useProvider']>
-  ENSNames: ReturnType<Web3ReactHooks['useENSNames']>
+  accounts: ReturnType<Web3VueHooks['useAccounts']>
+  provider: ReturnType<Web3VueHooks['useProvider']>
+  ENSNames: ReturnType<Web3VueHooks['useENSNames']>
 }) {
   const balances = useBalances(provider, accounts)
 
