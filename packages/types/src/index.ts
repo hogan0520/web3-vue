@@ -1,5 +1,5 @@
 import type { EventEmitter } from 'node:events'
-import type { defineStore, Store } from 'pinia'
+import type { defineStore, Store, StoreDefinition } from 'pinia'
 
 export interface Web3VueState {
   chainId: number | undefined
@@ -9,6 +9,7 @@ export interface Web3VueState {
 
 // export type Web3VueStore = ReturnType<ReturnType<typeof defineStore<string, Web3VueState>>>
 export type Web3VueStore = Store<string, Web3VueState>
+export type Web3VueStoreDefinition = StoreDefinition<string, Web3VueState>
 
 export type Web3VueStateUpdate =
   | {

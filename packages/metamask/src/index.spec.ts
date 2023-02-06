@@ -1,5 +1,5 @@
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
-import type { Actions, Web3VueStore } from '@web3-vue-org/types'
+import type { Actions, Web3VueStore, Web3VueStoreDefinition } from '@web3-vue-org/types'
 import { setActivePinia, createPinia } from 'pinia'
 import { MetaMask } from '.'
 import { MockEIP1193Provider } from '../../eip1193/src/mock'
@@ -18,13 +18,15 @@ describe('MetaMask', () => {
     ;(window as any).ethereum = mockProvider
   })
 
+  let useStore: Web3VueStoreDefinition
   let store: Web3VueStore
   let connector: MetaMask
 
   beforeEach(() => {
     setActivePinia(createPinia())
     let actions: Actions
-    ;[store, actions] = createWeb3VueStoreAndActions()
+    ;[useStore, actions] = createWeb3VueStoreAndActions()
+    store = useStore()
     connector = new MetaMask({ actions })
   })
 

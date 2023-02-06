@@ -7,8 +7,6 @@ import { ref, shallowRef, watch } from 'vue'
 import type { Web3VueHooks, Web3VuePriorityHooks, Web3VueSelectedHooks } from './hooks'
 import { getPriorityConnector, getSelectedConnector, initializeConnector } from './hooks'
 
-jest.setTimeout(10000)
-
 class MockProvider extends EventEmitter {
   request = jest.fn()
 }

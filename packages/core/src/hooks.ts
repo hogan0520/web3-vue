@@ -1,7 +1,7 @@
 import type { Networkish } from '@ethersproject/networks'
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
-import type { Actions, Connector, Web3VueState, Web3VueStore } from '@web3-vue-org/types'
+import type { Actions, Connector, Web3VueState, Web3VueStore, Web3VueStoreDefinition } from '@web3-vue-org/types'
 import { computed, ComputedRef, Ref, ref, shallowRef, watchEffect } from 'vue'
 
 let DynamicProvider: typeof Web3Provider | null | undefined
@@ -33,16 +33,18 @@ export type Web3VuePriorityHooks = ReturnType<typeof getPriorityConnector>
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns [connector, hooks, store] - The initialized connector, a variety of hooks, and a zustand store.
  */
-export function initializeConnector<T extends Connector>(f: (actions: Actions) => T): [T, Web3VueHooks, Web3VueStore] {
-  const [store, actions] = createWeb3VueStoreAndActions()
+export function initializeConnector<T extends Connector>(
+  f: (actions: Actions) => T
+): [T, Web3VueHooks, Web3VueStoreDefinition] {
+  const [useStore, actions] = createWeb3VueStoreAndActions()
 
   const connector = f(actions)
 
-  const stateHooks = getStateHooks(store)
+  const stateHooks = getStateHooks(useStore)
   const derivedHooks = getDerivedHooks(stateHooks)
   const augmentedHooks = getAugmentedHooks<T>(connector, stateHooks, derivedHooks)
 
-  return [connector, { ...stateHooks, ...derivedHooks, ...augmentedHooks }, store]
+  return [connector, { ...stateHooks, ...derivedHooks, ...augmentedHooks }, useStore]
 }
 
 function computeIsActive({ chainId, accounts, activating }: Web3VueState) {
@@ -52,22 +54,25 @@ function computeIsActive({ chainId, accounts, activating }: Web3VueState) {
 /**
  * Creates a variety of convenience `hooks` that return data associated with a particular passed connector.
  *
- * @param initializedConnectors - Two or more [connector, hooks(, store)] arrays, as returned from initializeConnector.
+ * @param initializedConnectors - Two or more [connector, hooks(, useStore)] arrays, as returned from initializeConnector.
  * @returns hooks - A variety of convenience hooks that wrap the hooks returned from initializeConnector.
  */
 export function getSelectedConnector(
-  ...initializedConnectors: [Connector, Web3VueHooks][] | [Connector, Web3VueHooks, Web3VueStore][]
+  ...initializedConnectors: [Connector, Web3VueHooks][] | [Connector, Web3VueHooks, Web3VueStoreDefinition][]
 ) {
   function getIndex(connector: Connector) {
-    const index = initializedConnectors.findIndex(([initializedConnector]) => connector === initializedConnector)
+    const index = initializedConnectors.findIndex(
+      ([initializedConnector]: [Connector, Web3VueHooks] | [Connector, Web3VueHooks, Web3VueStoreDefinition]) =>
+        connector === initializedConnector
+    )
     if (index === -1) throw new Error('Connector not found')
     return index
   }
 
   function useSelectedStore(connector: Ref<Connector>) {
-    const store = computed(() => initializedConnectors[getIndex(connector.value)][2])
-    if (!store.value) throw new Error('Stores not passed')
-    return store
+    const useStore = computed(() => initializedConnectors[getIndex(connector.value)]?.[2] as Web3VueStoreDefinition)
+    if (!useStore.value) throw new Error('Stores not passed')
+    return computed(() => useStore.value() as Web3VueStore)
   }
 
   // the following code calls hooks in a map a lot, which violates the eslint rule.
@@ -135,7 +140,7 @@ export function getSelectedConnector(
  * @returns hooks - A variety of convenience hooks that wrap the hooks returned from initializeConnector.
  */
 export function getPriorityConnector(
-  ...initializedConnectors: [Connector, Web3VueHooks][] | [Connector, Web3VueHooks, Web3VueStore][]
+  ...initializedConnectors: [Connector, Web3VueHooks][] | [Connector, Web3VueHooks, Web3VueStoreDefinition][]
 ) {
   const {
     useSelectedStore,
@@ -152,7 +157,10 @@ export function getPriorityConnector(
   function usePriorityConnector() {
     const connector: Ref<Connector> = shallowRef(initializedConnectors[0][0])
 
-    const values = initializedConnectors.map(([, { useIsActive }]) => useIsActive())
+    const values = initializedConnectors.map(
+      ([, { useIsActive }]: [Connector, Web3VueHooks] | [Connector, Web3VueHooks, Web3VueStoreDefinition]) =>
+        useIsActive()
+    )
     values.forEach((value, i) => {
       watchEffect(() => {
         if (value.value) {
@@ -228,16 +236,19 @@ export function getPriorityConnector(
   }
 }
 
-function getStateHooks(store: Web3VueStore) {
+function getStateHooks(useStore: Web3VueStoreDefinition) {
   function useChainId(): ComputedRef<Web3VueState['chainId']> {
+    const store = useStore()
     return computed(() => store.chainId)
   }
 
   function useAccounts(): ComputedRef<Web3VueState['accounts']> {
+    const store = useStore()
     return computed(() => store.accounts)
   }
 
   function useIsActivating(): ComputedRef<Web3VueState['activating']> {
+    const store = useStore()
     return computed(() => store.activating)
   }
 
@@ -245,14 +256,16 @@ function getStateHooks(store: Web3VueStore) {
 }
 
 function getDerivedHooks({ useChainId, useAccounts, useIsActivating }: ReturnType<typeof getStateHooks>) {
-  const chainId = useChainId()
-  const accounts = useAccounts()
-  const activating = useIsActivating()
   function useAccount(): ComputedRef<string | undefined> {
+    const accounts = useAccounts()
     return computed(() => accounts.value?.[0])
   }
 
   function useIsActive(): ComputedRef<boolean> {
+    const chainId = useChainId()
+    const activating = useIsActivating()
+    const accounts = useAccounts()
+
     return computed(() =>
       computeIsActive({
         chainId: chainId.value,

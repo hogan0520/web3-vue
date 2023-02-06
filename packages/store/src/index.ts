@@ -1,5 +1,5 @@
 import { getAddress } from '@ethersproject/address'
-import type { Actions, Web3VueState, Web3VueStateUpdate, Web3VueStore } from '@web3-vue-org/types'
+import type { Actions, Web3VueState, Web3VueStateUpdate, Web3VueStoreDefinition } from '@web3-vue-org/types'
 import { defineStore } from 'pinia'
 /**
  * MAX_SAFE_CHAIN_ID is the upper bound limit on what will be accepted for `chainId`
@@ -26,11 +26,11 @@ const DEFAULT_STATE = {
 }
 
 let storeIndex = 0
-export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
+export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions] {
   const storeId = `web3-vue-org-store-${storeIndex++}`
-  const store = defineStore<string, Web3VueState>(storeId, {
+  const useStore = defineStore<string, Web3VueState>(storeId, {
     state: () => Object.assign({}, DEFAULT_STATE),
-  })()
+  })
 
   // flag for tracking updates so we don't clobber data when cancelling activation
   let nullifier = 0
@@ -42,6 +42,7 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
    * as long as there haven't been any intervening updates.
    */
   function startActivation(): () => void {
+    const store = useStore()
     const nullifierCached = ++nullifier
 
     store.$patch({ ...DEFAULT_STATE, activating: true })
@@ -59,6 +60,8 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
    * @param stateUpdate - The state update to report.
    */
   function update(stateUpdate: Web3VueStateUpdate): void {
+    const store = useStore()
+
     // validate chainId statically, independent of existing state
     if (stateUpdate.chainId !== undefined) {
       validateChainId(stateUpdate.chainId)
@@ -93,9 +96,11 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
    * Resets connector state back to the default state.
    */
   function resetState(): void {
+    const store = useStore()
+
     nullifier++
     store.$patch({ ...DEFAULT_STATE })
   }
 
-  return [store, { startActivation, update, resetState }]
+  return [useStore, { startActivation, update, resetState }]
 }
