@@ -1,11 +1,10 @@
 {
   "name": "example-vite-ts",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1-alpha.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc && vite build",
     "preview": "vite preview",
     "pin": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,gnosis-safe,metamask,network,types,url,walletconnect}; do pnpm add @web3-vue-org/$X -E; done }'"
   },
@@ -13,7 +12,7 @@
     "@coinbase/wallet-sdk": "^3.3.0",
     "@walletconnect/ethereum-provider": "^1.7.8",
     "@web3-vue-org/coinbase-wallet": "0.0.8-alpha.0",
-    "@web3-vue-org/core": "0.0.8-alpha.0",
+    "@web3-vue-org/core": "^0.0.9-alpha.0",
     "@web3-vue-org/eip1193": "0.0.8-alpha.0",
     "@web3-vue-org/empty": "0.0.8-alpha.0",
     "@web3-vue-org/metamask": "0.0.8-alpha.0",
@@ -27,7 +26,7 @@
   "devDependencies": {
     "@babel/core": "^7.20.12",
     "@vitejs/plugin-vue": "^4.0.0",
-    "typescript": "^4.9.3",
+    "typescript": "^4.6.3",
     "vite": "^4.1.0",
     "vue-tsc": "^1.0.24"
   }

@@ -1,4 +1,4 @@
-import { CoinbaseWallet } from '@web3-vue-org/coinbase-wallet'
+import type { CoinbaseWallet } from '@web3-vue-org/coinbase-wallet'
 import { initializeConnector } from '@web3-vue-org/core'
 import { URLS } from '../chains'
 
