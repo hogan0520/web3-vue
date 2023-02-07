@@ -1,7 +1,7 @@
 import type { Networkish } from '@ethersproject/networks'
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
-import type {Connector, Web3VueStore} from '@web3-vue-org/types'
-import {computed, defineComponent, provide, h} from 'vue'
+import type { Connector, Web3VueStore } from '@web3-vue-org/types'
+import { computed, defineComponent, provide, h } from 'vue'
 import type { PropType } from 'vue'
 import type { Web3VueHooks, Web3VuePriorityHooks } from './hooks'
 import { getPriorityConnector } from './hooks'
@@ -59,55 +59,56 @@ export const Web3VueProvider = defineComponent({
         'The connectors prop passed to Web3VueProvider must be referentially static. If connectors is changing, try providing a key prop to Web3VueProvider that changes every time connectors changes.'
       )
 
+    const hooks = getPriorityConnector(...props.connectors)
+    const {
+      usePriorityConnector,
+      useSelectedChainId,
+      useSelectedAccounts,
+      useSelectedIsActivating,
+      useSelectedAccount,
+      useSelectedIsActive,
+      useSelectedProvider,
+      useSelectedENSNames,
+      useSelectedENSName,
+    } = hooks
 
-      const hooks = getPriorityConnector(...props.connectors)
-      const {
-        usePriorityConnector,
-        useSelectedChainId,
-        useSelectedAccounts,
-        useSelectedIsActivating,
-        useSelectedAccount,
-        useSelectedIsActive,
-        useSelectedProvider,
-        useSelectedENSNames,
-        useSelectedENSName,
-      } = hooks
+    const priorityConnector = usePriorityConnector()
+    const connector = computed(() => props.connectorOverride ?? priorityConnector.value)
 
-      const priorityConnector = usePriorityConnector()
-      const connector = computed(() => props.connectorOverride ?? priorityConnector.value)
+    const chainId = useSelectedChainId(connector)
+    const accounts = useSelectedAccounts(connector)
+    const isActivating = useSelectedIsActivating(connector)
+    const account = useSelectedAccount(connector)
+    const isActive = useSelectedIsActive(connector)
+    // note that we've omitted a <T extends BaseProvider = Web3Provider> generic type
+    // in Web3VueProvider, and thus can't pass T through to useSelectedProvider below.
+    // this is because if we did so, the type of provider would include T, but that would
+    // conflict because Web3Context can't take a generic. however, this isn't particularly
+    // important, because useWeb3Vue (below) is manually typed
+    const provider = useSelectedProvider(connector, network)
+    const ENSNames = useSelectedENSNames(
+      connector,
+      computed(() => (props.lookupENS ? provider.value : undefined))
+    )
+    const ENSName = useSelectedENSName(
+      connector,
+      computed(() => (props.lookupENS ? provider.value : undefined))
+    )
 
-      const chainId = useSelectedChainId(connector)
-      const accounts = useSelectedAccounts(connector)
-      const isActivating = useSelectedIsActivating(connector)
-      const account = useSelectedAccount(connector)
-      const isActive = useSelectedIsActive(connector)
-      // note that we've omitted a <T extends BaseProvider = Web3Provider> generic type
-      // in Web3VueProvider, and thus can't pass T through to useSelectedProvider below.
-      // this is because if we did so, the type of provider would include T, but that would
-      // conflict because Web3Context can't take a generic. however, this isn't particularly
-      // important, because useWeb3Vue (below) is manually typed
-      const provider = useSelectedProvider(connector, network)
-      const ENSNames = useSelectedENSNames(
-          connector,
-          computed(() => (props.lookupENS ? provider.value : undefined))
-      )
-      const ENSName = useSelectedENSName(
-          connector,
-          computed(() => (props.lookupENS ? provider.value : undefined))
-      )
-
-      provide('connector', connector)
-      provide('chainId', chainId)
-      provide('accounts', accounts)
-      provide('isActivating', isActivating)
-      provide('account', account)
-      provide('isActive', isActive)
-      provide('provider', provider)
-      provide('ENSNames', ENSNames)
-      provide('ENSName', ENSName)
-      provide('hooks', hooks)
-
-    const children = slots.default?.()
+    provide('connector', connector)
+    provide('chainId', chainId)
+    provide('accounts', accounts)
+    provide('isActivating', isActivating)
+    provide('account', account)
+    provide('isActive', isActive)
+    provide('provider', provider)
+    provide('ENSNames', ENSNames)
+    provide('ENSName', ENSName)
+    provide('hooks', hooks)
+  },
+  render() {
+    const { $slots } = this
+    const children = $slots.default?.()
     return <div class={'web3-vue-org-provider'}>{children}</div>
-  }
+  },
 })

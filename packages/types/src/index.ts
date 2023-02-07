@@ -1,5 +1,5 @@
 import type { EventEmitter } from 'node:events'
-import type {StoreApi} from "@web3-vue-org/x";
+import type { StoreApi } from '@web3-vue-org/x'
 
 export interface Web3VueState {
   chainId: number | undefined

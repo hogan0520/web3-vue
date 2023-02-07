@@ -27,7 +27,7 @@ export class Network extends Connector {
   /** {@inheritdoc Connector.provider} */
   public readonly provider: undefined = undefined
   /** {@inheritdoc Connector.customProvider} */
-  declare public customProvider?: JsonRpcProvider
+  public declare customProvider?: JsonRpcProvider
 
   private readonly providerCache: Record<number, Promise<JsonRpcProvider> | undefined> = {}
 

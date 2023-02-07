@@ -1,7 +1,6 @@
 import { createWeb3VueStoreAndActions, MAX_SAFE_CHAIN_ID } from '.'
 
 describe('#createWeb3VueStoreAndActions', () => {
-
   test('uninitialized', () => {
     const [store] = createWeb3VueStoreAndActions()
     expect(store.getState()).toEqual({

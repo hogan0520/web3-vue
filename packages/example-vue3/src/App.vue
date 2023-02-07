@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
-import type {Web3VueHooks, Web3VueProvider} from "@web3-vue-org/core";
+import type {Web3VueHooks} from "@web3-vue-org/core";
+import {Web3VueProvider} from "@web3-vue-org/core";
 import type {WalletConnect} from "@web3-vue-org/walletconnect";
 import type {MetaMask} from "@web3-vue-org/metamask";
 import type {CoinbaseWallet} from "@web3-vue-org/coinbase-wallet";
@@ -15,6 +16,8 @@ const connectors: [MetaMask | WalletConnect | CoinbaseWallet | Network, Web3VueH
   // [coinbaseWallet, coinbaseWalletHooks],
   // [network, networkHooks],
 ]
+
+metaMask.activate()
 </script>
 
 <template>

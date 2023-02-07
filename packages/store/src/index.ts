@@ -1,5 +1,5 @@
 import { getAddress } from '@ethersproject/address'
-import type {Actions, Web3VueState, Web3VueStateUpdate, Web3VueStore} from '@web3-vue-org/types'
+import type { Actions, Web3VueState, Web3VueStateUpdate, Web3VueStore } from '@web3-vue-org/types'
 import { defineStore } from '@web3-vue-org/x'
 /**
  * MAX_SAFE_CHAIN_ID is the upper bound limit on what will be accepted for `chainId`
@@ -28,7 +28,7 @@ const DEFAULT_STATE = {
 const createStore = defineStore<Web3VueState>()
 
 export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
-  const store = createStore( {...DEFAULT_STATE})
+  const store = createStore({ ...DEFAULT_STATE })
 
   // flag for tracking updates so we don't clobber data when cancelling activation
   let nullifier = 0
@@ -57,7 +57,6 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
    * @param stateUpdate - The state update to report.
    */
   function update(stateUpdate: Web3VueStateUpdate): void {
-
     // validate chainId statically, independent of existing state
     if (stateUpdate.chainId !== undefined) {
       validateChainId(stateUpdate.chainId)
@@ -82,7 +81,7 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
       if (activating && chainId && accounts) {
         activating = false
       }
-      return {chainId, accounts, activating}
+      return { chainId, accounts, activating }
     })
   }
 

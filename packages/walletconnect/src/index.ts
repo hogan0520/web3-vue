@@ -44,7 +44,7 @@ export interface ActivateOptions {
 
 export class WalletConnect extends Connector {
   /** {@inheritdoc Connector.provider} */
-  declare public provider?: MockWalletConnectProvider
+  public declare provider?: MockWalletConnectProvider
   public readonly events = new EventEmitter3()
 
   private readonly options: Omit<WalletConnectOptions, 'rpc'>

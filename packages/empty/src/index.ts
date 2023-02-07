@@ -1,7 +1,6 @@
 import { Connector } from '@web3-vue-org/types'
 
 export class Empty extends Connector {
-
   /**
    * No-op. May be called if it simplifies application code.
    */

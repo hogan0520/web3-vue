@@ -51,58 +51,44 @@ export function getAddChainParameters(chainId: number): AddEthereumChainParamete
 
 export const CHAINS: { [chainId: number]: BasicChainInformation | ExtendedChainInformation } = {
   1: {
-    urls: [
-      'https://cloudflare-eth.com',
-    ].filter((url) => url !== ''),
+    urls: ['https://cloudflare-eth.com'].filter((url) => url !== ''),
     name: 'Mainnet',
   },
   // Optimism
   10: {
-    urls: [
-      'https://mainnet.optimism.io',
-    ].filter((url) => url !== ''),
+    urls: ['https://mainnet.optimism.io'].filter((url) => url !== ''),
     name: 'Optimism',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://optimistic.etherscan.io'],
   },
   69: {
-    urls: [
-      'https://kovan.optimism.io',
-    ].filter((url) => url !== ''),
+    urls: ['https://kovan.optimism.io'].filter((url) => url !== ''),
     name: 'Optimism Kovan',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://kovan-optimistic.etherscan.io'],
   },
   // Arbitrum
   42161: {
-    urls: [
-      'https://arb1.arbitrum.io/rpc',
-    ].filter((url) => url !== ''),
+    urls: ['https://arb1.arbitrum.io/rpc'].filter((url) => url !== ''),
     name: 'Arbitrum One',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://arbiscan.io'],
   },
   421611: {
-    urls: [
-      'https://rinkeby.arbitrum.io/rpc',
-    ].filter((url) => url !== ''),
+    urls: ['https://rinkeby.arbitrum.io/rpc'].filter((url) => url !== ''),
     name: 'Arbitrum Testnet',
     nativeCurrency: ETH,
     blockExplorerUrls: ['https://testnet.arbiscan.io'],
   },
   // Polygon
   137: {
-    urls: [
-      'https://polygon-rpc.com',
-    ].filter((url) => url !== ''),
+    urls: ['https://polygon-rpc.com'].filter((url) => url !== ''),
     name: 'Polygon Mainnet',
     nativeCurrency: MATIC,
     blockExplorerUrls: ['https://polygonscan.com'],
   },
   80001: {
-    urls: ['https://polygon-testnet.public.blastapi.io'].filter(
-      (url) => url !== ''
-    ),
+    urls: ['https://polygon-testnet.public.blastapi.io'].filter((url) => url !== ''),
     name: 'Polygon Mumbai',
     nativeCurrency: MATIC,
     blockExplorerUrls: ['https://mumbai.polygonscan.com'],

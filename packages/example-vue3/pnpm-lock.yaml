@@ -7,17 +7,17 @@ specifiers:
   '@vitejs/plugin-vue-jsx': ^3.0.0
   '@vue/tsconfig': ^0.1.3
   '@walletconnect/ethereum-provider': ^1.7.8
-  '@web3-vue-org/coinbase-wallet': 0.0.8-alpha.0
-  '@web3-vue-org/core': ^0.0.10-alpha.0
-  '@web3-vue-org/eip1193': 0.0.8-alpha.0
-  '@web3-vue-org/empty': 0.0.8-alpha.0
-  '@web3-vue-org/metamask': 0.0.8-alpha.0
-  '@web3-vue-org/network': 0.0.8-alpha.0
-  '@web3-vue-org/types': 0.0.8-alpha.0
-  '@web3-vue-org/url': 0.0.8-alpha.0
-  '@web3-vue-org/walletconnect': 0.0.8-alpha.0
+  '@web3-vue-org/coinbase-wallet': 0.0.11-alpha.0
+  '@web3-vue-org/core': 0.0.13-alpha.0
+  '@web3-vue-org/eip1193': 0.0.11-alpha.0
+  '@web3-vue-org/empty': 0.0.11-alpha.0
+  '@web3-vue-org/metamask': 0.0.11-alpha.0
+  '@web3-vue-org/network': 0.0.11-alpha.0
+  '@web3-vue-org/types': 0.0.11-alpha.0
+  '@web3-vue-org/url': 0.0.11-alpha.0
+  '@web3-vue-org/walletconnect': 0.0.11-alpha.0
+  '@web3-vue-org/x': 0.0.4-alpha.0
   npm-run-all: ^4.1.5
-  pinia: ^2.0.28
   typescript: ~4.7.4
   vite: ^4.0.0
   vue: ^3.2.45
@@ -26,16 +26,16 @@ specifiers:
 dependencies:
   '@coinbase/wallet-sdk': 3.6.3
   '@walletconnect/ethereum-provider': 1.8.0
-  '@web3-vue-org/coinbase-wallet': 0.0.8-alpha.0_e626c33e3xsy64vuicbcgjvi2i
-  '@web3-vue-org/core': 0.0.10-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/eip1193': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/empty': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/metamask': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/network': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/url': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/walletconnect': 0.0.8-alpha.0_fcdqzbbxegpxcgrogm2wqajihu
-  pinia: 2.0.30_5yi2kxxaqg74pgvs6b75qdtvru
+  '@web3-vue-org/coinbase-wallet': 0.0.11-alpha.0_gxv3l7z2raed5sjhfemgmbtt2q
+  '@web3-vue-org/core': 0.0.13-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+  '@web3-vue-org/eip1193': 0.0.11-alpha.0_vue@3.2.47
+  '@web3-vue-org/empty': 0.0.11-alpha.0_vue@3.2.47
+  '@web3-vue-org/metamask': 0.0.11-alpha.0_vue@3.2.47
+  '@web3-vue-org/network': 0.0.11-alpha.0_vue@3.2.47
+  '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
+  '@web3-vue-org/url': 0.0.11-alpha.0_vue@3.2.47
+  '@web3-vue-org/walletconnect': 0.0.11-alpha.0_4kvkumrfvqa6cxzgxyjqthzqlq
+  '@web3-vue-org/x': 0.0.4-alpha.0
   vue: 3.2.47
 
 devDependencies:
@@ -726,6 +726,7 @@ packages:
 
   /@ethersproject/providers/5.7.2:
     resolution: {integrity: sha512-g34EWZ1WWAVgr4aptGlVBF8mhl3VWjv+8hoAnzStu8Ah22VHBsuGzP17eb6xDVRzw895G4W7vvx60lFFur/1Rg==}
+    requiresBuild: true
     dependencies:
       '@ethersproject/abstract-provider': 5.7.0
       '@ethersproject/abstract-signer': 5.7.0
@@ -1363,27 +1364,25 @@ packages:
       '@walletconnect/window-getters': 1.0.0
     dev: false
 
-  /@web3-vue-org/coinbase-wallet/0.0.8-alpha.0_e626c33e3xsy64vuicbcgjvi2i:
-    resolution: {integrity: sha512-9rUpxnojPbSZFXJzauW4h671h2pR6XS0HYe8G5a/r9724dwEz9vecnbffPTh/8Pz9bi0HkvEuibEeXVJb+BZKw==}
+  /@web3-vue-org/coinbase-wallet/0.0.11-alpha.0_gxv3l7z2raed5sjhfemgmbtt2q:
+    resolution: {integrity: sha512-RSWT7MzzpjMztGk2qVKF8Rv0twH2R7XwUwgMznbGSfqGWBTavd4smoS39pMECA1/CejjesLz1UoKLqLCdxH2EA==}
     peerDependencies:
       '@coinbase/wallet-sdk': ^3.0.4
     dependencies:
       '@coinbase/wallet-sdk': 3.6.3
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
     transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
       - vue
     dev: false
 
-  /@web3-vue-org/core/0.0.10-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-klysh1aJQUVc0s3wZmzTpDrE9K2ji67mEYSZmuUqVjklhd4PN26hC5kfc4rNnIaRSk3WUdXEWvYhyx5eOU3FNg==}
+  /@web3-vue-org/core/0.0.13-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
+    resolution: {integrity: sha512-9tGtyA9XmCGoIBJ6HLL9CykQVIObuXQtw6T/m93BMtnz9m8wr3NqWRc9V1cwVfOjIOAZ7hxyo6N+Cm2j3IENFA==}
     peerDependencies:
       vue: '>=3.2'
     dependencies:
       '@ethersproject/networks': 5.7.1
-      '@web3-vue-org/store': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/store': 0.0.11-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
       pinia: 2.0.30_5yi2kxxaqg74pgvs6b75qdtvru
       vue: 3.2.47
     optionalDependencies:
@@ -1395,90 +1394,75 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@web3-vue-org/eip1193/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-dpLPZtoio4PbY5mY2mB7wsXCH1pznIBcBqYkMXSg9vkdF3qoj7yrCeAvu8YX7cU2EHHcfJvQ+aGr21uEu2tWbQ==}
+  /@web3-vue-org/eip1193/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-OJ2Ec8qpGF2CjsM0AQlI2BGEksxn1ll/WOIp5iNmTfGygOtmcK3Q5sAAhMciTRCfWzkSALX8ZVxmt2Z7xAAPcQ==}
     dependencies:
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
     transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
       - vue
     dev: false
 
-  /@web3-vue-org/empty/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-drAX7kkXc/Re7CHFABN7ms4lpPaho7aQMpTu2ULDccRh3xH3W05Ht1nQg1iwQ9I1o+c4dgAm/C1tBiRa1djbPg==}
+  /@web3-vue-org/empty/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-9LepP+heo3Ms4Jxoy6VzcMThn39D3rwYFScMP11bXJrjQ+rs8kXSrVXMjCv4KHu1kxubYo5dmwAtmXItA1yL1g==}
     dependencies:
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
     transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
       - vue
     dev: false
 
-  /@web3-vue-org/metamask/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-uIz8y21lEaGrByTHtzzy5HVJ+vMpLXTheggiwUHBuN0lR0o0AIT+fFLu+j2b+XtImqZCJsLALKTukZDnbVToUQ==}
+  /@web3-vue-org/metamask/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-a2lsJszFADZjXpXlHM2lih15RBPjqKpgZbVG4cWoz/e6Mhh8k+nINhRyhC3zp+l4PHu5bQlnAAgOj4WdvUEYRA==}
     dependencies:
       '@metamask/detect-provider': 1.2.0
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
     transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
       - vue
     dev: false
 
-  /@web3-vue-org/network/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-HjOvyIDoe9S9SRJsf1jBA2hC5MXVEsNJTvYxUL7CdBF4ArkuWOqQBQpXLc+gLJItNGnLJ8x3qgrcPjxOhBLMFA==}
+  /@web3-vue-org/network/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-8CxtGrbEtyVV1RF2lEsNaBSh+CKhz5SViE7eApydBMpX9+nXiFWB/a9GpzYKOf64iH7gvrVmBVD7FlOZp15Mtw==}
     dependencies:
       '@ethersproject/providers': 5.7.2
       '@ethersproject/web': 5.7.1
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
     transitivePeerDependencies:
-      - '@vue/composition-api'
       - bufferutil
-      - typescript
       - utf-8-validate
       - vue
     dev: false
 
-  /@web3-vue-org/store/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-xgRFxCl4HcN3RxQR9wRTFNWVBkpl3OOosH4jOAJ0yuHf6y3EZ5uIylatljen1ydZeeiruv2yJt3sWRgDZbV2jw==}
+  /@web3-vue-org/store/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-y2buj7x5VU+CD0yUIiOIYS/KbgDlC9EtwJQ0qqEUH5Edi7/13r66x6hZ9hsDbh5SAB4T+Bl8Qx1AI8lAWGK8rQ==}
     dependencies:
       '@ethersproject/address': 5.7.0
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-      pinia: 2.0.30_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
+      '@web3-vue-org/x': 0.0.4-alpha.0
     transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
       - vue
     dev: false
 
-  /@web3-vue-org/types/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-nhQWAXq34kujRTqEk4qkj+by+aUtj7GqrURSL2mBI/Iich2aiE/XbtRER/gtkzXZ3vkSYbz4qnbUIV8dsWoC/g==}
+  /@web3-vue-org/types/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-n/hKPJDWZ3L8bMnIHyamjAY8ztCCxjTakzxTj/L9cCdlwnxPM545FNUumjb5FDQ+LedBfM2BIsaQGp+vvh/UrA==}
     peerDependencies:
       vue: '>=3.2'
     dependencies:
-      pinia: 2.0.30_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/x': 0.0.4-alpha.0
       vue: 3.2.47
-    transitivePeerDependencies:
-      - '@vue/composition-api'
-      - typescript
     dev: false
 
-  /@web3-vue-org/url/0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-EtEy0X+95btk5s29HvlKEIHMZLbE6DFtuaWrUy0/0V89+nmIQl0bLYRUIs0Ob5t1urUzVmy5+Wanyi+wOiLQDA==}
+  /@web3-vue-org/url/0.0.11-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-6ar44OpkXFbyUhg5ltZ8pIn5DZLSyF9EJJtLdel5YXiQTgFvKjNFGaopGCnSA4b5/ASJfh2c9hFpXiCBZ6P2DA==}
     dependencies:
       '@ethersproject/providers': 5.7.2
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
     transitivePeerDependencies:
-      - '@vue/composition-api'
       - bufferutil
-      - typescript
       - utf-8-validate
       - vue
     dev: false
 
-  /@web3-vue-org/walletconnect/0.0.8-alpha.0_fcdqzbbxegpxcgrogm2wqajihu:
-    resolution: {integrity: sha512-XcMmjM2R1TIarwUonURRaihQyTI7Pk5M9fk9j4v8X5IXTtjJe6cRsCOeSjx44b4dyaWQHlf36nL7G3th2HNyAA==}
+  /@web3-vue-org/walletconnect/0.0.11-alpha.0_4kvkumrfvqa6cxzgxyjqthzqlq:
+    resolution: {integrity: sha512-CfASOroU5OYldd8NCAX6/3+lruTlfr9kuFlYQcCuLvyxOcyREJdfAW+VWwBJ6pKs+uo126iezeJEg4zkp4fHJQ==}
     peerDependencies:
       '@walletconnect/ethereum-provider': ^1.7.8
     dependencies:
@@ -1486,13 +1470,15 @@ packages:
       '@walletconnect/jsonrpc-http-connection': 1.0.4
       '@walletconnect/jsonrpc-provider': 1.0.6
       '@walletconnect/types': 1.8.0
-      '@web3-vue-org/types': 0.0.8-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+      '@web3-vue-org/types': 0.0.11-alpha.0_vue@3.2.47
       eventemitter3: 4.0.7
     transitivePeerDependencies:
-      - '@vue/composition-api'
       - encoding
-      - typescript
       - vue
+    dev: false
+
+  /@web3-vue-org/x/0.0.4-alpha.0:
+    resolution: {integrity: sha512-T7RE+zxr8ckCRkKxtFUOwxung+JcHlciJHqYQu7qCZTJ7/lFbQWirZr4qFTQ5edjVeflbHaFTrXBwM4JAIc0fg==}
     dev: false
 
   /JSONStream/1.3.5:

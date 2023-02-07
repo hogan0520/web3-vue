@@ -2,8 +2,8 @@ import type { Networkish } from '@ethersproject/networks'
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
 import type { Actions, Connector, Web3VueState, Web3VueStore } from '@web3-vue-org/types'
-import type {ComputedRef, Ref} from 'vue'
-import { computed,  ref, shallowRef, watchEffect } from 'vue'
+import type { ComputedRef, Ref } from 'vue'
+import { computed, ref, shallowRef, watchEffect } from 'vue'
 
 let DynamicProvider: typeof Web3Provider | null | undefined
 async function importProvider(): Promise<void> {
@@ -34,9 +34,7 @@ export type Web3VuePriorityHooks = ReturnType<typeof getPriorityConnector>
  * @param f - A function which is called with `actions` bound to the returned `store`.
  * @returns [connector, hooks, store] - The initialized connector, a variety of hooks, and a zustand store.
  */
-export function initializeConnector<T extends Connector>(
-  f: (actions: Actions) => T
-): [T, Web3VueHooks, Web3VueStore] {
+export function initializeConnector<T extends Connector>(f: (actions: Actions) => T): [T, Web3VueHooks, Web3VueStore] {
   const [useStore, actions] = createWeb3VueStoreAndActions()
 
   const connector = f(actions)
@@ -159,8 +157,7 @@ export function getPriorityConnector(
     const connector: Ref<Connector> = shallowRef(initializedConnectors[0][0])
 
     const values = initializedConnectors.map(
-      ([, { useIsActive }]: [Connector, Web3VueHooks] | [Connector, Web3VueHooks, Web3VueStore]) =>
-        useIsActive()
+      ([, { useIsActive }]: [Connector, Web3VueHooks] | [Connector, Web3VueHooks, Web3VueStore]) => useIsActive()
     )
     values.forEach((value, i) => {
       watchEffect(() => {
@@ -238,18 +235,16 @@ export function getPriorityConnector(
 }
 
 function getStateHooks(store: Web3VueStore) {
-  const state = store.getState()
-
   function useChainId(): ComputedRef<Web3VueState['chainId']> {
-    return computed(() => state.chainId)
+    return computed(() => store.state.value.chainId)
   }
 
   function useAccounts(): ComputedRef<Web3VueState['accounts']> {
-    return computed(() => state.accounts)
+    return computed(() => store.state.value.accounts)
   }
 
   function useIsActivating(): ComputedRef<Web3VueState['activating']> {
-    return computed(() => state.activating)
+    return computed(() => store.state.value.activating)
   }
 
   return { useChainId, useAccounts, useIsActivating }

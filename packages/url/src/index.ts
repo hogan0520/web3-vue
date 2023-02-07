@@ -21,7 +21,7 @@ export class Url extends Connector {
   /** {@inheritdoc Connector.provider} */
   public readonly provider: undefined = undefined
   /** {@inheritdoc Connector.customProvider} */
-  declare public customProvider?: JsonRpcProvider
+  public declare customProvider?: JsonRpcProvider
 
   private readonly url: url | JsonRpcProvider
 
