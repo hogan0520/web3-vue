@@ -3,9 +3,13 @@
   "version": "0.0.3-alpha.0",
   "description": "> TODO: description",
   "keywords": [
+    "web3-vue-org",
     "vue3",
     "store"
   ],
+  "publishConfig": {
+    "access": "public"
+  },
   "license": "GPL-3.0-or-later",
   "author": "huhan <huhan@mcdex.io>",
   "homepage": "https://github.com/hogan0520/web3-vue#readme",
@@ -27,5 +31,6 @@
   },
   "bugs": {
     "url": "https://github.com/hogan0520/web3-vue/issues"
-  }
+  },
+  "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"
 }

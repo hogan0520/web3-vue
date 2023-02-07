@@ -32,5 +32,5 @@
   "optionalDependencies": {
     "@ethersproject/providers": "^5"
   },
-  "gitHead": "bc5c5d70cb26342312cfd1f6a9abd3c2e426262e"
+  "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"
 }
