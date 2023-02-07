@@ -8,7 +8,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.11-alpha.0",
+  "version": "0.0.12-alpha.0",
   "files": [
     "dist/*"
   ],
@@ -22,12 +22,12 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "@web3-vue-org/types": "^0.0.11-alpha.0"
+    "@web3-vue-org/types": "^0.0.12-alpha.0"
   },
   "devDependencies": {
     "@ethersproject/experimental": "^5.6.0",
     "@ethersproject/providers": "^5",
-    "@web3-vue-org/store": "^0.0.11-alpha.0",
+    "@web3-vue-org/store": "^0.0.12-alpha.0",
     "pinia": "^2.0.30"
   },
   "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"

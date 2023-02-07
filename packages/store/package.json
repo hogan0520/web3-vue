@@ -7,7 +7,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.11-alpha.0",
+  "version": "0.0.12-alpha.0",
   "files": [
     "dist/*"
   ],
@@ -22,8 +22,8 @@
   },
   "dependencies": {
     "@ethersproject/address": "^5",
-    "@web3-vue-org/types": "^0.0.11-alpha.0",
-    "@web3-vue-org/x": "^0.0.4-alpha.0"
+    "@web3-vue-org/types": "^0.0.12-alpha.0",
+    "@web3-vue-org/x": "^0.0.5-alpha.0"
   },
   "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"
 }
