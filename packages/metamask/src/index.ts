@@ -41,7 +41,7 @@ export interface MetaMaskConstructorArgs {
 
 export class MetaMask extends Connector {
   /** {@inheritdoc Connector.provider} */
-  public provider?: MetaMaskProvider
+  declare public provider?: MetaMaskProvider
 
   private readonly options?: Parameters<typeof detectEthereumProvider>[0]
   private eagerConnection?: Promise<void>

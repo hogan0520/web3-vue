@@ -21,7 +21,7 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "pinia": "^2.0.30"
+    "@web3-vue-org/x": "^0.0.1"
   },
   "devDependencies": {
     "vue": ">=3.2"

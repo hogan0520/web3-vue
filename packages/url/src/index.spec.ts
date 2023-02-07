@@ -28,7 +28,7 @@ describe('Url', () => {
     })
 
     test('is un-initialized', async () => {
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: undefined,
         accounts: undefined,
         activating: false,
@@ -47,7 +47,7 @@ describe('Url', () => {
       test('works', async () => {
         await connector.activate()
 
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: Number.parseInt(chainId, 16),
           accounts,
           activating: false,

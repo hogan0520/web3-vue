@@ -1,7 +1,7 @@
 import type { Networkish } from '@ethersproject/networks'
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
-import type { Connector, Web3VueStoreDefinition } from '@web3-vue-org/types'
-import {computed, ComputedRef, defineComponent, onMounted, provide, ref, Ref, shallowRef} from 'vue'
+import type {Connector, Web3VueStore} from '@web3-vue-org/types'
+import {computed, defineComponent, provide, h} from 'vue'
 import type { PropType } from 'vue'
 import type { Web3VueHooks, Web3VuePriorityHooks } from './hooks'
 import { getPriorityConnector } from './hooks'
@@ -26,7 +26,7 @@ export type Web3ContextType<T extends BaseProvider = Web3Provider> = {
 
 export const Web3VueProviderProps = {
   connectors: {
-    type: Array as PropType<[Connector, Web3VueHooks][] | [Connector, Web3VueHooks, Web3VueStoreDefinition][]>,
+    type: Array as PropType<[Connector, Web3VueHooks][] | [Connector, Web3VueHooks, Web3VueStore][]>,
     required: true,
   },
   connectorOverride: { type: Object as PropType<Connector>, required: false },
@@ -60,7 +60,6 @@ export const Web3VueProvider = defineComponent({
       )
 
 
-    onMounted(() => {
       const hooks = getPriorityConnector(...props.connectors)
       const {
         usePriorityConnector,
@@ -107,11 +106,8 @@ export const Web3VueProvider = defineComponent({
       provide('ENSNames', ENSNames)
       provide('ENSName', ENSName)
       provide('hooks', hooks)
-    })
-  },
-  render() {
-    const { $slots } = this
-    const children = $slots.default?.()
+
+    const children = slots.default?.()
     return <div class={'web3-vue-org-provider'}>{children}</div>
-  },
+  }
 })

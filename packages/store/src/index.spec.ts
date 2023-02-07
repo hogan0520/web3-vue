@@ -1,15 +1,10 @@
-import { createPinia, setActivePinia } from 'pinia'
 import { createWeb3VueStoreAndActions, MAX_SAFE_CHAIN_ID } from '.'
 
 describe('#createWeb3VueStoreAndActions', () => {
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
 
   test('uninitialized', () => {
-    const [useStore] = createWeb3VueStoreAndActions()
-    const store = useStore()
-    expect(store.$state).toEqual({
+    const [store] = createWeb3VueStoreAndActions()
+    expect(store.getState()).toEqual({
       chainId: undefined,
       accounts: undefined,
       activating: false,
@@ -19,10 +14,9 @@ describe('#createWeb3VueStoreAndActions', () => {
 
   describe('#startActivation', () => {
     test('works', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
+      const [store, actions] = createWeb3VueStoreAndActions()
       actions.startActivation()
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: undefined,
         accounts: undefined,
         activating: true,
@@ -31,14 +25,13 @@ describe('#createWeb3VueStoreAndActions', () => {
     })
 
     test('cancellation works', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
+      const [store, actions] = createWeb3VueStoreAndActions()
 
       const cancelActivation = actions.startActivation()
 
       cancelActivation()
 
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: undefined,
         accounts: undefined,
         activating: false,
@@ -61,12 +54,11 @@ describe('#createWeb3VueStoreAndActions', () => {
     })
 
     test('chainId', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
+      const [store, actions] = createWeb3VueStoreAndActions()
 
       const chainId = 1
       actions.update({ chainId })
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId,
         accounts: undefined,
         activating: false,
@@ -76,11 +68,11 @@ describe('#createWeb3VueStoreAndActions', () => {
 
     describe('accounts', () => {
       test('empty', () => {
-        const [useStore, actions] = createWeb3VueStoreAndActions()
-        const store = useStore()
+        const [store, actions] = createWeb3VueStoreAndActions()
+
         const accounts: string[] = []
         actions.update({ accounts })
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: undefined,
           accounts,
           activating: false,
@@ -89,11 +81,11 @@ describe('#createWeb3VueStoreAndActions', () => {
       })
 
       test('single', () => {
-        const [useStore, actions] = createWeb3VueStoreAndActions()
-        const store = useStore()
+        const [store, actions] = createWeb3VueStoreAndActions()
+
         const accounts = ['0x0000000000000000000000000000000000000000']
         actions.update({ accounts })
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: undefined,
           accounts,
           activating: false,
@@ -102,12 +94,11 @@ describe('#createWeb3VueStoreAndActions', () => {
       })
 
       test('multiple', () => {
-        const [useStore, actions] = createWeb3VueStoreAndActions()
-        const store = useStore()
+        const [store, actions] = createWeb3VueStoreAndActions()
 
         const accounts = ['0x0000000000000000000000000000000000000000', '0x0000000000000000000000000000000000000001']
         actions.update({ accounts })
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: undefined,
           accounts,
           activating: false,
@@ -117,12 +108,12 @@ describe('#createWeb3VueStoreAndActions', () => {
     })
 
     test('both', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
+      const [store, actions] = createWeb3VueStoreAndActions()
+
       const chainId = 1
       const accounts: string[] = []
       actions.update({ chainId, accounts })
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId,
         accounts,
         activating: false,
@@ -131,13 +122,11 @@ describe('#createWeb3VueStoreAndActions', () => {
     })
 
     test('chainId does not unset activating', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
-
+      const [store, actions] = createWeb3VueStoreAndActions()
       const chainId = 1
       actions.startActivation()
       actions.update({ chainId })
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId,
         accounts: undefined,
         activating: true,
@@ -146,13 +135,12 @@ describe('#createWeb3VueStoreAndActions', () => {
     })
 
     test('accounts does not unset activating', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
+      const [store, actions] = createWeb3VueStoreAndActions()
 
       const accounts: string[] = []
       actions.startActivation()
       actions.update({ accounts })
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: undefined,
         accounts,
         activating: true,
@@ -161,14 +149,13 @@ describe('#createWeb3VueStoreAndActions', () => {
     })
 
     test('unsets activating', () => {
-      const [useStore, actions] = createWeb3VueStoreAndActions()
-      const store = useStore()
+      const [store, actions] = createWeb3VueStoreAndActions()
 
       const chainId = 1
       const accounts: string[] = []
       actions.startActivation()
       actions.update({ chainId, accounts })
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId,
         accounts,
         activating: false,

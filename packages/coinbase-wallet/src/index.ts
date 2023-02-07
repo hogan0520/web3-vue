@@ -26,7 +26,7 @@ export interface CoinbaseWalletConstructorArgs {
 
 export class CoinbaseWallet extends Connector {
   /** {@inheritdoc Connector.provider} */
-  public provider: CoinbaseWalletProvider | undefined
+  public provider: CoinbaseWalletProvider | undefined = undefined
 
   private readonly options: CoinbaseWalletSDKOptions
   private eagerConnection?: Promise<void>

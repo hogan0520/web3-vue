@@ -1,6 +1,6 @@
 import { getAddress } from '@ethersproject/address'
-import type { Actions, Web3VueState, Web3VueStateUpdate, Web3VueStoreDefinition } from '@web3-vue-org/types'
-import { defineStore } from 'pinia'
+import type {Actions, Web3VueState, Web3VueStateUpdate, Web3VueStore} from '@web3-vue-org/types'
+import { defineStore } from '@web3-vue-org/x'
 /**
  * MAX_SAFE_CHAIN_ID is the upper bound limit on what will be accepted for `chainId`
  * `MAX_SAFE_CHAIN_ID = floor( ( 2**53 - 39 ) / 2 ) = 4503599627370476`
@@ -25,12 +25,10 @@ const DEFAULT_STATE = {
   activating: false,
 }
 
-let storeIndex = 0
-export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions] {
-  const storeId = `web3-vue-org-store-${storeIndex++}`
-  const useStore = defineStore<string, Web3VueState>(storeId, {
-    state: () => Object.assign({}, DEFAULT_STATE),
-  })
+const createStore = defineStore<Web3VueState>()
+
+export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
+  const store = createStore( {...DEFAULT_STATE})
 
   // flag for tracking updates so we don't clobber data when cancelling activation
   let nullifier = 0
@@ -42,14 +40,13 @@ export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions
    * as long as there haven't been any intervening updates.
    */
   function startActivation(): () => void {
-    const store = useStore()
     const nullifierCached = ++nullifier
 
-    store.$patch({ ...DEFAULT_STATE, activating: true })
+    store.setState({ ...DEFAULT_STATE, activating: true })
 
     // return a function that cancels the activation iff nothing else has happened
     return () => {
-      if (nullifier === nullifierCached) store.$patch({ activating: false })
+      if (nullifier === nullifierCached) store.setState({ activating: false })
     }
   }
 
@@ -60,7 +57,6 @@ export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions
    * @param stateUpdate - The state update to report.
    */
   function update(stateUpdate: Web3VueStateUpdate): void {
-    const store = useStore()
 
     // validate chainId statically, independent of existing state
     if (stateUpdate.chainId !== undefined) {
@@ -76,7 +72,7 @@ export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions
 
     nullifier++
 
-    store.$patch((existingState) => {
+    store.setState((existingState): Web3VueState => {
       // determine the next chainId and accounts
       const chainId = stateUpdate.chainId ?? existingState.chainId
       const accounts = stateUpdate.accounts ?? existingState.accounts
@@ -86,9 +82,7 @@ export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions
       if (activating && chainId && accounts) {
         activating = false
       }
-      existingState.chainId = chainId
-      existingState.accounts = accounts
-      existingState.activating = activating
+      return {chainId, accounts, activating}
     })
   }
 
@@ -96,11 +90,9 @@ export function createWeb3VueStoreAndActions(): [Web3VueStoreDefinition, Actions
    * Resets connector state back to the default state.
    */
   function resetState(): void {
-    const store = useStore()
-
     nullifier++
-    store.$patch({ ...DEFAULT_STATE })
+    store.setState(DEFAULT_STATE)
   }
 
-  return [useStore, { startActivation, update, resetState }]
+  return [store, { startActivation, update, resetState }]
 }

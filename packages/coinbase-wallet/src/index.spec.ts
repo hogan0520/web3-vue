@@ -1,5 +1,5 @@
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
-import type { Actions, Web3VueStore, Web3VueStoreDefinition } from '@web3-vue-org/types'
+import type { Actions, Web3VueStore } from '@web3-vue-org/types'
 import { setActivePinia, createPinia } from 'pinia'
 import { CoinbaseWallet } from '.'
 import { MockEIP1193Provider } from '../../eip1193/src/mock'
@@ -18,7 +18,6 @@ const chainId = '0x1'
 const accounts: string[] = []
 
 describe('Coinbase Wallet', () => {
-  let useStore: Web3VueStoreDefinition
   let store: Web3VueStore
   let connector: CoinbaseWallet
   let mockProvider: MockEIP1193Provider
@@ -30,8 +29,7 @@ describe('Coinbase Wallet', () => {
   describe('connectEagerly = true', () => {
     beforeEach(async () => {
       let actions: Actions
-      ;[useStore, actions] = createWeb3VueStoreAndActions()
-      store = useStore()
+      ;[store, actions] = createWeb3VueStoreAndActions()
       connector = new CoinbaseWallet({
         actions,
         options: {
@@ -56,7 +54,7 @@ describe('Coinbase Wallet', () => {
         mockProvider.eth_requestAccounts.mock.invocationCallOrder[0]
       )
 
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: Number.parseInt(chainId, 16),
         accounts,
         activating: false,

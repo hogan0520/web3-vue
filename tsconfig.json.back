@@ -1,0 +1,13 @@
+{
+  "extends": "@vue/tsconfig/tsconfig.json",
+  "compilerOptions": {
+    "types": [ "node","jest"],
+    "typeRoots": ["./node_modules/@types"]
+  },
+  "exclude": ["**/*.spec.ts"],
+  "references": [
+    {
+      "path": "./tsconfig.config.json"
+    }
+  ]
+}

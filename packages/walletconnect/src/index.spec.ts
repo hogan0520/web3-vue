@@ -59,7 +59,7 @@ describe('WalletConnect', () => {
         mockProvider.eth_requestAccounts.mock.invocationCallOrder[0]
       )
 
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: Number.parseInt(chainId, 16),
         accounts,
         activating: false,

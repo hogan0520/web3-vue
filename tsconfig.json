@@ -1,9 +1,13 @@
 {
-  "extends": "@tsconfig/recommended/tsconfig.json",
+  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*", "types.d.ts"],
   "compilerOptions": {
     "module": "CommonJS",
+    "target": "ES6",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
     "declaration": true,
-    "moduleResolution": "Node"
+    "moduleResolution": "Node",
+    "esModuleInterop": true,
   },
   "exclude": ["**/*.spec.ts"]
 }

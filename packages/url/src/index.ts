@@ -19,9 +19,9 @@ export interface UrlConstructorArgs {
 
 export class Url extends Connector {
   /** {@inheritdoc Connector.provider} */
-  public readonly provider: undefined
+  public readonly provider: undefined = undefined
   /** {@inheritdoc Connector.customProvider} */
-  public customProvider?: JsonRpcProvider
+  declare public customProvider?: JsonRpcProvider
 
   private readonly url: url | JsonRpcProvider
 

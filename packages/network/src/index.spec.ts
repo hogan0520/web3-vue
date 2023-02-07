@@ -36,7 +36,7 @@ describe('Network', () => {
     })
 
     test('is un-initialized', async () => {
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: undefined,
         accounts: undefined,
         activating: false,
@@ -55,7 +55,7 @@ describe('Network', () => {
       test('works', async () => {
         await connector.activate()
 
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: Number.parseInt(chainId, 16),
           accounts,
           activating: false,
@@ -85,7 +85,7 @@ describe('Network', () => {
     test('#activate', async () => {
       await connector.activate()
 
-      expect(store.$state).toEqual({
+      expect(store.getState()).toEqual({
         chainId: Number.parseInt(chainId, 16),
         accounts,
         activating: false,
@@ -112,7 +112,7 @@ describe('Network', () => {
         mockConnector.chainId = chainId
         await connector.activate()
 
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: 1,
           accounts,
           activating: false,
@@ -127,7 +127,7 @@ describe('Network', () => {
         mockConnector.chainId = '0x2'
         await connector.activate(2)
 
-        expect(store.$state).toEqual({
+        expect(store.getState()).toEqual({
           chainId: 2,
           accounts,
           activating: false,
