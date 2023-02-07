@@ -8,7 +8,7 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
-    "pin": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,gnosis-safe,metamask,network,types,url,walletconnect}; do pnpm add @web3-vue-org/$X -E; done }'"
+    "pin1": "sh -c '{ for X in {coinbase-wallet,core,eip1193,empty,metamask,network,types,url,walletconnect,x}; do pnpm add @web3-vue-org/$X -E; done }'"
   },
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.3.0",
