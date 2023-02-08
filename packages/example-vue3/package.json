@@ -1,6 +1,6 @@
 {
   "name": "example-vue3",
-  "version": "0.0.4-alpha.0",
+  "version": "0.0.5-alpha.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -13,16 +13,16 @@
   "dependencies": {
     "@coinbase/wallet-sdk": "^3.3.0",
     "@walletconnect/ethereum-provider": "^1.7.8",
-    "@web3-vue-org/coinbase-wallet": "0.0.12-alpha.0",
-    "@web3-vue-org/core": "0.0.14-alpha.0",
-    "@web3-vue-org/eip1193": "0.0.12-alpha.0",
-    "@web3-vue-org/empty": "0.0.12-alpha.0",
-    "@web3-vue-org/metamask": "0.0.12-alpha.0",
-    "@web3-vue-org/network": "0.0.12-alpha.0",
-    "@web3-vue-org/types": "0.0.12-alpha.0",
-    "@web3-vue-org/url": "0.0.12-alpha.0",
-    "@web3-vue-org/walletconnect": "0.0.12-alpha.0",
-    "@web3-vue-org/x": "0.0.5-alpha.0",
+    "@web3-vue-org/coinbase-wallet": "^0.0.13-alpha.0",
+    "@web3-vue-org/core": "^0.0.15-alpha.0",
+    "@web3-vue-org/eip1193": "^0.0.13-alpha.0",
+    "@web3-vue-org/empty": "^0.0.13-alpha.0",
+    "@web3-vue-org/metamask": "^0.0.13-alpha.0",
+    "@web3-vue-org/network": "^0.0.13-alpha.0",
+    "@web3-vue-org/types": "^0.0.13-alpha.0",
+    "@web3-vue-org/url": "^0.0.13-alpha.0",
+    "@web3-vue-org/walletconnect": "^0.0.13-alpha.0",
+    "@web3-vue-org/x": "^0.0.6-alpha.0",
     "vue": "^3.2.45"
   },
   "devDependencies": {
