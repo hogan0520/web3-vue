@@ -2,21 +2,23 @@ lockfileVersion: 5.4
 
 specifiers:
   '@coinbase/wallet-sdk': ^3.3.0
+  '@ethersproject/bignumber': ^5.7.0
+  '@ethersproject/units': ^5.7.0
   '@types/node': ^18.11.12
   '@vitejs/plugin-vue': ^4.0.0
   '@vitejs/plugin-vue-jsx': ^3.0.0
   '@vue/tsconfig': ^0.1.3
   '@walletconnect/ethereum-provider': ^1.7.8
-  '@web3-vue-org/coinbase-wallet': 0.0.12-alpha.0
-  '@web3-vue-org/core': 0.0.14-alpha.0
-  '@web3-vue-org/eip1193': 0.0.12-alpha.0
-  '@web3-vue-org/empty': 0.0.12-alpha.0
-  '@web3-vue-org/metamask': 0.0.12-alpha.0
-  '@web3-vue-org/network': 0.0.12-alpha.0
-  '@web3-vue-org/types': 0.0.12-alpha.0
-  '@web3-vue-org/url': 0.0.12-alpha.0
-  '@web3-vue-org/walletconnect': 0.0.12-alpha.0
-  '@web3-vue-org/x': 0.0.5-alpha.0
+  '@web3-vue-org/coinbase-wallet': ^0.0.13-alpha.0
+  '@web3-vue-org/core': ^0.0.15-alpha.0
+  '@web3-vue-org/eip1193': ^0.0.13-alpha.0
+  '@web3-vue-org/empty': ^0.0.13-alpha.0
+  '@web3-vue-org/metamask': ^0.0.13-alpha.0
+  '@web3-vue-org/network': ^0.0.13-alpha.0
+  '@web3-vue-org/types': ^0.0.13-alpha.0
+  '@web3-vue-org/url': ^0.0.13-alpha.0
+  '@web3-vue-org/walletconnect': ^0.0.13-alpha.0
+  '@web3-vue-org/x': ^0.0.6-alpha.0
   npm-run-all: ^4.1.5
   typescript: ~4.7.4
   vite: ^4.0.0
@@ -25,17 +27,19 @@ specifiers:
 
 dependencies:
   '@coinbase/wallet-sdk': 3.6.3
+  '@ethersproject/bignumber': 5.7.0
+  '@ethersproject/units': 5.7.0
   '@walletconnect/ethereum-provider': 1.8.0
-  '@web3-vue-org/coinbase-wallet': 0.0.12-alpha.0_gxv3l7z2raed5sjhfemgmbtt2q
-  '@web3-vue-org/core': 0.0.14-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
-  '@web3-vue-org/eip1193': 0.0.12-alpha.0_vue@3.2.47
-  '@web3-vue-org/empty': 0.0.12-alpha.0_vue@3.2.47
-  '@web3-vue-org/metamask': 0.0.12-alpha.0_vue@3.2.47
-  '@web3-vue-org/network': 0.0.12-alpha.0_vue@3.2.47
-  '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
-  '@web3-vue-org/url': 0.0.12-alpha.0_vue@3.2.47
-  '@web3-vue-org/walletconnect': 0.0.12-alpha.0_4kvkumrfvqa6cxzgxyjqthzqlq
-  '@web3-vue-org/x': 0.0.5-alpha.0
+  '@web3-vue-org/coinbase-wallet': 0.0.13-alpha.0_gxv3l7z2raed5sjhfemgmbtt2q
+  '@web3-vue-org/core': 0.0.15-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru
+  '@web3-vue-org/eip1193': 0.0.13-alpha.0_vue@3.2.47
+  '@web3-vue-org/empty': 0.0.13-alpha.0_vue@3.2.47
+  '@web3-vue-org/metamask': 0.0.13-alpha.0_vue@3.2.47
+  '@web3-vue-org/network': 0.0.13-alpha.0_vue@3.2.47
+  '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
+  '@web3-vue-org/url': 0.0.13-alpha.0_vue@3.2.47
+  '@web3-vue-org/walletconnect': 0.0.13-alpha.0_4kvkumrfvqa6cxzgxyjqthzqlq
+  '@web3-vue-org/x': 0.0.6-alpha.0
   vue: 3.2.47
 
 devDependencies:
@@ -808,6 +812,14 @@ packages:
       '@ethersproject/signing-key': 5.7.0
     dev: false
 
+  /@ethersproject/units/5.7.0:
+    resolution: {integrity: sha512-pD3xLMy3SJu9kG5xDGI7+xhTEmGXlEqXU4OfNapmfnxLVY4EMSSRp7j1k7eezutBPH7RBN/7QPnwR7hzNlEFeg==}
+    dependencies:
+      '@ethersproject/bignumber': 5.7.0
+      '@ethersproject/constants': 5.7.0
+      '@ethersproject/logger': 5.7.0
+    dev: false
+
   /@ethersproject/web/5.7.1:
     resolution: {integrity: sha512-Gueu8lSvyjBWL4cYsWsjh6MtMwM0+H4HvqFPZfB6dV8ctbP9zFAO73VG1cMWae0FLPCtz0peKPpZY8/ugJJX2w==}
     dependencies:
@@ -1364,25 +1376,25 @@ packages:
       '@walletconnect/window-getters': 1.0.0
     dev: false
 
-  /@web3-vue-org/coinbase-wallet/0.0.12-alpha.0_gxv3l7z2raed5sjhfemgmbtt2q:
-    resolution: {integrity: sha512-iv3/p7oxPwdM2HsvcSxEL3+2gLt8k0uvr4TTRGU555TOxtkeOym1e+UkiauDvk3Fx8vCHUDl0H5dR/0zp1C8/A==}
+  /@web3-vue-org/coinbase-wallet/0.0.13-alpha.0_gxv3l7z2raed5sjhfemgmbtt2q:
+    resolution: {integrity: sha512-yzVJn0bLUD5iTZOdG7V+ZX7ydwSicFAt9INdgUdcrCjtLSf4qinCaEVpgwaErBJwpE8DFb6UeQxfweTTcApDSQ==}
     peerDependencies:
       '@coinbase/wallet-sdk': ^3.0.4
     dependencies:
       '@coinbase/wallet-sdk': 3.6.3
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
     transitivePeerDependencies:
       - vue
     dev: false
 
-  /@web3-vue-org/core/0.0.14-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
-    resolution: {integrity: sha512-aAu8eTw5jOuU8bgljPGQXCDK4IiVZvc/iG8prKFmKPEhNYmVc5QUjs/r2NRCltdFPa4ImvtUo9Djd9Wo0WrYvw==}
+  /@web3-vue-org/core/0.0.15-alpha.0_5yi2kxxaqg74pgvs6b75qdtvru:
+    resolution: {integrity: sha512-8ZD9JN1fEeDEL0pWppy/RcQgkzCxZsoOSr1y8z/abreAAA//a6lQUgvC0xM7rA8qByZgLJlnMX73BQ4Go28IxA==}
     peerDependencies:
       vue: '>=3.2'
     dependencies:
       '@ethersproject/networks': 5.7.1
-      '@web3-vue-org/store': 0.0.12-alpha.0_vue@3.2.47
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/store': 0.0.13-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
       pinia: 2.0.30_5yi2kxxaqg74pgvs6b75qdtvru
       vue: 3.2.47
     optionalDependencies:
@@ -1394,75 +1406,75 @@ packages:
       - utf-8-validate
     dev: false
 
-  /@web3-vue-org/eip1193/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-4Ry+O0S9jQ9vYZQvy2RLCwrvB5ewO88y+jHJRe8R1kTXMn+hLwdZ8aWv/CEdjGUsHVNr5V3o66J2fe/QgXkAXw==}
+  /@web3-vue-org/eip1193/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-v9t8iPm75RDOnTMvMq8HUMHkeHVL8IA1Uc3ppt08UgD58Ksk7W7q6aS+ZVtkCqM6v7O45IDuwbu45ThvNDWYoQ==}
     dependencies:
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
     transitivePeerDependencies:
       - vue
     dev: false
 
-  /@web3-vue-org/empty/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-oZLXJpBF1m5XddDZxJJSfLg4Lz96RSL5p4xTCjiw9JunJ9pGvo+mi5VtoVQ89mLJhh590rHHZfyMCVCODNAnlw==}
+  /@web3-vue-org/empty/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-jU/tNYIuUvuGgUsc+SP9H8gEV6g6PhLeD0qTtAQsHNxcdxaEAE76dVR7t6KUyXeQl6NeKvYZtm4d8Er3b/QFNA==}
     dependencies:
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
     transitivePeerDependencies:
       - vue
     dev: false
 
-  /@web3-vue-org/metamask/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-jg5rc2XdrM+YgiH/lqUCOI6jKRU3S1eXlN77GHSD4DlgY0ODtzEQ17dAbSLhAHS2ToFBHZMh5RlemOVAi5hilw==}
+  /@web3-vue-org/metamask/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-XgYxn0mRw3XMHwQIwR4e/MiNBa0VVl0ca0vaRQw+4tB+qEjJxJLEhzi/bKyO0meeDONcZ4BBHEjfu2JkfhsuTQ==}
     dependencies:
       '@metamask/detect-provider': 1.2.0
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
     transitivePeerDependencies:
       - vue
     dev: false
 
-  /@web3-vue-org/network/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-GAICXLqgHc9WPjvkj1F3JeurSNtL7ShMIyR8jDxCKp0tb4xXlPN2Jl8mMhRYJMRd9OSpvifchaRUWnTUJ4Gypw==}
+  /@web3-vue-org/network/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-NCh+jC1DO2EFjqCDrx5jhP6dx/4ibkrA4nvqneDQArp4wVW1ZLHFu4XCniYxq/+iyoqeBVBtyKRVKolkSXWZvg==}
     dependencies:
       '@ethersproject/providers': 5.7.2
       '@ethersproject/web': 5.7.1
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
       - vue
     dev: false
 
-  /@web3-vue-org/store/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-HmCbFcXnVGRkA9736ie1BnmKNnzSiQVyV0c/ytn2H/IphCY+p0yPaMn9oC1xDWEwlCrmtxlf70zHXgc6Vy0BUA==}
+  /@web3-vue-org/store/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-yTbWk0/vrACkPL7g9r1tWimZ06UW9WDAxnt9RlQHBLFfaZ7ERKXq/R0TKlG4TSUV1va+RNZ5RmoD3ybIj6ZMXQ==}
     dependencies:
       '@ethersproject/address': 5.7.0
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
-      '@web3-vue-org/x': 0.0.5-alpha.0
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
+      '@web3-vue-org/x': 0.0.6-alpha.0
     transitivePeerDependencies:
       - vue
     dev: false
 
-  /@web3-vue-org/types/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-HI7UaiRfFv+SYF+nYQQ/WI4ci2vS93i68qJ6GIpKWt+98SEbYya4iFv6Ni5n4eUFMK0HkWKJb1glfZld8aDIYQ==}
+  /@web3-vue-org/types/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-uIvNzny0FqWiI7dqbNM9Ip2CN0XbY5i9Dje9NeSe/nfO1LNpG62VBdIV5+nDFxqfZk1aBdOP5iSm72KSkFv9yQ==}
     peerDependencies:
       vue: '>=3.2'
     dependencies:
-      '@web3-vue-org/x': 0.0.5-alpha.0
+      '@web3-vue-org/x': 0.0.6-alpha.0
       vue: 3.2.47
     dev: false
 
-  /@web3-vue-org/url/0.0.12-alpha.0_vue@3.2.47:
-    resolution: {integrity: sha512-hH3nxg6GGehqVdXpcFY+mVnmu27gF73DKy3ryUyd/6eNdafLR5C+OZSjjbrww76bCdOvLFNbKo4xeDvWLzIa9g==}
+  /@web3-vue-org/url/0.0.13-alpha.0_vue@3.2.47:
+    resolution: {integrity: sha512-Ut2nGQIJdbwjHOfGSqcJ5RcYYHUwBKsCcDzTVIEFSCOJ7ycS84aE2aAox658k3YeAOORiB9orPGg8sVtXWykRA==}
     dependencies:
       '@ethersproject/providers': 5.7.2
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
       - vue
     dev: false
 
-  /@web3-vue-org/walletconnect/0.0.12-alpha.0_4kvkumrfvqa6cxzgxyjqthzqlq:
-    resolution: {integrity: sha512-tSTbdeMs75uJn/vD10LzZK58etFIFeqsBW4UeZSNurBnDw+xHz8jTqMv2vDlkX/3lwZ0A/hHJHEp3r3wq54ugA==}
+  /@web3-vue-org/walletconnect/0.0.13-alpha.0_4kvkumrfvqa6cxzgxyjqthzqlq:
+    resolution: {integrity: sha512-FyQHf1bjosih5Vf8V0ZoC9vR/CQsZ3r0tHf5f+a53uBZ/Vkr1reoZzx1g8YlEbusXlO17BdqDFdLRbD/vTNj+w==}
     peerDependencies:
       '@walletconnect/ethereum-provider': ^1.7.8
     dependencies:
@@ -1470,15 +1482,15 @@ packages:
       '@walletconnect/jsonrpc-http-connection': 1.0.4
       '@walletconnect/jsonrpc-provider': 1.0.6
       '@walletconnect/types': 1.8.0
-      '@web3-vue-org/types': 0.0.12-alpha.0_vue@3.2.47
+      '@web3-vue-org/types': 0.0.13-alpha.0_vue@3.2.47
       eventemitter3: 4.0.7
     transitivePeerDependencies:
       - encoding
       - vue
     dev: false
 
-  /@web3-vue-org/x/0.0.5-alpha.0:
-    resolution: {integrity: sha512-ru0MTbP17aSpfgiTGqhArqj3IM7Ucrf3YOg7uuUTdBiBoGZFZQVquipm5AD8XY4uaaw6sCEC99pl4XHlZo1lMQ==}
+  /@web3-vue-org/x/0.0.6-alpha.0:
+    resolution: {integrity: sha512-ZeqR83xJ/xwEYQBR6E1ChbjbDVkiSX8LOae7FHVTRv3IxdR1UX3BpdvRFA35F/ZKZ62KHHmuStAEvphkkunIZQ==}
     dev: false
 
   /JSONStream/1.3.5:

@@ -2,7 +2,7 @@ import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
 import type { Actions, Connector, Web3VueState, Web3VueStore } from '@web3-vue-org/types'
 import type { ComputedRef, Ref } from 'vue'
-import { computed, ref, watchEffect } from 'vue'
+import { computed, markRaw, reactive, ref, watchEffect, watch } from 'vue'
 
 let DynamicProvider: typeof Web3Provider | null | undefined
 async function importProvider(): Promise<void> {
@@ -259,38 +259,17 @@ function getDerivedHooks({ chainId, accounts, isActivating }: ReturnType<typeof 
  * indicated that names cannot be fetched because there's no provider, or they're in the process of being fetched,
  * or `string | null`, depending on whether an ENS name has been set for the account in question or not.
  */
-function useENS(
-  providerRef: Ref<BaseProvider | undefined>,
-  accountsRef: Ref<string[] | undefined> = ref(undefined)
-): Ref<undefined[] | (string | null)[]> {
-  const ENSNames: Ref<(string | null)[] | undefined[]> = ref(
-    new Array<undefined>(accountsRef.value?.length ?? 0).fill(undefined)
-  )
-
-  watchEffect((onInvalidate) => {
-    const provider = providerRef.value
-    const accounts = accountsRef.value ?? []
-    if (provider && accounts.length) {
-      let stale = false
-
-      Promise.all(accounts.map((account) => provider.lookupAddress(account)))
-        .then((names) => {
-          if (stale) return
-          ENSNames.value = names
-        })
-        .catch((error) => {
-          if (stale) return
-          console.debug('Could not fetch ENS names', error)
-          ENSNames.value = new Array<null>(accounts.length).fill(null)
-        })
-
-      onInvalidate(() => {
-        stale = true
-      })
+async function useENS(provider: BaseProvider, accounts: string[]): Promise<undefined[] | (string | null)[]> {
+  if (accounts.length) {
+    try {
+      return await Promise.all(accounts.map((account) => provider.lookupAddress(account)))
+    } catch (e) {
+      console.debug('Could not fetch ENS names', e)
+      return Promise.resolve(new Array<null>(accounts.length).fill(null))
     }
-  })
+  }
 
-  return ENSNames
+  return Promise.resolve([])
 }
 
 function getAugmentedHooks<T extends Connector>(
@@ -318,17 +297,40 @@ function getAugmentedHooks<T extends Connector>(
     if (connector.customProvider) {
       return connector.customProvider as Web3Provider | undefined
     } else if (DynamicProvider && connector.provider) {
-      return new DynamicProvider(connector.provider, chainId.value)
+      return markRaw(new DynamicProvider(connector.provider, chainId.value))
     } else {
       return undefined
     }
   })
 
-  const ENSNames: ComputedRef<undefined[] | (string | null)[]> = computed(() => useENS(provider, accounts).value)
+  const ensNames: Record<string, string | undefined | null> = reactive({})
+  watch(
+    [provider, accounts],
+    ([newProvider, newAccounts], [], onCleanup) => {
+      let stale = false
+      if (newProvider && newAccounts) {
+        useENS(newProvider, newAccounts).then((names) => {
+          if (stale) return
+          names.forEach((name, i) => {
+            ensNames[accounts.value[i]] = name
+          })
+        })
+
+        onCleanup(() => {
+          stale = true
+          for (const ensNamesKey in ensNames) {
+            delete ensNames[ensNamesKey]
+          }
+        })
+      }
+    },
+    { immediate: true }
+  )
+
+  const ENSNames: ComputedRef<undefined[] | (string | null)[]> = computed(() => Object.values(ensNames))
 
   const ENSName: ComputedRef<undefined | string | null> = computed(() => {
-    const accounts = computed(() => (account.value === undefined ? undefined : [account.value]))
-    return useENS(provider, accounts).value?.[0]
+    return ensNames[account.value]
   })
 
   return { provider, ENSName, ENSNames }
