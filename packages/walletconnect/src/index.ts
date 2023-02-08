@@ -6,6 +6,8 @@ import EventEmitter3 from 'eventemitter3'
 import type { EventEmitter } from 'node:events'
 import { getBestUrl } from './utils'
 
+export const URI_AVAILABLE = 'URI_AVAILABLE'
+
 type MockWalletConnectProvider = WalletConnectProvider & EventEmitter
 
 function parseChainId(chainId: string | number) {
@@ -79,6 +81,10 @@ export class WalletConnect extends Connector {
     this.actions.update({ accounts })
   }
 
+  private URIListener = (_: Error | null, payload: { params: string[] }): void => {
+    this.events.emit(URI_AVAILABLE, payload.params[0])
+  }
+
   private async isomorphicInitialize(chainId = this.defaultChainId): Promise<void> {
     if (this.eagerConnection) return
 
@@ -98,11 +104,16 @@ export class WalletConnect extends Connector {
     )
 
     return (this.eagerConnection = import('@walletconnect/ethereum-provider').then(async (m) => {
-      this.provider = new m.default() as unknown as MockWalletConnectProvider
+      this.provider = new m.default({
+        ...this.options,
+        chainId,
+        rpc: await rpc,
+      }) as unknown as MockWalletConnectProvider
 
       this.provider.on('disconnect', this.disconnectListener)
       this.provider.on('chainChanged', this.chainChangedListener)
       this.provider.on('accountsChanged', this.accountsChangedListener)
+      this.provider.connector.on('display_uri', this.URIListener)
     }))
   }
 
