@@ -1,6 +1,6 @@
 {
   "name": "example-vue3",
-  "version": "0.0.6-alpha.0",
+  "version": "0.0.7-alpha.0",
   "private": true,
   "scripts": {
     "dev": "vite",
@@ -23,7 +23,7 @@
     "@web3-vue-org/network": "^0.0.13-alpha.0",
     "@web3-vue-org/types": "^0.0.13-alpha.0",
     "@web3-vue-org/url": "^0.0.13-alpha.0",
-    "@web3-vue-org/walletconnect": "^0.0.13-alpha.0",
+    "@web3-vue-org/walletconnect": "^0.0.14-alpha.0",
     "@web3-vue-org/x": "^0.0.6-alpha.0",
     "vue": ">=3.2"
   },
