@@ -61,7 +61,7 @@ export const Web3VueProvider = defineComponent({
 
     const hooks = getPriorityConnector(...props.connectors)
     const {
-      usePriorityConnector,
+      priorityConnector,
       useSelectedChainId,
       useSelectedAccounts,
       useSelectedIsActivating,
@@ -72,7 +72,6 @@ export const Web3VueProvider = defineComponent({
       useSelectedENSName,
     } = hooks
 
-    const priorityConnector = usePriorityConnector()
     const connector = computed(() => props.connectorOverride ?? priorityConnector.value)
 
     const chainId = useSelectedChainId(connector)
@@ -85,15 +84,9 @@ export const Web3VueProvider = defineComponent({
     // this is because if we did so, the type of provider would include T, but that would
     // conflict because Web3Context can't take a generic. however, this isn't particularly
     // important, because useWeb3Vue (below) is manually typed
-    const provider = useSelectedProvider(connector, network)
-    const ENSNames = useSelectedENSNames(
-      connector,
-      computed(() => (props.lookupENS ? provider.value : undefined))
-    )
-    const ENSName = useSelectedENSName(
-      connector,
-      computed(() => (props.lookupENS ? provider.value : undefined))
-    )
+    const provider = useSelectedProvider(connector)
+    const ENSNames = useSelectedENSNames(connector)
+    const ENSName = useSelectedENSName(connector)
 
     provide('connector', connector)
     provide('chainId', chainId)

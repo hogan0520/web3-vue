@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {computed} from "vue";
 import HelloWorld from './components/HelloWorld.vue'
 import TheWelcome from './components/TheWelcome.vue'
 import type {Web3VueHooks} from "@web3-vue-org/core";
@@ -11,11 +12,13 @@ import {metaMask,  hooks as metaMaskHooks } from "./connectors/metaMask";
 import {walletConnect, hooks as walletConnectHooks} from "./connectors/walletConnect";
 
 const connectors: [MetaMask | WalletConnect | CoinbaseWallet | Network, Web3VueHooks][] = [
-  [metaMask, metaMaskHooks],
   [walletConnect, walletConnectHooks],
+  [metaMask, metaMaskHooks],
   // [coinbaseWallet, coinbaseWalletHooks],
   // [network, networkHooks],
 ]
+
+const chainId = metaMaskHooks.chainId
 
 metaMask.activate()
 </script>

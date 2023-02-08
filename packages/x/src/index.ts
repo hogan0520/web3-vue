@@ -4,7 +4,7 @@ type SetStateInternal<T> = {
   _(partial: T | Partial<T> | { _(state: T): T | Partial<T> }['_'], replace?: boolean | undefined): void
 }['_']
 
-export interface StoreApi<T extends Object> {
+export interface StoreApi<T extends object> {
   setState: SetStateInternal<T>
   getState: () => T
   state: ComputedRef<T>

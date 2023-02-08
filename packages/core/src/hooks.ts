@@ -1,9 +1,8 @@
-import type { Networkish } from '@ethersproject/networks'
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
 import type { Actions, Connector, Web3VueState, Web3VueStore } from '@web3-vue-org/types'
 import type { ComputedRef, Ref } from 'vue'
-import { computed, ref, shallowRef, watchEffect } from 'vue'
+import { computed, ref, watchEffect } from 'vue'
 
 let DynamicProvider: typeof Web3Provider | null | undefined
 async function importProvider(): Promise<void> {
@@ -35,15 +34,15 @@ export type Web3VuePriorityHooks = ReturnType<typeof getPriorityConnector>
  * @returns [connector, hooks, store] - The initialized connector, a variety of hooks, and a zustand store.
  */
 export function initializeConnector<T extends Connector>(f: (actions: Actions) => T): [T, Web3VueHooks, Web3VueStore] {
-  const [useStore, actions] = createWeb3VueStoreAndActions()
+  const [store, actions] = createWeb3VueStoreAndActions()
 
   const connector = f(actions)
 
-  const stateHooks = getStateHooks(useStore)
+  const stateHooks = getStateHooks(store)
   const derivedHooks = getDerivedHooks(stateHooks)
   const augmentedHooks = getAugmentedHooks<T>(connector, stateHooks, derivedHooks)
 
-  return [connector, { ...stateHooks, ...derivedHooks, ...augmentedHooks }, useStore]
+  return [connector, { ...stateHooks, ...derivedHooks, ...augmentedHooks }, store]
 }
 
 function computeIsActive({ chainId, accounts, activating }: Web3VueState) {
@@ -77,23 +76,25 @@ export function getSelectedConnector(
   // the following code calls hooks in a map a lot, which violates the eslint rule.
   // this is ok, though, because initializedConnectors never changes, so the same hooks are called each time
   function useSelectedChainId(connector: Ref<Connector>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useChainId().value)
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].chainId.value)
   }
 
   function useSelectedAccounts(connector: Ref<Connector>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useAccounts().value)
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].accounts.value)
   }
 
   function useSelectedIsActivating(connector: Ref<Connector>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useIsActivating().value)
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].isActivating.value)
   }
 
   function useSelectedAccount(connector: Ref<Connector>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useAccount().value)
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].account.value)
   }
 
   function useSelectedIsActive(connector: Ref<Connector>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useIsActive().value)
+    return computed(() => {
+      return initializedConnectors[getIndex(connector.value)][1].isActive.value
+    })
   }
 
   /**
@@ -102,20 +103,19 @@ export function getSelectedConnector(
    * property, over all connectors.
    */
   function useSelectedProvider<T extends BaseProvider = Web3Provider>(
-    connector: Ref<Connector>,
-    network: Ref<Networkish | undefined>
+    connector: Ref<Connector>
   ): ComputedRef<T | undefined> {
-    return computed(
-      () => initializedConnectors[getIndex(connector.value)][1].useProvider(network).value
-    ) as unknown as ComputedRef<T | undefined>
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].provider.value) as unknown as ComputedRef<
+      T | undefined
+    >
   }
 
-  function useSelectedENSNames(connector: Ref<Connector>, provider: Ref<BaseProvider | undefined>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useENSNames(provider).value)
+  function useSelectedENSNames(connector: Ref<Connector>) {
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].ENSNames.value)
   }
 
-  function useSelectedENSName(connector: Ref<Connector>, provider: Ref<BaseProvider | undefined>) {
-    return computed(() => initializedConnectors[getIndex(connector.value)][1].useENSName(provider).value)
+  function useSelectedENSName(connector: Ref<Connector>) {
+    return computed(() => initializedConnectors[getIndex(connector.value)][1].ENSName.value)
   }
 
   return {
@@ -153,45 +153,42 @@ export function getPriorityConnector(
     useSelectedENSName,
   } = getSelectedConnector(...initializedConnectors)
 
-  function usePriorityConnector() {
-    const connector: Ref<Connector> = shallowRef(initializedConnectors[0][0])
-
+  const priorityConnectorIndex = computed(() => {
     const values = initializedConnectors.map(
-      ([, { useIsActive }]: [Connector, Web3VueHooks] | [Connector, Web3VueHooks, Web3VueStore]) => useIsActive()
+      ([, { isActive }]: [Connector, Web3VueHooks] | [Connector, Web3VueHooks, Web3VueStore]) => isActive.value
     )
-    values.forEach((value, i) => {
-      watchEffect(() => {
-        if (value.value) {
-          connector.value = initializedConnectors[i][0]
-        }
-      })
-    })
+    return Math.max(
+      values.findIndex((v) => v === true),
+      0
+    )
+  })
 
-    return connector
-  }
+  const priorityConnector = computed(() => {
+    return initializedConnectors[priorityConnectorIndex.value][0]
+  })
 
   function usePriorityStore() {
-    return useSelectedStore(usePriorityConnector())
+    return useSelectedStore(priorityConnector)
   }
 
   function usePriorityChainId() {
-    return useSelectedChainId(usePriorityConnector())
+    return useSelectedChainId(priorityConnector)
   }
 
   function usePriorityAccounts() {
-    return useSelectedAccounts(usePriorityConnector())
+    return useSelectedAccounts(priorityConnector)
   }
 
   function usePriorityIsActivating() {
-    return useSelectedIsActivating(usePriorityConnector())
+    return useSelectedIsActivating(priorityConnector)
   }
 
   function usePriorityAccount() {
-    return useSelectedAccount(usePriorityConnector())
+    return useSelectedAccount(priorityConnector)
   }
 
   function usePriorityIsActive() {
-    return useSelectedIsActive(usePriorityConnector())
+    return useSelectedIsActive(priorityConnector)
   }
 
   /**
@@ -199,19 +196,20 @@ export function getPriorityConnector(
    * getPriorityConnector is using `connector.customProvider`, in which case it must match every possible type of this
    * property, over all connectors.
    */
-  function usePriorityProvider<T extends BaseProvider = Web3Provider>(network: Ref<Networkish | undefined>) {
-    return useSelectedProvider<T>(usePriorityConnector(), network)
+  function usePriorityProvider<T extends BaseProvider = Web3Provider>() {
+    return useSelectedProvider<T>(priorityConnector)
   }
 
-  function usePriorityENSNames(provider: Ref<BaseProvider | undefined>) {
-    return useSelectedENSNames(usePriorityConnector(), provider)
+  function usePriorityENSNames() {
+    return useSelectedENSNames(priorityConnector)
   }
 
-  function usePriorityENSName(provider: Ref<BaseProvider | undefined>) {
-    return useSelectedENSName(usePriorityConnector(), provider)
+  function usePriorityENSName() {
+    return useSelectedENSName(priorityConnector)
   }
 
   return {
+    priorityConnector,
     useSelectedStore,
     useSelectedChainId,
     useSelectedAccounts,
@@ -221,7 +219,6 @@ export function getPriorityConnector(
     useSelectedProvider,
     useSelectedENSNames,
     useSelectedENSName,
-    usePriorityConnector,
     usePriorityStore,
     usePriorityChainId,
     usePriorityAccounts,
@@ -235,42 +232,26 @@ export function getPriorityConnector(
 }
 
 function getStateHooks(store: Web3VueStore) {
-  function useChainId(): ComputedRef<Web3VueState['chainId']> {
-    return computed(() => store.state.value.chainId)
-  }
+  const chainId: ComputedRef<Web3VueState['chainId']> = computed(() => store.state.value.chainId)
 
-  function useAccounts(): ComputedRef<Web3VueState['accounts']> {
-    return computed(() => store.state.value.accounts)
-  }
+  const accounts: ComputedRef<Web3VueState['accounts']> = computed(() => store.state.value.accounts)
 
-  function useIsActivating(): ComputedRef<Web3VueState['activating']> {
-    return computed(() => store.state.value.activating)
-  }
+  const isActivating: ComputedRef<Web3VueState['activating']> = computed(() => store.state.value.activating)
 
-  return { useChainId, useAccounts, useIsActivating }
+  return { chainId, accounts, isActivating }
 }
 
-function getDerivedHooks({ useChainId, useAccounts, useIsActivating }: ReturnType<typeof getStateHooks>) {
-  function useAccount(): ComputedRef<string | undefined> {
-    const accounts = useAccounts()
-    return computed(() => accounts.value?.[0])
-  }
+function getDerivedHooks({ chainId, accounts, isActivating }: ReturnType<typeof getStateHooks>) {
+  const account: ComputedRef<string | null> = computed(() => (accounts.value[0] ? accounts.value[0] : null))
+  const isActive: ComputedRef<boolean> = computed(() =>
+    computeIsActive({
+      chainId: chainId.value,
+      accounts: accounts.value,
+      activating: isActivating.value,
+    })
+  )
 
-  function useIsActive(): ComputedRef<boolean> {
-    const chainId = useChainId()
-    const activating = useIsActivating()
-    const accounts = useAccounts()
-
-    return computed(() =>
-      computeIsActive({
-        chainId: chainId.value,
-        accounts: accounts.value,
-        activating: activating.value,
-      })
-    )
-  }
-
-  return { useAccount, useIsActive }
+  return { account, isActive }
 }
 
 /**
@@ -314,62 +295,41 @@ function useENS(
 
 function getAugmentedHooks<T extends Connector>(
   connector: T,
-  { useAccounts, useChainId }: ReturnType<typeof getStateHooks>,
-  { useAccount, useIsActive }: ReturnType<typeof getDerivedHooks>
+  { accounts, chainId }: ReturnType<typeof getStateHooks>,
+  { account, isActive }: ReturnType<typeof getDerivedHooks>
 ) {
-  /**
-   * Avoid type erasure by returning the most qualified type if not otherwise set.
-   * Note that this function's return type is `T | undefined`, but there is a code path
-   * that returns a Web3Provider, which could conflict with a user-provided T. So,
-   * it's important that users only provide an override for T if they know that
-   * `connector.customProvider` is going to be defined and of type T.
-   *
-   * @typeParam T - A type argument must only be provided if using `connector.customProvider`, in which case it
-   * must match the type of this property.
-   */
-  function useProvider<T extends BaseProvider = Web3Provider>(
-    network: Ref<Networkish | undefined>,
-    enabled = true
-  ): ComputedRef<T | undefined> {
-    const isActive = useIsActive()
-    const chainId = useChainId()
-
-    const loaded = ref(DynamicProvider !== undefined)
-    // ensure that Provider is going to be available when loaded if @ethersproject/providers is installed
-    watchEffect((onInvalidate) => {
-      if (loaded.value) return
-      let stale = false
-      void importProvider().then(() => {
-        if (stale) return
-        loaded.value = true
-      })
-      onInvalidate(() => {
-        stale = true
-      })
+  const loaded = ref(DynamicProvider !== undefined)
+  // ensure that Provider is going to be available when loaded if @ethersproject/providers is installed
+  watchEffect((onInvalidate) => {
+    if (loaded.value) return
+    let stale = false
+    void importProvider().then(() => {
+      if (stale) return
+      loaded.value = true
     })
-
-    return computed(() => {
-      // to ensure connectors remain fresh, we condition re-renders on loaded, isActive and chainId
-      void loaded.value && isActive.value && chainId.value && network.value
-      if (enabled) {
-        if (connector.customProvider) return connector.customProvider as T
-        // see tsdoc note above for return type explanation.
-        else if (DynamicProvider && connector.provider)
-          return new DynamicProvider(connector.provider, network.value) as unknown as T
-      }
+    onInvalidate(() => {
+      stale = true
     })
-  }
+  })
 
-  function useENSNames(provider: Ref<BaseProvider | undefined>): ComputedRef<undefined[] | (string | null)[]> {
-    const accounts = useAccounts()
-    return computed(() => useENS(provider, accounts).value)
-  }
+  const provider: ComputedRef<Web3Provider | undefined> = computed(() => {
+    void loaded.value && isActive.value && chainId.value
 
-  function useENSName(provider: Ref<BaseProvider | undefined>): ComputedRef<undefined | string | null> {
-    const account = useAccount()
+    if (connector.customProvider) {
+      return connector.customProvider as Web3Provider | undefined
+    } else if (DynamicProvider && connector.provider) {
+      return new DynamicProvider(connector.provider, chainId.value)
+    } else {
+      return undefined
+    }
+  })
+
+  const ENSNames: ComputedRef<undefined[] | (string | null)[]> = computed(() => useENS(provider, accounts).value)
+
+  const ENSName: ComputedRef<undefined | string | null> = computed(() => {
     const accounts = computed(() => (account.value === undefined ? undefined : [account.value]))
-    return computed(() => useENS(provider, accounts).value?.[0])
-  }
+    return useENS(provider, accounts).value?.[0]
+  })
 
-  return { useProvider, useENSNames, useENSName }
+  return { provider, ENSName, ENSNames }
 }
