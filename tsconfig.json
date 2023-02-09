@@ -1,5 +1,5 @@
 {
-  "include": ["vite.config.*", "vitest.config.*", "cypress.config.*", "playwright.config.*", "types.d.ts"],
+  "extends": "@tsconfig/recommended/tsconfig.json",
   "compilerOptions": {
     "module": "CommonJS",
     "target": "ES6",
