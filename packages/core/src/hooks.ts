@@ -242,7 +242,7 @@ function getStateHooks(store: Web3VueStore) {
 }
 
 function getDerivedHooks({ chainId, accounts, isActivating }: ReturnType<typeof getStateHooks>) {
-  const account: ComputedRef<string | null> = computed(() => (accounts.value[0] ? accounts.value[0] : null))
+  const account: ComputedRef<string | null> = computed(() => (accounts.value?.[0] ? accounts.value[0] : null))
   const isActive: ComputedRef<boolean> = computed(() =>
     computeIsActive({
       chainId: chainId.value,
@@ -312,7 +312,7 @@ function getAugmentedHooks<T extends Connector>(
         useENS(newProvider, newAccounts).then((names) => {
           if (stale) return
           names.forEach((name, i) => {
-            ensNames[accounts.value[i]] = name
+            ensNames[newAccounts[i]] = name
           })
         })
 
@@ -327,10 +327,10 @@ function getAugmentedHooks<T extends Connector>(
     { immediate: true }
   )
 
-  const ENSNames: ComputedRef<undefined[] | (string | null)[]> = computed(() => Object.values(ensNames))
+  const ENSNames: ComputedRef<(string | null | undefined)[]> = computed(() => Object.values(ensNames))
 
   const ENSName: ComputedRef<undefined | string | null> = computed(() => {
-    return ensNames[account.value]
+    return account.value ? ensNames[account.value] : undefined
   })
 
   return { provider, ENSName, ENSNames }

@@ -2,7 +2,7 @@ import type { Networkish } from '@ethersproject/networks'
 import type { BaseProvider, Web3Provider } from '@ethersproject/providers'
 import type { Connector, Web3VueStore } from '@web3-vue-org/types'
 import { computed, defineComponent, provide, h } from 'vue'
-import type { PropType } from 'vue'
+import type { PropType, ComputedRef } from 'vue'
 import type { Web3VueHooks, Web3VuePriorityHooks } from './hooks'
 import { getPriorityConnector } from './hooks'
 
@@ -12,7 +12,7 @@ import { getPriorityConnector } from './hooks'
  * property, over all connectors.
  */
 export type Web3ContextType<T extends BaseProvider = Web3Provider> = {
-  connector: Connector
+  connector: ComputedRef<Connector>
   chainId: ReturnType<Web3VuePriorityHooks['useSelectedChainId']>
   accounts: ReturnType<Web3VuePriorityHooks['useSelectedAccounts']>
   isActivating: ReturnType<Web3VuePriorityHooks['useSelectedIsActivating']>

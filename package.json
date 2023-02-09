@@ -7,7 +7,9 @@
   "scripts": {
     "bootstrap": "lerna bootstrap --hoist",
     "clean": "lerna clean --yes",
-    "lint": "eslint --ext .ts,.tsx . && prettier -w .",
+    "lint": "pnpm run lint:e && pnpm run lint:p",
+    "lint:e": "eslint --ext .ts,.tsx .",
+    "lint:p": "prettier -w .",
     "test": "jest",
     "build": "lerna run build",
     "prestart": "npm run build",
