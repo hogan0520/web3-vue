@@ -8,6 +8,7 @@ import ChainId from "@/components/ChainId.vue";
 const chainId = inject<Web3ContextType["chainId"]>('chainId')
 const connector = inject<ComputedRef<Connector>>('connector')
 const connectorName = computed(() => getName(connector.value))
+const provider = inject<Web3ContextType["provider"]>('provider')
 </script>
 
 <template>

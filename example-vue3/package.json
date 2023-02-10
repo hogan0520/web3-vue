@@ -16,7 +16,7 @@
     "@ethersproject/units": "^5.7.0",
     "@walletconnect/ethereum-provider": "^1.7.8",
     "@web3-vue-org/coinbase-wallet": "file:../packages/coinbase-wallet",
-    "@web3-vue-org/core": "file:../packages/core",
+    "@web3-vue-org/core": "link:../packages/core",
     "@web3-vue-org/eip1193": "file:../packages/eip1193",
     "@web3-vue-org/empty": "file:../packages/empty",
     "@web3-vue-org/metamask": "file:../packages/metamask",

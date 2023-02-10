@@ -164,31 +164,33 @@ export function getPriorityConnector(
   })
 
   const priorityConnector = computed(() => {
-    return initializedConnectors[priorityConnectorIndex.value][0]
+    return initializedConnectors[priorityConnectorIndex.value]
   })
 
+  const connector = computed(() => priorityConnector.value[0])
+
   function usePriorityStore() {
-    return useSelectedStore(priorityConnector)
+    return computed(() => priorityConnector.value[2])
   }
 
   function usePriorityChainId() {
-    return useSelectedChainId(priorityConnector)
+    return computed(() => priorityConnector.value[1].chainId.value)
   }
 
   function usePriorityAccounts() {
-    return useSelectedAccounts(priorityConnector)
+    return computed(() => priorityConnector.value[1].accounts.value)
   }
 
   function usePriorityIsActivating() {
-    return useSelectedIsActivating(priorityConnector)
+    return computed(() => priorityConnector.value[1].isActivating.value)
   }
 
   function usePriorityAccount() {
-    return useSelectedAccount(priorityConnector)
+    return computed(() => priorityConnector.value[1].account.value)
   }
 
   function usePriorityIsActive() {
-    return useSelectedIsActive(priorityConnector)
+    return computed(() => priorityConnector.value[1].isActive.value)
   }
 
   /**
@@ -196,20 +198,20 @@ export function getPriorityConnector(
    * getPriorityConnector is using `connector.customProvider`, in which case it must match every possible type of this
    * property, over all connectors.
    */
-  function usePriorityProvider<T extends BaseProvider = Web3Provider>() {
-    return useSelectedProvider<T>(priorityConnector)
+  function usePriorityProvider() {
+    return computed(() => priorityConnector.value[1].provider.value)
   }
 
   function usePriorityENSNames() {
-    return useSelectedENSNames(priorityConnector)
+    return computed(() => priorityConnector.value[1].ENSNames.value)
   }
 
   function usePriorityENSName() {
-    return useSelectedENSName(priorityConnector)
+    return computed(() => priorityConnector.value[1].ENSName.value)
   }
 
   return {
-    priorityConnector,
+    priorityConnector: connector,
     useSelectedStore,
     useSelectedChainId,
     useSelectedAccounts,
