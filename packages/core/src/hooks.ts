@@ -298,7 +298,7 @@ function getAugmentedHooks<T extends Connector>(
 
     if (connector.customProvider) {
       return connector.customProvider as Web3Provider | undefined
-    } else if (DynamicProvider && connector.provider) {
+    } else if (loaded.value && isActive.value && chainId.value && DynamicProvider && connector.provider) {
       return markRaw(new DynamicProvider(connector.provider, chainId.value))
     } else {
       return undefined
