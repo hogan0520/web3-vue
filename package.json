@@ -12,11 +12,9 @@
     "lint:e": "eslint --fix --ext .ts,.tsx .",
     "lint:p": "prettier -w .",
     "test": "jest",
-    "build": "lerna run build",
+    "build": "pnpm --stream -r run build",
     "prestart": "npm run build",
     "start": "lerna run start --parallel",
-    "pin": "lerna run pin && npm run bootstrap",
-    "version": "npm run pin && git add packages/example-vue3/package.json",
     "prepack": "npm run build"
   },
   "devDependencies": {
