@@ -1,6 +1,7 @@
 {
   "private": true,
   "name": "web3-vue-org",
+  "packageManager": "pnpm",
   "engines": {
     "node": "^14 || ^16"
   },
@@ -8,7 +9,7 @@
     "bootstrap": "lerna bootstrap --hoist",
     "clean": "lerna clean --yes",
     "lint": "pnpm run lint:e && pnpm run lint:p",
-    "lint:e": "eslint --ext .ts,.tsx .",
+    "lint:e": "eslint --fix --ext .ts,.tsx .",
     "lint:p": "prettier -w .",
     "test": "jest",
     "build": "lerna run build",
@@ -44,6 +45,7 @@
     "vue-tsc": "^1.0.12"
   },
   "dependencies": {
+    "json-rpc-engine": "5.4",
     "vue": ">=3.2"
   }
 }

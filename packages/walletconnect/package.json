@@ -12,7 +12,6 @@
   "files": [
     "dist/*"
   ],
-  "type": "commonjs",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "exports": "./dist/index.js",
