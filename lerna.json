@@ -1,6 +1,5 @@
 {
   "version": "independent",
-  "useWorkspaces": true,
   "npmClient": "pnpm",
   "ignoreChanges": ["**/*.md", "**/*.spec.ts", "**/pnpm-lock.yaml"]
 }
