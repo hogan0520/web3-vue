@@ -52,6 +52,12 @@ export interface ProviderRpcError extends Error {
   data?: unknown
 }
 
+export class UnSupportedChainError extends Error {
+  constructor(chainId: number) {
+    super(`UnSupported ChainId:  ${chainId}`)
+  }
+}
+
 // per EIP-3085
 export interface AddEthereumChainParameter {
   chainId: number

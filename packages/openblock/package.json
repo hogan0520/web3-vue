@@ -1,0 +1,39 @@
+{
+  "name": "@web3-vue-org/openblock",
+  "version": "0.0.1",
+  "description": "Web3 Vue Connector for OpenBlock",
+  "author": "hoganhu <hhlsch@hotmail.com>",
+  "homepage": "https://github.com/hogan0520/web3-vue#readme",
+  "keywords": [
+    "web3-vue-org",
+    "openblock"
+  ],
+  "license": "GPL-3.0-or-later",
+  "publishConfig": {
+    "access": "public"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@openblockhq/dappsdk": "^5",
+    "@web3-vue-org/types": "^0.0.14-alpha.0",
+    "regenerator-runtime": "^0.13.11"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hogan0520/web3-vue.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hogan0520/web3-vue/issues"
+  }
+}
