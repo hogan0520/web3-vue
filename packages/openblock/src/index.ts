@@ -50,7 +50,7 @@ export class OpenBlock extends Connector {
   private eagerConnection?: Promise<void>
 
   constructor({ actions, onError }: OpenBlockConstructorArgs) {
-    super(actions, onError)
+    super(actions, false, onError)
   }
 
   private async isomorphicInitialize(): Promise<void> {
@@ -65,10 +65,10 @@ export class OpenBlock extends Connector {
         })
 
         this.provider.on('disconnect', (error: ProviderRpcError): void => {
-          // 1013 indicates that MetaMask is attempting to reestablish the connection
+          // 1013 indicates that OpenBlock is attempting to reestablish the connection
           // https://github.com/MetaMask/providers/releases/tag/v8.0.0
           if (error.code === 1013) {
-            console.debug('MetaMask logged connection error 1013: "Try again later"')
+            console.debug('OpenBlock logged connection error 1013: "Try again later"')
             return
           }
           this.actions.resetState()

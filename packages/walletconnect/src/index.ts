@@ -55,7 +55,7 @@ export class WalletConnect extends Connector {
   private eagerConnection?: Promise<void>
 
   constructor({ actions, options, defaultChainId, timeout = 5000, onError }: WalletConnectConstructorArgs) {
-    super(actions, onError)
+    super(actions, false, onError)
 
     const { rpc, ...rest } = options
     this.options = rest

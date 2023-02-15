@@ -37,7 +37,7 @@ export class CoinbaseWallet extends Connector {
   public coinbaseWallet: CoinbaseWalletSDK | undefined
 
   constructor({ actions, options, onError }: CoinbaseWalletConstructorArgs) {
-    super(actions, onError)
+    super(actions, true, onError)
     this.options = options
   }
 

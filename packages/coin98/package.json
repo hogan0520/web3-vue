@@ -1,14 +1,14 @@
 {
-  "name": "@web3-vue-org/metamask",
+  "name": "@web3-vue-org/coin98",
   "keywords": [
     "web3-vue-org",
-    "metamask"
+    "coin98"
   ],
   "license": "GPL-3.0-or-later",
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.15-alpha.0",
+  "version": "0.0.1",
   "files": [
     "dist/*"
   ],
@@ -22,11 +22,7 @@
     "start": "tsc --watch"
   },
   "dependencies": {
-    "@metamask/detect-provider": "^1.2.0",
     "@web3-vue-org/types": "^0.0.15-alpha.0"
-  },
-  "devDependencies": {
-    "@web3-vue-org/store": "^0.0.15-alpha.0"
   },
   "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"
 }

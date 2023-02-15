@@ -20,7 +20,7 @@ export class EIP1193 extends Connector {
   provider: Provider
 
   constructor({ actions, provider, onError }: EIP1193ConstructorArgs) {
-    super(actions, onError)
+    super(actions, false, onError)
 
     this.provider = provider
 

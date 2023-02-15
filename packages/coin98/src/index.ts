@@ -1,4 +1,3 @@
-import type detectEthereumProvider from '@metamask/detect-provider'
 import type {
   Actions,
   AddEthereumChainParameter,
@@ -9,19 +8,27 @@ import type {
 } from '@web3-vue-org/types'
 import { Connector } from '@web3-vue-org/types'
 
-type MetaMaskProvider = Provider & {
-  isMetaMask?: boolean
+type Coin98Provider = Provider & {
+  isCoin98?: boolean
   isConnected?: () => boolean
-  providers?: MetaMaskProvider[]
+  disconnect: () => Promise<void>
   get chainId(): string
   get accounts(): string[]
 }
 
-export class NoMetaMaskError extends Error {
+declare global {
+  interface Window {
+    coin98?: {
+      provider: Coin98Provider
+    }
+  }
+}
+
+export class NoCoin98Error extends Error {
   public constructor() {
-    super('MetaMask not installed')
-    this.name = NoMetaMaskError.name
-    Object.setPrototypeOf(this, NoMetaMaskError.prototype)
+    super('Coin98 not installed')
+    this.name = NoCoin98Error.name
+    Object.setPrototypeOf(this, NoCoin98Error.prototype)
   }
 }
 
@@ -30,67 +37,64 @@ function parseChainId(chainId: string) {
 }
 
 /**
- * @param options - Options to pass to `@metamask/detect-provider`
  * @param onError - Handler to report errors thrown from eventListeners.
  */
-export interface MetaMaskConstructorArgs {
+export interface Coin98ConstructorArgs {
   actions: Actions
-  options?: Parameters<typeof detectEthereumProvider>[0]
   onError?: (error: Error) => void
 }
 
-export class MetaMask extends Connector {
+export class Coin98 extends Connector {
   /** {@inheritdoc Connector.provider} */
-  public declare provider?: MetaMaskProvider
-
-  private readonly options?: Parameters<typeof detectEthereumProvider>[0]
+  public declare provider?: Coin98Provider
   private eagerConnection?: Promise<void>
 
-  constructor({ actions, options, onError }: MetaMaskConstructorArgs) {
+  constructor({ actions, onError }: Coin98ConstructorArgs) {
     super(actions, true, onError)
-    this.options = options
+  }
+
+  private onConnect = ({ chainId }: ProviderConnectInfo): void => {
+    this.actions.update({ chainId: parseChainId(chainId) })
+  }
+
+  private onDisconnect = (error: ProviderRpcError): void => {
+    // 1013 indicates that Coin98 is attempting to reestablish the connection
+    // https://github.com/MetaMask/providers/releases/tag/v8.0.0
+    if (error.code === 1013) {
+      console.debug('Coin98 logged connection error 1013: "Try again later"')
+      return
+    }
+    this.actions.resetState()
+    this.onError?.(error)
+  }
+
+  private onChainChanged = (chainId: string): void => {
+    this.actions.update({ chainId: parseChainId(chainId) })
+  }
+
+  private onAccountsChanged = (accounts: string[]): void => {
+    if (accounts.length === 0) {
+      // handle this edge case by disconnecting
+      this.actions.resetState()
+    } else {
+      this.actions.update({ accounts })
+    }
   }
 
   private async isomorphicInitialize(): Promise<void> {
     if (this.eagerConnection) return
 
-    return (this.eagerConnection = import('@metamask/detect-provider').then(async (m) => {
-      const provider = await m.default(this.options)
+    return (this.eagerConnection = Promise.resolve(window.coin98?.provider).then((provider) => {
       if (provider) {
-        this.provider = provider as MetaMaskProvider
+        this.provider = provider as Coin98Provider
 
-        // handle the case when e.g. metamask and coinbase wallet are both installed
-        if (this.provider.providers?.length) {
-          this.provider = this.provider.providers.find((p) => p.isMetaMask) ?? this.provider.providers[0]
-        }
+        this.provider.on('connect', this.onConnect)
 
-        this.provider.on('connect', ({ chainId }: ProviderConnectInfo): void => {
-          this.actions.update({ chainId: parseChainId(chainId) })
-        })
+        this.provider.on('disconnect', this.onDisconnect)
 
-        this.provider.on('disconnect', (error: ProviderRpcError | undefined): void => {
-          // 1013 indicates that MetaMask is attempting to reestablish the connection
-          // https://github.com/MetaMask/providers/releases/tag/v8.0.0
-          if (error && error.code === 1013) {
-            console.debug('MetaMask logged connection error 1013: "Try again later"')
-            return
-          }
-          this.actions.resetState()
-          if (error) this.onError?.(error)
-        })
+        this.provider.on('chainChanged', this.onChainChanged)
 
-        this.provider.on('chainChanged', (chainId: string): void => {
-          this.actions.update({ chainId: parseChainId(chainId) })
-        })
-
-        this.provider.on('accountsChanged', (accounts: string[]): void => {
-          if (accounts.length === 0) {
-            // handle this edge case by disconnecting
-            this.actions.resetState()
-          } else {
-            this.actions.update({ accounts })
-          }
-        })
+        this.provider.on('accountsChanged', this.onAccountsChanged)
       }
     }))
   }
@@ -133,7 +137,7 @@ export class MetaMask extends Connector {
 
     return this.isomorphicInitialize()
       .then(async () => {
-        if (!this.provider) throw new NoMetaMaskError()
+        if (!this.provider) throw new NoCoin98Error()
 
         // Wallets may resolve eth_chainId and hang on eth_accounts pending user interaction, which may include changing
         // chains; they should be requested serially, with accounts first, so that the chainId can settle.
@@ -175,6 +179,18 @@ export class MetaMask extends Connector {
         cancelActivation?.()
         throw error
       })
+  }
+
+  public async deactivate(): Promise<void> {
+    this.provider?.off('disconnect', this.onDisconnect)
+    this.provider?.off('chainChanged', this.onChainChanged)
+    this.provider?.off('accountsChanged', this.onAccountsChanged)
+    // we don't unregister the display_uri handler because the walletconnect types/inheritances are really broken.
+    // it doesn't matter, anyway, as the connector object is destroyed
+    await this.provider?.disconnect()
+    this.provider = undefined
+    this.eagerConnection = undefined
+    this.actions.resetState()
   }
 
   public async watchAsset({ address, symbol, decimals, image }: WatchAssetParameters): Promise<true> {

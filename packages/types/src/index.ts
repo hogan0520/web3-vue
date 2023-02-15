@@ -97,6 +97,8 @@ export abstract class Connector {
    */
   public customProvider?: unknown
 
+  public readonly supportAddChain: boolean
+
   protected readonly actions: Actions
 
   /**
@@ -107,12 +109,14 @@ export abstract class Connector {
 
   /**
    * @param actions - Methods bound to a zustand store that tracks the state of the connector.
+   * @param supportAddChain - set Connector is support add chain or not
    * @param onError - An optional handler which will report errors thrown from event listeners.
    * Actions are used by the connector to report changes in connection status.
    */
-  constructor(actions: Actions, onError?: (error: Error) => void) {
+  constructor(actions: Actions, supportAddChain = false, onError?: (error: Error) => void) {
     this.actions = actions
     this.onError = onError
+    this.supportAddChain = supportAddChain
   }
 
   /**
