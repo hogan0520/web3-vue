@@ -1,0 +1,32 @@
+{
+  "name": "@web3-vue-org/crypto-com",
+  "keywords": [
+    "web3-vue-org",
+    "crypto.com"
+  ],
+  "license": "GPL-3.0-or-later",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.1.0",
+  "files": [
+    "dist/*"
+  ],
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@deficonnect/provider": "^2.0.3",
+    "@deficonnect/types": "^2.0.3",
+    "@web3-vue-org/types": "^0.1.0"
+  },
+  "devDependencies": {
+    "@web3-vue-org/store": "^0.1.0"
+  }
+}

@@ -2,11 +2,9 @@ lockfileVersion: 5.4
 
 specifiers:
   '@ethersproject/address': ^5
-  pinia: ^2.0.30
 
 dependencies:
   '@ethersproject/address': registry.npmmirror.com/@ethersproject/address/5.7.0
-  pinia: registry.npmmirror.com/pinia/2.0.30
 
 packages:
 
@@ -64,12 +62,6 @@ packages:
       '@ethersproject/logger': registry.npmmirror.com/@ethersproject/logger/5.7.0
     dev: false
 
-  registry.npmmirror.com/@vue/devtools-api/6.5.0:
-    resolution: {integrity: sha512-o9KfBeaBmCKl10usN4crU53fYtC1r7jJwdGKjPT24t348rHxgfpZ0xL3Xm/gLUYnc0oTp8LAmrxOeLyu6tbk2Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vue/devtools-api/-/devtools-api-6.5.0.tgz}
-    name: '@vue/devtools-api'
-    version: 6.5.0
-    dev: false
-
   registry.npmmirror.com/bn.js/5.2.1:
     resolution: {integrity: sha512-eXRvHzWyYPBuB4NBy0cmYQjGitUrtqwbvlzP3G6VFnNRbsZQIxQ10PbKKHt8gZ/HW/D/747aDl+QkDqg3KQLMQ==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/bn.js/-/bn.js-5.2.1.tgz}
     name: bn.js
@@ -80,37 +72,4 @@ packages:
     resolution: {integrity: sha512-gF1cRrHhIzNfToc802P800N8PpXS+evLLXfsVpowqmAFR9uwbi89WvXg2QspOmXL8QL86J4T1EpFu+yUkwJY3Q==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/js-sha3/-/js-sha3-0.8.0.tgz}
     name: js-sha3
     version: 0.8.0
-    dev: false
-
-  registry.npmmirror.com/pinia/2.0.30:
-    resolution: {integrity: sha512-q6DUmxWwe/mQgg+55QQjykpKC+aGeGdaJV3niminl19V08dE+LRTvSEuqi6/NLSGCKHI49KGL6tMNEOssFiMyA==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/pinia/-/pinia-2.0.30.tgz}
-    name: pinia
-    version: 2.0.30
-    peerDependencies:
-      '@vue/composition-api': ^1.4.0
-      typescript: '>=4.4.4'
-      vue: ^2.6.14 || ^3.2.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
-      typescript:
-        optional: true
-    dependencies:
-      '@vue/devtools-api': registry.npmmirror.com/@vue/devtools-api/6.5.0
-      vue-demi: registry.npmmirror.com/vue-demi/0.13.11
-    dev: false
-
-  registry.npmmirror.com/vue-demi/0.13.11:
-    resolution: {integrity: sha512-IR8HoEEGM65YY3ZJYAjMlKygDQn25D5ajNFNoKh9RSDMQtlzCxtfQjdQgv9jjK+m3377SsJXY8ysq8kLCZL25A==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/vue-demi/-/vue-demi-0.13.11.tgz}
-    name: vue-demi
-    version: 0.13.11
-    engines: {node: '>=12'}
-    hasBin: true
-    requiresBuild: true
-    peerDependencies:
-      '@vue/composition-api': ^1.0.0-rc.1
-      vue: ^3.0.0-0 || ^2.6.0
-    peerDependenciesMeta:
-      '@vue/composition-api':
-        optional: true
     dev: false
