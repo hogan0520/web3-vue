@@ -6,7 +6,7 @@ import type {
   ProviderRpcError,
   WatchAssetParameters,
 } from '@web3-vue-org/types'
-import { Connector } from '@web3-vue-org/types'
+import { Connector, UnSupportedChainError } from '@web3-vue-org/types'
 
 type OkxWalletProvider = Provider & {
   isConnected?: () => boolean
@@ -17,7 +17,7 @@ type OkxWalletProvider = Provider & {
 
 declare global {
   interface Window {
-    okxwallet?:  OkxWalletProvider
+    okxwallet?: OkxWalletProvider
   }
 }
 
@@ -127,8 +127,12 @@ export class OkxWallet extends Connector {
    * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
    * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
    * specified parameters first, before being prompted to switch.
+   * @param times activate 方法循环调用的次数，超过3次认为失败
    */
-  public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
+  public async activate(
+    desiredChainIdOrChainParameters?: number | AddEthereumChainParameter,
+    times = 0
+  ): Promise<void> {
     let cancelActivation: () => void
     if (!this.provider?.isConnected?.()) cancelActivation = this.actions.startActivation()
 
@@ -136,15 +140,18 @@ export class OkxWallet extends Connector {
       .then(async () => {
         if (!this.provider) throw new NoOkxWalletError()
 
+        const desiredChainId =
+          typeof desiredChainIdOrChainParameters === 'number'
+            ? desiredChainIdOrChainParameters
+            : desiredChainIdOrChainParameters?.chainId
+
+        if (times >= 3) throw new UnSupportedChainError(desiredChainId ?? 0)
+
         // Wallets may resolve eth_chainId and hang on eth_accounts pending user interaction, which may include changing
         // chains; they should be requested serially, with accounts first, so that the chainId can settle.
         const accounts = (await this.provider.request({ method: 'eth_requestAccounts' })) as string[]
         const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
         const receivedChainId = parseChainId(chainId)
-        const desiredChainId =
-          typeof desiredChainIdOrChainParameters === 'number'
-            ? desiredChainIdOrChainParameters
-            : desiredChainIdOrChainParameters?.chainId
 
         // if there's no desired chain, or it's equal to the received, update
         if (!desiredChainId || receivedChainId === desiredChainId)
@@ -170,7 +177,7 @@ export class OkxWallet extends Connector {
 
             throw error
           })
-          .then(() => this.activate(desiredChainId))
+          .then(() => this.activate(desiredChainId, times + 1))
       })
       .catch((error) => {
         cancelActivation?.()
