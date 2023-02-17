@@ -118,16 +118,7 @@ export class MetaMask extends Connector {
     }
   }
 
-  /**
-   * Initiates a connection.
-   *
-   * @param desiredChainIdOrChainParameters - If defined, indicates the desired chain to connect to. If the user is
-   * already connected to this chain, no additional steps will be taken. Otherwise, the user will be prompted to switch
-   * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
-   * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
-   * specified parameters first, before being prompted to switch.
-   */
-  private async _activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
+  protected async _activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
     return this.isomorphicInitialize().then(async () => {
       if (!this.provider) throw new NoMetaMaskError()
 
@@ -165,20 +156,21 @@ export class MetaMask extends Connector {
 
           throw error
         })
-        .then(() => this.activate(desiredChainId))
+        .then(() => this._activate(desiredChainId))
     })
   }
 
+  /**
+   * Initiates a connection.
+   *
+   * @param desiredChainIdOrChainParameters - If defined, indicates the desired chain to connect to. If the user is
+   * already connected to this chain, no additional steps will be taken. Otherwise, the user will be prompted to switch
+   * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
+   * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
+   * specified parameters first, before being prompted to switch.
+   */
   public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
-    let cancelActivation: () => void
-    if (!this.provider?.isConnected?.()) cancelActivation = this.actions.startActivation()
-    this.actions.update({ changing: true })
-    return this._activate(desiredChainIdOrChainParameters)
-      .catch((e) => {
-        cancelActivation?.()
-        throw e
-      })
-      .finally(() => this.actions.update({ changing: false }))
+    return this.startActive(!!this.provider?.isConnected?.(), desiredChainIdOrChainParameters)
   }
 
   public async watchAsset({ address, symbol, decimals, image }: WatchAssetParameters): Promise<true> {

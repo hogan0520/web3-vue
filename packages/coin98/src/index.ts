@@ -131,54 +131,50 @@ export class Coin98 extends Connector {
    * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
    * specified parameters first, before being prompted to switch.
    */
+  protected async _activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
+    return this.isomorphicInitialize().then(async () => {
+      if (!this.provider) throw new NoCoin98Error()
+
+      // Wallets may resolve eth_chainId and hang on eth_accounts pending user interaction, which may include changing
+      // chains; they should be requested serially, with accounts first, so that the chainId can settle.
+      const accounts = (await this.provider.request({ method: 'eth_requestAccounts' })) as string[]
+      const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
+      const receivedChainId = parseChainId(chainId)
+      const desiredChainId =
+        typeof desiredChainIdOrChainParameters === 'number'
+          ? desiredChainIdOrChainParameters
+          : desiredChainIdOrChainParameters?.chainId
+
+      // if there's no desired chain, or it's equal to the received, update
+      if (!desiredChainId || receivedChainId === desiredChainId)
+        return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
+
+      const desiredChainIdHex = `0x${desiredChainId.toString(16)}`
+
+      // if we're here, we can try to switch networks
+      return this.provider
+        .request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: desiredChainIdHex }],
+        })
+        .catch((error: ProviderRpcError) => {
+          if (error.code === 4902 && typeof desiredChainIdOrChainParameters !== 'number') {
+            if (!this.provider) throw new Error('No provider')
+            // if we're here, we can try to add a new network
+            return this.provider.request({
+              method: 'wallet_addEthereumChain',
+              params: [{ ...desiredChainIdOrChainParameters, chainId: desiredChainIdHex }],
+            })
+          }
+
+          throw error
+        })
+        .then(() => this._activate(desiredChainId))
+    })
+  }
+
   public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
-    let cancelActivation: () => void
-    if (!this.provider?.isConnected?.()) cancelActivation = this.actions.startActivation()
-
-    return this.isomorphicInitialize()
-      .then(async () => {
-        if (!this.provider) throw new NoCoin98Error()
-
-        // Wallets may resolve eth_chainId and hang on eth_accounts pending user interaction, which may include changing
-        // chains; they should be requested serially, with accounts first, so that the chainId can settle.
-        const accounts = (await this.provider.request({ method: 'eth_requestAccounts' })) as string[]
-        const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
-        const receivedChainId = parseChainId(chainId)
-        const desiredChainId =
-          typeof desiredChainIdOrChainParameters === 'number'
-            ? desiredChainIdOrChainParameters
-            : desiredChainIdOrChainParameters?.chainId
-
-        // if there's no desired chain, or it's equal to the received, update
-        if (!desiredChainId || receivedChainId === desiredChainId)
-          return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
-
-        const desiredChainIdHex = `0x${desiredChainId.toString(16)}`
-
-        // if we're here, we can try to switch networks
-        return this.provider
-          .request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: desiredChainIdHex }],
-          })
-          .catch((error: ProviderRpcError) => {
-            if (error.code === 4902 && typeof desiredChainIdOrChainParameters !== 'number') {
-              if (!this.provider) throw new Error('No provider')
-              // if we're here, we can try to add a new network
-              return this.provider.request({
-                method: 'wallet_addEthereumChain',
-                params: [{ ...desiredChainIdOrChainParameters, chainId: desiredChainIdHex }],
-              })
-            }
-
-            throw error
-          })
-          .then(() => this.activate(desiredChainId))
-      })
-      .catch((error) => {
-        cancelActivation?.()
-        throw error
-      })
+    return this.startActive(!!this.provider?.isConnected?.(), desiredChainIdOrChainParameters)
   }
 
   public async deactivate(): Promise<void> {

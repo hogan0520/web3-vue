@@ -108,7 +108,7 @@ export class CoinbaseWallet extends Connector {
    * AddEthereumChainParameter, in which case the user will be prompted to add the chain with the specified parameters
    * first, before being prompted to switch.
    */
-  public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
+  protected async _activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
     const desiredChainId =
       typeof desiredChainIdOrChainParameters === 'number'
         ? desiredChainIdOrChainParameters
@@ -136,8 +136,6 @@ export class CoinbaseWallet extends Connector {
           throw error
         })
     }
-
-    const cancelActivation = this.actions.startActivation()
 
     try {
       await this.isomorphicInitialize()
@@ -172,9 +170,12 @@ export class CoinbaseWallet extends Connector {
           throw error
         })
     } catch (error) {
-      cancelActivation()
       throw error
     }
+  }
+
+  public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
+    return this.startActive(!!this.provider?.isConnected?.(), desiredChainIdOrChainParameters)
   }
 
   /** {@inheritdoc Connector.deactivate} */

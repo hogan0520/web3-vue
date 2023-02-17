@@ -31,7 +31,7 @@ export class Url extends Connector {
   }
 
   /** {@inheritdoc Connector.activate} */
-  public async activate(): Promise<void> {
+  protected async _activate(): Promise<void> {
     if (!this.customProvider) {
       const cancelActivation = this.actions.startActivation()
       if (!isUrl(this.url)) this.customProvider = this.url
@@ -48,5 +48,9 @@ export class Url extends Connector {
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { chainId } = await this.customProvider!.getNetwork()
     this.actions.update({ chainId, accounts: [], changing: false })
+  }
+
+  public async activate(): Promise<void> {
+    return this._activate()
   }
 }

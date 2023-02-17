@@ -76,7 +76,7 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
       // determine the next chainId and accounts
       const chainId = stateUpdate.chainId ?? existingState.chainId
       const accounts = stateUpdate.accounts ?? existingState.accounts
-      let changing = stateUpdate.changing ?? existingState.changing
+      const changing = stateUpdate.changing ?? existingState.changing
 
       // ensure that the activating flag is cleared when appropriate
       let activating = existingState.activating

@@ -7,6 +7,10 @@ export class Empty extends Connector {
   public activate() {
     void 0
   }
+
+  protected _activate(): Promise<void> {
+    return Promise.resolve(undefined)
+  }
 }
 
 // @ts-expect-error actions aren't validated and are only used to set a protected property, so this is ok

@@ -62,13 +62,17 @@ export class EIP1193 extends Connector {
     return this.activateAccounts(() => this.provider.request({ method: 'eth_accounts' }) as Promise<string[]>)
   }
 
-  /** {@inheritdoc Connector.activate} */
-  public async activate(): Promise<void> {
+  protected async _activate(): Promise<void> {
     return this.activateAccounts(
       () =>
         this.provider
           .request({ method: 'eth_requestAccounts' })
           .catch(() => this.provider.request({ method: 'eth_accounts' })) as Promise<string[]>
     )
+  }
+
+  /** {@inheritdoc Connector.activate} */
+  public async activate(): Promise<void> {
+    return this._activate()
   }
 }

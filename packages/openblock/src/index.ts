@@ -123,45 +123,50 @@ export class OpenBlock extends Connector {
    * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
    * specified parameters first, before being prompted to switch.
    */
+  protected async _activate(desiredChainIdOrChainParameters?: number): Promise<void> {
+    return this.isomorphicInitialize().then(async () => {
+      if (!this.provider) throw new NoOpenBlockError()
+
+      if (desiredChainIdOrChainParameters && !SUPPORTED_CHAIN_IDS.includes(desiredChainIdOrChainParameters)) {
+        throw new UnSupportedChainError(desiredChainIdOrChainParameters)
+      }
+
+      // Wallets may resolve eth_chainId and hang on eth_accounts pending user interaction, which may include changing
+      // chains; they should be requested serially, with accounts first, so that the chainId can settle.
+      const accounts = (await this.provider.request({ method: 'eth_requestAccounts' })) as string[]
+      const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
+      const receivedChainId = parseChainId(chainId)
+      const desiredChainId = desiredChainIdOrChainParameters
+
+      // if there's no desired chain, or it's equal to the received, update
+      if (!desiredChainId || receivedChainId === desiredChainId)
+        return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
+
+      const desiredChainIdHex = `0x${desiredChainId.toString(16)}`
+
+      // if we're here, we can try to switch networks
+      return this.provider
+        .request({
+          method: 'wallet_switchEthereumChain',
+          params: [{ chainId: desiredChainIdHex }],
+        })
+        .catch((error: ProviderRpcError) => {
+          throw error
+        })
+        .then(() => this._activate(desiredChainId))
+    })
+  }
+
+  /**
+   * Initiates a connection.
+   *
+   * @param desiredChainIdOrChainParameters - If defined, indicates the desired chain to connect to. If the user is
+   * already connected to this chain, no additional steps will be taken. Otherwise, the user will be prompted to switch
+   * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
+   * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
+   * specified parameters first, before being prompted to switch.
+   */
   public async activate(desiredChainIdOrChainParameters?: number): Promise<void> {
-    let cancelActivation: () => void
-    if (!this.provider?.isLogin) cancelActivation = this.actions.startActivation()
-
-    return this.isomorphicInitialize()
-      .then(async () => {
-        if (!this.provider) throw new NoOpenBlockError()
-
-        if (desiredChainIdOrChainParameters && !SUPPORTED_CHAIN_IDS.includes(desiredChainIdOrChainParameters)) {
-          throw new UnSupportedChainError(desiredChainIdOrChainParameters)
-        }
-
-        // Wallets may resolve eth_chainId and hang on eth_accounts pending user interaction, which may include changing
-        // chains; they should be requested serially, with accounts first, so that the chainId can settle.
-        const accounts = (await this.provider.request({ method: 'eth_requestAccounts' })) as string[]
-        const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
-        const receivedChainId = parseChainId(chainId)
-        const desiredChainId = desiredChainIdOrChainParameters
-
-        // if there's no desired chain, or it's equal to the received, update
-        if (!desiredChainId || receivedChainId === desiredChainId)
-          return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
-
-        const desiredChainIdHex = `0x${desiredChainId.toString(16)}`
-
-        // if we're here, we can try to switch networks
-        return this.provider
-          .request({
-            method: 'wallet_switchEthereumChain',
-            params: [{ chainId: desiredChainIdHex }],
-          })
-          .catch((error: ProviderRpcError) => {
-            throw error
-          })
-          .then(() => this.activate(desiredChainId))
-      })
-      .catch((error) => {
-        cancelActivation?.()
-        throw error
-      })
+    return this.startActive(!!this.provider?.isLogin, desiredChainIdOrChainParameters)
   }
 }

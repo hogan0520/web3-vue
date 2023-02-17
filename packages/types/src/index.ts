@@ -150,10 +150,24 @@ export abstract class Connector {
     this.actions.resetState()
   }
 
+  protected abstract _activate(...args: unknown[]): Promise<void>
+
   /**
    * Initiate a connection.
    */
   public abstract activate(...args: unknown[]): Promise<void> | void
+
+  protected startActive(connected: boolean, ...args: unknown[]) {
+    let cancelActivation: () => void
+    if (!connected) cancelActivation = this.actions.startActivation()
+    this.actions.update({ changing: true })
+    return this._activate(...args)
+      .catch((e) => {
+        cancelActivation?.()
+        throw e
+      })
+      .finally(() => this.actions.update({ changing: false }))
+  }
 
   /**
    * Attempt to initiate a connection, failing silently

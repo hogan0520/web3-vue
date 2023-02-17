@@ -141,7 +141,7 @@ export class WalletConnect extends Connector {
   /**
    * @param desiredChainId - The desired chainId to connect to.
    */
-  public async activate(desiredChainId?: number): Promise<void> {
+  protected async _activate(desiredChainId?: number): Promise<void> {
     // this early return clause catches some common cases if activate is called after connection has been established
     if (this.provider?.connected) {
       if (!desiredChainId || desiredChainId === this.provider.chainId) return
@@ -151,8 +151,6 @@ export class WalletConnect extends Connector {
         params: [{ chainId: `0x${desiredChainId.toString(16)}` }],
       })
     }
-
-    const cancelActivation = this.actions.startActivation()
 
     // if we're trying to connect to a specific chain that we're not already initialized for, we have to re-initialize
     if (desiredChainId && desiredChainId !== this.provider?.chainId) await this.deactivate()
@@ -175,9 +173,12 @@ export class WalletConnect extends Connector {
 
       this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
-      cancelActivation()
       throw error
     }
+  }
+
+  public async activate(desiredChainIdOrChainParameters?: number): Promise<void> {
+    return this.startActive(!!this.provider?.connected, desiredChainIdOrChainParameters)
   }
 
   /** {@inheritdoc Connector.deactivate} */

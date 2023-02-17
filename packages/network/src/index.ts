@@ -81,22 +81,21 @@ export class Network extends Connector {
    *
    * @param desiredChainId - The desired chain to connect to.
    */
+  protected async _activate(desiredChainId = this.defaultChainId): Promise<void> {
+    return this.isomorphicInitialize(desiredChainId).then(async (customProvider) => {
+      this.customProvider = customProvider
+
+      const { chainId } = await this.customProvider.getNetwork()
+      this.actions.update({ chainId, accounts: [], changing: false })
+    })
+  }
+
+  /**
+   * Initiates a connection.
+   *
+   * @param desiredChainId - The desired chain to connect to.
+   */
   public async activate(desiredChainId = this.defaultChainId): Promise<void> {
-    let cancelActivation: () => void
-    if (!this.providerCache[desiredChainId]) {
-      cancelActivation = this.actions.startActivation()
-    }
-
-    return this.isomorphicInitialize(desiredChainId)
-      .then(async (customProvider) => {
-        this.customProvider = customProvider
-
-        const { chainId } = await this.customProvider.getNetwork()
-        this.actions.update({ chainId, accounts: [], changing: false })
-      })
-      .catch((error: Error) => {
-        cancelActivation?.()
-        throw error
-      })
+    return this.startActive(!!this.providerCache[desiredChainId], desiredChainId)
   }
 }

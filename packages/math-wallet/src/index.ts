@@ -140,7 +140,7 @@ export class MathWallet extends Connector {
    * specified parameters first, before being prompted to switch.
    * @param times activate 方法被循环调用的次数
    */
-  private async _activate(
+  protected async _activate(
     desiredChainIdOrChainParameters?: number | AddEthereumChainParameter,
     times = 0
   ): Promise<void> {
@@ -213,16 +213,16 @@ export class MathWallet extends Connector {
       })
   }
 
-  public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter) {
-    let cancelActivation: () => void
-    if (!this.provider?.isConnected?.()) cancelActivation = this.actions.startActivation()
-    this.actions.update({ changing: true })
-    return this._activate(desiredChainIdOrChainParameters)
-      .catch((e) => {
-        cancelActivation?.()
-        this.resetState()
-        throw e
-      })
-      .finally(() => this.actions.update({ changing: false }))
+  /**
+   * Initiates a connection.
+   *
+   * @param desiredChainIdOrChainParameters - If defined, indicates the desired chain to connect to. If the user is
+   * already connected to this chain, no additional steps will be taken. Otherwise, the user will be prompted to switch
+   * to the chain, if one of two conditions is met: either they already have it added in their extension, or the
+   * argument is of type AddEthereumChainParameter, in which case the user will be prompted to add the chain with the
+   * specified parameters first, before being prompted to switch.
+   */
+  public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter): Promise<void> {
+    return this.startActive(!!this.provider?.isConnected?.(), desiredChainIdOrChainParameters)
   }
 }
