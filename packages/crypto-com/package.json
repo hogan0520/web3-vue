@@ -8,7 +8,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.1.2",
+  "version": "0.2.0",
   "files": [
     "dist/*"
   ],
@@ -24,9 +24,9 @@
   "dependencies": {
     "@deficonnect/provider": "^2.0.3",
     "@deficonnect/types": "^2.0.3",
-    "@web3-vue-org/types": "^0.1.1"
+    "@web3-vue-org/types": "^0.2.0"
   },
   "devDependencies": {
-    "@web3-vue-org/store": "^0.1.1"
+    "@web3-vue-org/store": "^0.2.0"
   }
 }

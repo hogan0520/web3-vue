@@ -1,6 +1,6 @@
 {
   "name": "@web3-vue-org/openblock",
-  "version": "0.1.1",
+  "version": "0.2.0",
   "description": "Web3 Vue Connector for OpenBlock",
   "author": "hoganhu <hhlsch@hotmail.com>",
   "homepage": "https://github.com/hogan0520/web3-vue#readme",
@@ -26,7 +26,7 @@
   },
   "dependencies": {
     "@openblockhq/dappsdk": "^5",
-    "@web3-vue-org/types": "^0.1.1",
+    "@web3-vue-org/types": "^0.2.0",
     "regenerator-runtime": "^0.13.11"
   },
   "repository": {
