@@ -92,7 +92,7 @@ export class CoinbaseWallet extends Connector {
       const accounts = await this.provider.request<string[]>({ method: 'eth_accounts' })
       if (!accounts.length) throw new Error('No accounts returned')
       const chainId = await this.provider.request<string>({ method: 'eth_chainId' })
-      this.actions.update({ chainId: parseChainId(chainId), accounts })
+      this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
       cancelActivation()
       throw error
@@ -150,7 +150,7 @@ export class CoinbaseWallet extends Connector {
       const receivedChainId = parseChainId(chainId)
 
       if (!desiredChainId || desiredChainId === receivedChainId)
-        return this.actions.update({ chainId: receivedChainId, accounts })
+        return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
 
       // if we're here, we can try to switch networks
       const desiredChainIdHex = `0x${desiredChainId.toString(16)}`

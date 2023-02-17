@@ -131,7 +131,7 @@ export class WalletConnect extends Connector {
       if (!accounts.length) throw new Error('No accounts returned')
       const chainId = await this.provider.request<string>({ method: 'eth_chainId' })
 
-      this.actions.update({ chainId: parseChainId(chainId), accounts })
+      this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
       cancelActivation()
       throw error
@@ -173,7 +173,7 @@ export class WalletConnect extends Connector {
         })
       const chainId = await this.provider.request<string>({ method: 'eth_chainId' })
 
-      this.actions.update({ chainId: parseChainId(chainId), accounts })
+      this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
       cancelActivation()
       throw error

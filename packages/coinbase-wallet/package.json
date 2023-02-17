@@ -28,8 +28,7 @@
     "@coinbase/wallet-sdk": "^3.0.4"
   },
   "devDependencies": {
-    "@web3-vue-org/store": "^0.1.0",
-    "pinia": "^2.0.30"
+    "@web3-vue-org/store": "^0.1.0"
   },
   "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"
 }

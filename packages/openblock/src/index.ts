@@ -104,7 +104,7 @@ export class OpenBlock extends Connector {
       const accounts = (await this.provider.request({ method: 'eth_accounts' })) as string[]
       if (!accounts.length) throw new Error('No accounts returned')
       const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
-      this.actions.update({ chainId: parseChainId(chainId), accounts })
+      this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
       console.debug('Could not connect eagerly', error)
       // we should be able to use `cancelActivation` here, but on mobile, metamask emits a 'connect'
@@ -144,7 +144,7 @@ export class OpenBlock extends Connector {
 
         // if there's no desired chain, or it's equal to the received, update
         if (!desiredChainId || receivedChainId === desiredChainId)
-          return this.actions.update({ chainId: receivedChainId, accounts })
+          return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
 
         const desiredChainIdHex = `0x${desiredChainId.toString(16)}`
 

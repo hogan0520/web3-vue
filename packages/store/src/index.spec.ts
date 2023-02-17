@@ -8,6 +8,7 @@ describe('#createWeb3VueStoreAndActions', () => {
       accounts: undefined,
       activating: false,
       error: undefined,
+      changing: false,
     })
   })
 
@@ -20,6 +21,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts: undefined,
         activating: true,
         error: undefined,
+        changing: true,
       })
     })
 
@@ -35,6 +37,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts: undefined,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
   })
@@ -62,6 +65,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts: undefined,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
 
@@ -76,6 +80,7 @@ describe('#createWeb3VueStoreAndActions', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
 
@@ -89,6 +94,7 @@ describe('#createWeb3VueStoreAndActions', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
 
@@ -102,6 +108,7 @@ describe('#createWeb3VueStoreAndActions', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
     })
@@ -117,6 +124,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
 
@@ -130,6 +138,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts: undefined,
         activating: true,
         error: undefined,
+        changing: true,
       })
     })
 
@@ -144,6 +153,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts,
         activating: true,
         error: undefined,
+        changing: true,
       })
     })
 
@@ -159,6 +169,7 @@ describe('#createWeb3VueStoreAndActions', () => {
         accounts,
         activating: false,
         error: undefined,
+        changing: true,
       })
     })
   })

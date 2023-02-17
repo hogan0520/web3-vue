@@ -5,6 +5,7 @@ export interface Web3VueState {
   chainId: number | undefined
   accounts: string[] | undefined
   activating: boolean
+  changing: boolean
 }
 
 export type Web3VueStore = StoreApi<Web3VueState>
@@ -13,14 +14,37 @@ export type Web3VueStateUpdate =
   | {
       chainId: number
       accounts: string[]
+      changing: boolean
     }
   | {
       chainId: number
       accounts?: never
+      changing?: never
     }
   | {
       chainId?: never
       accounts: string[]
+      changing?: never
+    }
+  | {
+      chainId?: never
+      accounts?: never
+      changing: boolean
+    }
+  | {
+      chainId: number
+      accounts: string[]
+      changing?: never
+    }
+  | {
+      chainId: number
+      accounts?: never
+      changing: boolean
+    }
+  | {
+      chainId?: never
+      accounts: string[]
+      changing: boolean
     }
 
 export interface Actions {

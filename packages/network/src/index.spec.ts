@@ -1,6 +1,5 @@
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
 import type { Actions, Web3VueStore } from '@web3-vue-org/types'
-import { setActivePinia, createPinia } from 'pinia'
 import { Network } from './'
 
 export class MockJsonRpcProvider {
@@ -24,10 +23,6 @@ describe('Network', () => {
   let connector: Network
   let mockConnector: MockJsonRpcProvider
 
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
-
   describe('single url', () => {
     beforeEach(() => {
       let actions: Actions
@@ -41,6 +36,7 @@ describe('Network', () => {
         accounts: undefined,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
 
@@ -60,6 +56,7 @@ describe('Network', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
     })
@@ -90,6 +87,7 @@ describe('Network', () => {
         accounts,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
   })
@@ -117,6 +115,7 @@ describe('Network', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
 
@@ -132,6 +131,7 @@ describe('Network', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
     })

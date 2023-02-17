@@ -120,7 +120,7 @@ export class MathWallet extends Connector {
       const accounts = (await this.provider.request({ method: 'eth_accounts' })) as string[]
       if (!accounts.length) throw new Error('No accounts returned')
       const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
-      this.actions.update({ chainId: parseChainId(chainId), accounts })
+      this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
       console.debug('Could not connect eagerly', error)
       // we should be able to use `cancelActivation` here, but on mobile, metamask emits a 'connect'
@@ -140,13 +140,10 @@ export class MathWallet extends Connector {
    * specified parameters first, before being prompted to switch.
    * @param times activate 方法被循环调用的次数
    */
-  public async activate(
+  private async _activate(
     desiredChainIdOrChainParameters?: number | AddEthereumChainParameter,
     times = 0
   ): Promise<void> {
-    let cancelActivation: () => void
-    if (!this.provider?.isConnected?.()) cancelActivation = this.actions.startActivation()
-
     return this.isomorphicInitialize()
       .then(async () => {
         if (!this.provider) throw new NoMathWalletError()
@@ -169,7 +166,7 @@ export class MathWallet extends Connector {
           const receivedChainId = parseChainId(chainId)
           // if there's no desired chain, or it's equal to the received, update
           if (!desiredChainId || receivedChainId === desiredChainId) {
-            return this.actions.update({ chainId: receivedChainId, accounts })
+            return this.actions.update({ chainId: receivedChainId, accounts, changing: false })
           }
         } catch (e: any) {
           // 如果不是account缺失，或者重试次数过高，则报错
@@ -205,16 +202,27 @@ export class MathWallet extends Connector {
                   throw error
                 })
         ).then((value) => {
-          this.activate(desiredChainId, times + 1)
+          this._activate(desiredChainId, times + 1)
         })
       })
       .catch((error) => {
-        cancelActivation?.()
-        this.resetState()
         if (error.message === 'Please create or import undefined account first') {
           this.onError?.(new NoMathAddressError())
         }
         throw error
       })
+  }
+
+  public async activate(desiredChainIdOrChainParameters?: number | AddEthereumChainParameter) {
+    let cancelActivation: () => void
+    if (!this.provider?.isConnected?.()) cancelActivation = this.actions.startActivation()
+    this.actions.update({ changing: true })
+    return this._activate(desiredChainIdOrChainParameters)
+      .catch((e) => {
+        cancelActivation?.()
+        this.resetState()
+        throw e
+      })
+      .finally(() => this.actions.update({ changing: false }))
   }
 }

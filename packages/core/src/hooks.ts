@@ -240,16 +240,19 @@ function getStateHooks(store: Web3VueStore) {
 
   const isActivating: ComputedRef<Web3VueState['activating']> = computed(() => store.state.value.activating)
 
-  return { chainId, accounts, isActivating }
+  const isChanging: ComputedRef<Web3VueState['changing']> = computed(() => store.state.value.changing)
+
+  return { chainId, accounts, isActivating, isChanging }
 }
 
-function getDerivedHooks({ chainId, accounts, isActivating }: ReturnType<typeof getStateHooks>) {
+function getDerivedHooks({ chainId, accounts, isActivating, isChanging }: ReturnType<typeof getStateHooks>) {
   const account: ComputedRef<string | null> = computed(() => (accounts.value?.[0] ? accounts.value[0] : null))
   const isActive: ComputedRef<boolean> = computed(() =>
     computeIsActive({
       chainId: chainId.value,
       accounts: accounts.value,
       activating: isActivating.value,
+      changing: isChanging.value,
     })
   )
 

@@ -1,6 +1,5 @@
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
 import type { Actions, Web3VueStore } from '@web3-vue-org/types'
-import { setActivePinia, createPinia } from 'pinia'
 import { CoinbaseWallet } from '.'
 import { MockEIP1193Provider } from '../../eip1193/src/mock'
 
@@ -21,10 +20,6 @@ describe('Coinbase Wallet', () => {
   let store: Web3VueStore
   let connector: CoinbaseWallet
   let mockProvider: MockEIP1193Provider
-
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
 
   describe('connectEagerly = true', () => {
     beforeEach(async () => {
@@ -58,6 +53,7 @@ describe('Coinbase Wallet', () => {
         chainId: Number.parseInt(chainId, 16),
         accounts,
         activating: false,
+        changing: false,
       })
     })
   })

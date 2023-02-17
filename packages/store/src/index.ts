@@ -23,6 +23,7 @@ const DEFAULT_STATE = {
   chainId: undefined,
   accounts: undefined,
   activating: false,
+  changing: false,
 }
 
 const createStore = defineStore<Web3VueState>()
@@ -42,11 +43,11 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
   function startActivation(): () => void {
     const nullifierCached = ++nullifier
 
-    store.setState({ ...DEFAULT_STATE, activating: true })
+    store.setState({ ...DEFAULT_STATE, activating: true, changing: true })
 
     // return a function that cancels the activation iff nothing else has happened
     return () => {
-      if (nullifier === nullifierCached) store.setState({ activating: false })
+      if (nullifier === nullifierCached) store.setState({ activating: false, changing: false })
     }
   }
 
@@ -75,13 +76,14 @@ export function createWeb3VueStoreAndActions(): [Web3VueStore, Actions] {
       // determine the next chainId and accounts
       const chainId = stateUpdate.chainId ?? existingState.chainId
       const accounts = stateUpdate.accounts ?? existingState.accounts
+      let changing = stateUpdate.changing ?? existingState.changing
 
       // ensure that the activating flag is cleared when appropriate
       let activating = existingState.activating
       if (activating && chainId && accounts) {
         activating = false
       }
-      return { chainId, accounts, activating }
+      return { chainId, accounts, activating, changing }
     })
   }
 

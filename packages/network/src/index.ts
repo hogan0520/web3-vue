@@ -92,7 +92,7 @@ export class Network extends Connector {
         this.customProvider = customProvider
 
         const { chainId } = await this.customProvider.getNetwork()
-        this.actions.update({ chainId, accounts: [] })
+        this.actions.update({ chainId, accounts: [], changing: false })
       })
       .catch((error: Error) => {
         cancelActivation?.()

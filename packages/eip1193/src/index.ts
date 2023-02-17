@@ -50,7 +50,7 @@ export class EIP1193 extends Connector {
       // chains; they should be requested serially, with accounts first, so that the chainId can settle.
       const accounts = await requestAccounts()
       const chainId = (await this.provider.request({ method: 'eth_chainId' })) as string
-      this.actions.update({ chainId: parseChainId(chainId), accounts })
+      this.actions.update({ chainId: parseChainId(chainId), accounts, changing: false })
     } catch (error) {
       cancelActivation()
       throw error

@@ -57,6 +57,7 @@ describe('EIP1193', () => {
         chainId: 1,
         accounts,
         activating: false,
+        changing: false,
       })
     })
   })
@@ -85,6 +86,7 @@ describe('EIP1193', () => {
           chainId: undefined,
           accounts: undefined,
           activating: false,
+          changing: false,
         })
 
         expect(mockProvider.eth_chainId.mock.calls.length).toBe(0)
@@ -103,6 +105,7 @@ describe('EIP1193', () => {
           chainId: 1,
           accounts,
           activating: false,
+          changing: false,
         })
 
         expect(mockProvider.eth_chainId.mock.calls.length).toBe(1)
@@ -130,6 +133,7 @@ describe('EIP1193', () => {
           chainId: undefined,
           accounts: undefined,
           activating: false,
+          changing: false,
         })
       })
 
@@ -153,6 +157,7 @@ describe('EIP1193', () => {
             chainId: 1,
             accounts,
             activating: false,
+            changing: false,
           })
         })
 
@@ -166,6 +171,7 @@ describe('EIP1193', () => {
             chainId: 1,
             accounts,
             activating: false,
+            changing: false,
           })
         })
 
@@ -182,6 +188,7 @@ describe('EIP1193', () => {
             chainId: 1,
             accounts,
             activating: false,
+            changing: false,
           })
         })
 
@@ -201,6 +208,7 @@ describe('EIP1193', () => {
             chainId: 1,
             accounts,
             activating: false,
+            changing: false,
           })
         })
       })
@@ -230,6 +238,7 @@ describe('EIP1193', () => {
         accounts: undefined,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
 
@@ -240,6 +249,7 @@ describe('EIP1193', () => {
         chainId: undefined,
         accounts: undefined,
         activating: false,
+        changing: false,
       })
     })
 
@@ -250,6 +260,7 @@ describe('EIP1193', () => {
         chainId: 1,
         accounts: undefined,
         activating: false,
+        changing: false,
       })
     })
 
@@ -260,6 +271,7 @@ describe('EIP1193', () => {
         chainId: undefined,
         accounts,
         activating: false,
+        changing: false,
       })
     })
 
@@ -271,6 +283,7 @@ describe('EIP1193', () => {
         chainId: 1,
         accounts,
         activating: false,
+        changing: false,
       })
     })
 
@@ -282,6 +295,7 @@ describe('EIP1193', () => {
         chainId: 1,
         accounts,
         activating: false,
+        changing: false,
       })
     })
   })

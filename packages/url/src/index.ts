@@ -47,6 +47,6 @@ export class Url extends Connector {
 
     // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     const { chainId } = await this.customProvider!.getNetwork()
-    this.actions.update({ chainId, accounts: [] })
+    this.actions.update({ chainId, accounts: [], changing: false })
   }
 }

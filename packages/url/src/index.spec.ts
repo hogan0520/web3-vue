@@ -33,6 +33,7 @@ describe('Url', () => {
         accounts: undefined,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
 
@@ -52,6 +53,7 @@ describe('Url', () => {
           accounts,
           activating: false,
           error: undefined,
+          changing: false,
         })
       })
     })

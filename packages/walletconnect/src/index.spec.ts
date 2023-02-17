@@ -1,6 +1,5 @@
 import { createWeb3VueStoreAndActions } from '@web3-vue-org/store'
 import type { Actions, RequestArguments, Web3VueStore } from '@web3-vue-org/types'
-import { setActivePinia, createPinia } from 'pinia'
 import EventEmitter from 'node:events'
 import { WalletConnect } from '.'
 import { MockEIP1193Provider } from '../../eip1193/src/mock'
@@ -32,10 +31,6 @@ describe('WalletConnect', () => {
   let connector: WalletConnect
   let mockProvider: MockMockWalletConnectProvider
 
-  beforeEach(() => {
-    setActivePinia(createPinia())
-  })
-
   describe('works', () => {
     beforeEach(async () => {
       let actions: Actions
@@ -64,6 +59,7 @@ describe('WalletConnect', () => {
         accounts,
         activating: false,
         error: undefined,
+        changing: false,
       })
     })
   })
