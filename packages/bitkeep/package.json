@@ -1,0 +1,28 @@
+{
+  "name": "@web3-vue-org/bitkeep",
+  "keywords": [
+    "web3-vue-org",
+    "bitkeep"
+  ],
+  "license": "GPL-3.0-or-later",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.2.0",
+  "files": [
+    "dist/*"
+  ],
+  "type": "commonjs",
+  "types": "./dist/index.d.ts",
+  "main": "./dist/index.js",
+  "exports": "./dist/index.js",
+  "scripts": {
+    "prebuild": "rm -rf dist",
+    "build": "tsc",
+    "start": "tsc --watch"
+  },
+  "dependencies": {
+    "@web3-vue-org/types": "^0.2.0"
+  },
+  "gitHead": "84ded3901f3f3c04f2fc71ab354ab35dca20d273"
+}
